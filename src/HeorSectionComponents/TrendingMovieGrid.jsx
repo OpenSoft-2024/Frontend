@@ -15,7 +15,7 @@ import useFetch from "../custumHooks/useFetch";
 import { useSelector } from "react-redux";
 import t10 from "../assets/t10.webp";
 
-function TrendingMovieGrid({ label,type }) {
+function TrendingMovieGrid({ label, type }) {
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch(`/trending/${type}/day`);
   console.log(heroImg);
@@ -28,8 +28,9 @@ function TrendingMovieGrid({ label,type }) {
   let itTrending = 0;
   const trendingAray = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10];
   return (
-    <div className="w-screen flex flex-col pl-8 mt-14 mb-2  overflow-x-auto  trending-movie-grid  overflow-y-hidden">
+    <div className="w-screen flex flex-col pl-8 mt-14 mb-2  overflow-x-auto  trending-movie-grid  overflow-y-hidden  ">
       <h1 className="text-white text-xl text-opacity-55">{label}</h1>
+
       <div className="trending-movie-grid flex gap-10 overflow-y-hidden py-4 pl-8">
         {data?.results.map((item) => {
           return (

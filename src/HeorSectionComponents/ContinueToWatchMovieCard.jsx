@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useContext } from "react";
 import BackgroundImage from "../LandingPageBackgroundImageContext/context";
 import { useState } from "react";
+import Img from "../lazyLoading/Img";
 
 function ContinueToWatchMovieCard({
   img,
@@ -38,10 +39,10 @@ function ContinueToWatchMovieCard({
   return (
     <div onClick={handleOnClick} id={boxId}>
       <div
-        className={`cont-movie-card rounded-lg overflow-hidden hover:scale-110 cursor-pointer`}
+        className={`cont-movie-card rounded-lg overflow-hidden hover:scale-110 cursor-pointer  h-full`}
       >
-        <div className="vishal">
-          <img src={img} alt={title} className="w-full h-full  img-cont" />
+        <div className="vishal w-full h-full rounded">
+          <Img src={img} className="w-full  h-full img-cont" />
         </div>
       </div>
     </div>

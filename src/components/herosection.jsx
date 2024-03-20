@@ -57,7 +57,7 @@ function Herosection() {
   //////// IMAGE BASE URL FETCHING /////////////////////////
   // console.log(movieData);
 
-  let [bgImage, setBgImage] = useState('');
+  let [bgImage, setBgImage] = useState("");
   let [bgImageDescription, setBgImageDescription] = useState({
     // title:"",
     // releaseDate:"",
@@ -85,13 +85,13 @@ function Herosection() {
           <img src={bgImage} className="fixed w-full " alt="" />
           {/* <div className={`overlayComplete w-full h-3/4  z-20 absolute `}></div> */}
           <div className="overlay-1 w-full"></div>
-          <div className="overlay-01"></div>
+          {/* <div className="overlay-01"></div> */}
           <div className="overlay-02"></div>
           <HeroMovieDesc />
         </div>
 
-        <div className="bg-black">
-          <div className="contnueWatching ">
+        <div className="  glassmor">
+          <div className="contnueWatching   ">
             <div className="continuToWatchMovie">
               <ContinueToWatch label="latest Relaease" />
             </div>
