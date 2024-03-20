@@ -4,7 +4,7 @@ import Img from "../lazyLoading/Img";
 
 function MovieCard({ img }) {
   return (
-    <div className="mt-4 rounded-3xl relative h-80  ">
+    <div className="mt-4 rounded-3xl relative h-96 ">
       <div className="w-40  rounded overflow-hidden border-black movie-box-movie-grid    relative  detailOnHover h-20  ">
         <Img
           src={img}

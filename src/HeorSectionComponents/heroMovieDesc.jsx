@@ -50,12 +50,12 @@ function HeroMovieDesc() {
         {/* <div className="backdropImg">
        <img src={img} alt="" className="w-60 h-30" />
        </div> */}
-        <h4 className="text-4xl text-wrap tracking-wide capitalize mt-1 text-white text-opacity-80 w-3/4">
+        <h4 className="text-4xl text-wrap tracking-wide capitalize mt-20 text-white text-opacity-80 w-3/4">
           {bgImageDescription.title}
         </h4>
       </div>
       <div className="info-home-page flex  items-center">
-        <p className="text-white text-opacity-75">
+        <p className="text-white text-opacity-75 ">
           {dayjs(bgImageDescription.releaseDate).format("MMM D, YYYY")}
         </p>
         <div className="mx-3 flex justify-center items-center ">

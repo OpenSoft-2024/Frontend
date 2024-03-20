@@ -99,13 +99,14 @@ function Herosection() {
           <div className="trendingMovie">
             <TrendingMovieGrid label="Top 20 movies " type={"movie"} />
           </div>
-          <div className="trendingMovie">
-            <TrendingMovieGrid label="Top 20 TV-SHOWS" type={"tv"} />
-          </div>
+          
           <div className="posterSection pl-6 mt-20">
             <MovieGrid label="latest" />
             <MovieGrid label="Newly relased movies" />
             <MovieGrid label="Because you watch batman" />
+          </div>
+          <div className="trendingMovie">
+            <TrendingMovieGrid label="Top 20 TV-SHOWS" type={"tv"} />
           </div>
         </div>
       </div>

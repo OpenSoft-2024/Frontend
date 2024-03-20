@@ -52,7 +52,10 @@ function MovieGrid({ label }) {
         onClick={() => navigation("left")}
       ></i>
       <div className="flex  w-screen gap-3 movie-grid scrool-smooth  relative  eijw323">
-        <div className=" gap-3 kdowei overflow-x-hidden flex " ref={myRef}>
+        <div
+          className=" gap-3 kdowei overflow-x-hidden flex transition-all overflow-y-hidden  "
+          ref={myRef}
+        >
           {data?.results.map((item) => (
             <MovieCard img={url.poster + item.poster_path} />
           ))}

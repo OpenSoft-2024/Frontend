@@ -449,7 +449,7 @@ display: none;
 
   /* trendingPageDesign */
        .trendingNumber{
-               font-size:7rem;
+               font-size:5.5rem;
                position:absolute;
                font-weight:900;
                z-index: 4;
@@ -460,7 +460,7 @@ display: none;
      }
      .trending-count{
       position: absolute;
-      top:70%;
+      top:85%;
       /* right:-3%; */
       left:-13%;
      }
@@ -499,7 +499,7 @@ display: none;
 
   .movie-box-movie-grid{
     position: relative;
-   height:19rem;
+   height:27rem;
     width:12.87rem;
     & img{
       height:20rem;
@@ -574,6 +574,7 @@ display: none;
 
 
    .kdowei{
-    grid-template-columns:repeat(20,1fr)
+      height:35rem;
    }
  
+
