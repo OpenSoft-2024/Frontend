@@ -32,7 +32,7 @@ function ContinueToWatch({ label }) {
   let randInt = Math.floor(Math.random() * 21);
   return (
     <div className="w-screen pl-10 mt-8  relative ">
-       {/* <i
+      {/* <i
         class=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl h-full  cursor-pointer  "
         onClick={() => navigation("right")}
       ></i>
@@ -40,7 +40,7 @@ function ContinueToWatch({ label }) {
         class=" i2 ri-arrow-left-circle-line text-white  absolute top-28 right-10 text-3xl h-full  cursor-pointer  "
         onClick={() => navigation("left")}
       ></i> */}
-      <div className="flex gap-4 pt-4 overflow-auto overflow-y-hidden contToWatch scroll-smooth pb-4 h-full">
+      <div className="flex gap-4 pt-4 overflow-auto overflow-y-hidden contToWatch scroll-smooth pb-4 h-full justify-between">
         {!data ? (
           <ContinueToWatchMovieSkelton />
         ) : (

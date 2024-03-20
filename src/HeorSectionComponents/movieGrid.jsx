@@ -44,15 +44,15 @@ function MovieGrid({ label }) {
     <div className={"relative oei9342"}>
       <h1 className="text-white ml-4 capitalize text-lg mt-20  ">{label}</h1>
       <i
-        class=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl h-full  cursor-pointer  "
+        class=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl w-fit  cursor-pointer  "
         onClick={() => navigation("right")}
       ></i>
       <i
-        class=" i2 ri-arrow-left-circle-line text-white  absolute top-28 right-10 text-3xl h-full  cursor-pointer  "
+        class=" i2 ri-arrow-left-circle-line text-white  absolute top-28 right-10 text-3xl  w-fit cursor-pointer  "
         onClick={() => navigation("left")}
       ></i>
       <div className="flex  w-screen gap-3 movie-grid scrool-smooth  relative  eijw323">
-        <div className="flex gap-3 kdowei overflow-x-hidden" ref={myRef}>
+        <div className=" gap-3 kdowei overflow-x-hidden flex " ref={myRef}>
           {data?.results.map((item) => (
             <MovieCard img={url.poster + item.poster_path} />
           ))}

@@ -498,12 +498,21 @@ display: none;
   }
 
   .movie-box-movie-grid{
+    position: relative;
    height:19rem;
     width:12.87rem;
     & img{
       height:20rem;
     }
     object-fit: cover;
+
+    & p{
+      position: absolute;
+      top:10%;
+      display:none;
+      
+    }
+    
   }
 
   
@@ -557,4 +566,14 @@ display: none;
     & img{
       object-fit:cover;
     }
+   
+   } 
+
+    */
+
+
+
+   .kdowei{
+    grid-template-columns:repeat(20,1fr)
    }
+ 

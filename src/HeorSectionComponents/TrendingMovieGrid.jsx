@@ -35,7 +35,7 @@ function TrendingMovieGrid({ label, type }) {
         {data?.results.map((item) => {
           return (
             <TrendingMovieCard
-              key={item}
+              key={item.id}
               img={url.poster + item.backdrop_path}
               trendingCount={++itTrending}
             />

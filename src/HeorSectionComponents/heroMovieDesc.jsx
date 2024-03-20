@@ -8,7 +8,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import img from "../assets/heroTitle.png";
 import BackgroundImage from "../LandingPageBackgroundImageContext/context";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import dayjs from "dayjs";
 function HeroMovieDesc() {
   // console.log(document.getElementsByClassName("description")[0]);
   //   let mycont = useRef(null);
@@ -56,7 +56,7 @@ function HeroMovieDesc() {
       </div>
       <div className="info-home-page flex  items-center">
         <p className="text-white text-opacity-75">
-          {bgImageDescription.releaseDate}
+          {dayjs(bgImageDescription.releaseDate).format("MMM D, YYYY")}
         </p>
         <div className="mx-3 flex justify-center items-center ">
           <p className="points "></p>
