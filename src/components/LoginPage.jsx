@@ -21,7 +21,7 @@ function LoginPage() {
   const row2 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
   const row3 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
   return (
-    <div className='bg-gradient-to-tr from-red-950'>
+    <div className='bg-gradient-to-tr from-red-500'>
       <div className='mix-blend-overlay'>
         <Marquee direction='left'>
           {row1.map(i => (<Poster img={i}></Poster>))}
