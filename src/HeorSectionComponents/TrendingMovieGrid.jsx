@@ -18,9 +18,9 @@ import t10 from "../assets/t10.webp";
 function TrendingMovieGrid({ label, type }) {
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch(`/trending/${type}/day`);
-  console.log(heroImg);
+  // console.log(heroImg);
   const { url } = useSelector((state) => state.AppSlice);
-  console.log(url);
+  // console.log(url);
   // setBgImage(url?.poster + data?.results[0].backdrop_path);
   useEffect(() => {
     setData(heroImg);

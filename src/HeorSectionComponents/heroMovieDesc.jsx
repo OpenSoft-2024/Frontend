@@ -9,9 +9,25 @@ import img from "../assets/heroTitle.png";
 import BackgroundImage from "../LandingPageBackgroundImageContext/context";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import dayjs from "dayjs";
+import { useSelector } from "react-redux";
+import useFetch from "../custumHooks/useFetch";
 function HeroMovieDesc() {
   // console.log(document.getElementsByClassName("description")[0]);
   //   let mycont = useRef(null);
+  const [data, setData] = useState(null);
+  const { heroImg, isLoading, error } = useFetch("/movie/upcoming");
+  useEffect(() => {
+    setData(heroImg);
+  }, [heroImg]);
+  console.log(data);
+  const { url, genres } = useSelector((state) => state.AppSlice);
+
+  const truncted = (str) => {
+    if (str?.length > 140) {
+      str = str.slice(0, 140) + ".....";
+    }
+    return str;
+  };
   let [overview] = useAutoAnimate();
   //   const ele = document.getElementsByClassName("description")[0];
   let { bgImage, bgImageDescription } = useContext(BackgroundImage);
@@ -32,13 +48,7 @@ function HeroMovieDesc() {
     handleOnchange();
   }, [bgImage]);
   let maxLength = 180;
-  let [data, setData] = useState({
-    movieTitle: "spider-man",
-    movieSubtitle: "beyond the spiderverse",
-    moviveDescription:
-      "Spider-Man: Into the Spider-Verse, Miles Morales, a teenager from Brooklyn, discovers his own abilities after being  a  ",
-    genres: ["action", "superHero", "animated", "sci-fi"],
-  });
+
   return (
     <div
       ref={mycont}
@@ -51,18 +61,21 @@ function HeroMovieDesc() {
        <img src={img} alt="" className="w-60 h-30" />
        </div> */}
         <h4 className="text-4xl text-wrap tracking-wide capitalize mt-20 text-white text-opacity-80 w-3/4">
-          {bgImageDescription.title}
+          {bgImageDescription.title || data?.results[2]?.title}
         </h4>
       </div>
       <div className="info-home-page flex  items-center">
         <p className="text-white text-opacity-75 ">
-          {dayjs(bgImageDescription.releaseDate).format("MMM D, YYYY")}
+          {dayjs(
+            bgImageDescription.releaseDate || data?.results[2]?.release_date
+          ).format("MMM D, YYYY")}
         </p>
         <div className="mx-3 flex justify-center items-center ">
           <p className="points "></p>
         </div>
         <p className="text-white text-opacity-75">
-          language {bgImageDescription.ogl}
+          language{" "}
+          {bgImageDescription.ogl || data?.results[2]?.original_language}
         </p>
         <div className="mx-3 flex justify-center items-center ">
           <p className="points"></p>
@@ -73,12 +86,12 @@ function HeroMovieDesc() {
       </div>
       <div className="aboutMovie" ref={overview}>
         <p className="text-white text-sm text-wrap w-3/4 tracking-wide text-opacity-60">
-          {bgImageDescription.overview}
+          {truncted(bgImageDescription.overview || data?.results[2]?.overview)}
         </p>
       </div>
       <div className="genres flex gap-3">
-        {data.genres.map((item) => (
-          <p className="capitalize text-white text-opacity-80">{item}</p>
+        {bgImageDescription?.genre_ids?.map((item) => (
+          <p className="text-white">{genres[item].name}</p>
         ))}
       </div>
       <div className="buttonToWatch flex gap-9 mt-4">

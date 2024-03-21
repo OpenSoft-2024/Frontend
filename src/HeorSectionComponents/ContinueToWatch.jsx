@@ -57,6 +57,8 @@ function ContinueToWatch({ label }) {
                 releasedate={item.release_date}
                 boxId={item.id}
                 ogl={item.original_language}
+                genre_ids={item.genre_ids}
+
               />
             );
           })

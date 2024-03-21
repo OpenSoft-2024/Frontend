@@ -16,6 +16,9 @@ import { useEffect } from "react";
 import { fetchDataFromApi } from "../DataUtils/fetchData2";
 import { useDispatch, useSelector } from "react-redux";
 import { getUrl, getGenres } from "../AppStore/AppSlicer";
+import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
+import useFetch from "../custumHooks/useFetch";
+// import { UseSelector } from "react-redux";
 
 function Herosection() {
   // overlay logic
@@ -51,46 +54,67 @@ function Herosection() {
       dispatch(getUrl(url));
     });
   };
+
+  const genresCall = async () => {
+    let promises = [];
+    let endPoints = ["tv", "movie"];
+    let allGenres = {};
+
+    endPoints.forEach((url) => {
+      promises.push(fetchDataFromApi(`/genre/${url}/list`));
+    });
+
+    const data = await Promise.all(promises);
+    console.log(data);
+    data.map(({ genres }) => {
+      return genres.map((item) => (allGenres[item.id] = item));
+    });
+
+    dispatch(getGenres(allGenres));
+  };
   useEffect(() => {
     fetchApiConfiguration();
-  });
-  //////// IMAGE BASE URL FETCHING /////////////////////////
-  // console.log(movieData);
+    genresCall();
+  }, []);
 
-  let [bgImage, setBgImage] = useState("");
+  const [data, setData] = useState(null);
+  const { heroImg, isLoading, error } = useFetch("/movie/upcoming");
+  useEffect(() => {
+    setData(heroImg);
+    localStorage.setItem("def", url?.poster + data?.results[0].backdrop_path);
+    // setBgImage(localStorage.getItem('def'))
+  }, [heroImg]);
+
+  let [bgImage, setBgImage] = useState({
+    img: url?.backdrop + data?.results[0].backdrop_path,
+    id: "",
+  });
   let [bgImageDescription, setBgImageDescription] = useState({
     // title:"",
     // releaseDate:"",
     // overview:"",
   });
 
-  let [data, setData] = useState({
-    movieTitle: "spider-man",
-    movieSubtitle: "beyond the spiderverse",
-    moviveDescription:
-      "Spider-Man: Into the Spider-Verse, Miles Morales, a teenager from Brooklyn, discovers his own abilities after being bitten by a  ",
-    genres: ["action", "superHero", "animated", "sci-fi"],
-  });
-  let [populaMoviesData, setPopulaMoviesData] = useState([
-    { movieTitle: "", movieSubtitle: "", movieBackdrop: "", genres: [] },
-  ]);
-
   const [imgRef] = useAutoAnimate();
   return (
     <BackgroundImage.Provider
       value={{ bgImage, setBgImage, bgImageDescription, setBgImageDescription }}
     >
-      <div className="">
+      <div className="w-screen overflow-x-hidden">
         <div className="hero-image-section w-screen h-screen">
-          <img src={bgImage} className="fixed w-full " alt="" />
+          <img
+            src={bgImage.img || url?.backdrop + data?.results[2].backdrop_path}
+            className="fixed w-full "
+            alt=""
+          />
           {/* <div className={`overlayComplete w-full h-3/4  z-20 absolute `}></div> */}
           <div className="overlay-1 w-full"></div>
-          {/* <div className="overlay-01"></div> */}
+          <div className="overlay-01"></div>
           <div className="overlay-02"></div>
           <HeroMovieDesc />
         </div>
 
-        <div className="  glassmor">
+        <div className="  glassmor bg-black">
           <div className="contnueWatching   ">
             <div className="continuToWatchMovie">
               <ContinueToWatch label="latest Relaease" />
@@ -99,9 +123,10 @@ function Herosection() {
           <div className="trendingMovie">
             <TrendingMovieGrid label="Top 20 movies " type={"movie"} />
           </div>
-          
-          <div className="posterSection pl-6 mt-20">
+
+          <div className=" pl-6 mt-20 ">
             <MovieGrid label="latest" />
+            <TopRatedFlex />
             <MovieGrid label="Newly relased movies" />
             <MovieGrid label="Because you watch batman" />
           </div>
