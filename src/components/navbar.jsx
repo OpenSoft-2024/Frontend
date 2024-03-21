@@ -95,6 +95,16 @@ const NavBar = () => {
                 plans
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/MySpace"
+                className={({ isActive }) =>
+                  ` text-lg  ${isActive ? "acv" : "nonacv"}`
+                }
+              >
+                MySpace
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
