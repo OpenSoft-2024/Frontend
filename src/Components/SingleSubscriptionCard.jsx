@@ -1,18 +1,18 @@
 import React from "react";
-function SingleSubscriptionCard({planName, planCost, numberOfScreens}) {
+function SingleSubscriptionCard({planName, planCost, numberOfScreens, billingTime}) {
     return (
 
 
-        <div class="p-8 w-full m-4 bg-white transition duration-200 hover:scale-105 rounded-xl border-t-4 border-2 border-t-blue-700">
+        <div className={(billingTime === 1 ? "border-t-green-400" : "border-t-blue-700")  + " p-8 w-full m-4 bg-white transition duration-200 hover:scale-105 rounded-xl border-t-4 border-2" }>
             <div class="mb-15 text-center">
                 <p class="text-xl font-medium tracking-wide">
                     {planName}
                 </p>
                 <div class="flex items-center mb-5 justify-center">
                     <p class="mr-2 text-5xl font-semibold text-black lg:text-6xl">
-                        ${planCost}
+                        ${(billingTime === 0 ?planCost : planCost*11)}
                     </p>
-                    <p class="text-lg">/ month</p>
+                    <p class="text-lg">/ {(billingTime === 0 ? "month" : "year")}</p>
                 </div>
                 
             </div>
@@ -116,7 +116,7 @@ function SingleSubscriptionCard({planName, planCost, numberOfScreens}) {
             </ul>
             <button
                 type="submit"
-                className="inline-flex items-center bg-blue-700 justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md hover:bg-blue-200 focus:shadow-outline focus:outline-none"
+                className={(billingTime === 1 ? " bg-green-400 hover:bg-green-100" : "bg-blue-700 hover:bg-blue-200") + " inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md  focus:shadow-outline focus:outline-none"}
             >
                 Get Now
             </button>
