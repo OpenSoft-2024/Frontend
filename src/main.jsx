@@ -6,11 +6,15 @@ import { createBrowserRouter,createRoutesFromElements,Route,RouterProvider } fro
 import HeroSection from './components/herosection.jsx'
 import Plans from './components/AddToFavourite.jsx/plans.jsx'
 import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite.jsx'
+import LoginPage from './components/LoginPage.jsx'
+import SignupPage from './components/SignupPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
       <Route path='' element={<HeroSection/>} />
+      <Route path='/signup' element={<SignupPage/>} />
+      <Route path='/login' element={<LoginPage/>} />
       <Route path='plans' element={<Plans/>} />
       <Route path='AddToFavourite' element={<AddToFavourite />}/>
     </Route>
