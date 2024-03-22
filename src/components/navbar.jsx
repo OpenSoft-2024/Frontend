@@ -104,6 +104,16 @@ const NavBar = () => {
                 Log in
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/MySpace"
+                classN  ame={({ isActive }) =>
+                  ` text-lg  ${isActive ? "acv" : "nonacv"}`
+                }
+              >
+                My Space
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
