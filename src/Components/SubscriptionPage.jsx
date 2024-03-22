@@ -32,16 +32,18 @@ const SubscriptionPage = () => {
       </div>
 
       <div className='flex justify-evenly w-full mt-10'>
+
         {
-          subscripPlan.map((element) => {
-            return (<>
-              Hi
-              {/* {element.name} */}
-              <SubscriptionPage planName={element.name} planCost={element.price} numberOfScreens={element.noOfScreen} />
-            </>
-            );
-          })
+          subscripPlan.map(
+            (item) => {
+              return(
+                <SingleSubscriptionCard planName = {item.name} planCost = {item.price} numberOfScreens={item.noOfScreen}/>
+              )
+            }
+          )
         }
+        
+        
       </div>
     </div>
   )
