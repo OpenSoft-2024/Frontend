@@ -40,10 +40,10 @@ const SubscriptionPage = () => {
   return (
     <div className=''>
       <div className='p-2'>
-        <h1 className=" text-blue-500 text-6xl font-bold">Subscriptions</h1>
+        <h1 className=" text-blue-500 text-center text-5xl md:text-6xl font-bold">Subscriptions</h1>
       </div>
       <div className='p-2 m-1'>
-        <p>
+        <p className='text-sm md:text-lg'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde aspernatur dolores voluptatum fugit, quaerat impedit id nesciunt sit. Distinctio, asperiores nemo facere non saepe aperiam enim adipisci aspernatur ab odit suscipit iste molestiae reiciendis neque nisi dolore eum similique. Dicta!
         </p>
       </div>
@@ -62,7 +62,7 @@ const SubscriptionPage = () => {
         <span class="text-base font-medium">Bill Annually</span>
       </div>
 
-      <div className='flex justify-evenly w-full mt-10'>
+      <div className='flex justify-evenly w-full mt-10 flex-col md:flex-row'>
 
         {
           subscripPlan.map(
