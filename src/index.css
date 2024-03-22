@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root{
+  margin-top: 0;
+  margin-bottom: 0;
+ 
+}
+
+body{
+  background-color: whitesmoke;
+}
