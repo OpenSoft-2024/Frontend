@@ -111,10 +111,10 @@ function Herosection() {
           <div className="overlay-1 w-full"></div>
           <div className="overlay-01"></div>
           <div className="overlay-02"></div>
-          <HeroMovieDesc />
+          <HeroMovieDesc/>
         </div>
 
-        <div className="  glassmor bg-black">
+        <div className="glassmor bg-black">
           <div className="contnueWatching   ">
             <div className="continuToWatchMovie">
               <ContinueToWatch label="latest Relaease" />
@@ -124,7 +124,7 @@ function Herosection() {
             <TrendingMovieGrid label="Top 20 movies " type={"movie"} />
           </div>
 
-          <div className=" pl-6 mt-20 ">
+          <div className="pl-6 mt-20">
             <MovieGrid label="latest" />
             <TopRatedFlex />
             <MovieGrid label="Newly relased movies" />

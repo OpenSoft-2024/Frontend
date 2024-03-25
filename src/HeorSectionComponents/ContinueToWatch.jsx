@@ -42,9 +42,9 @@ function ContinueToWatch({ label }) {
       ></i> */}
       <div className="flex gap-4 pt-4 overflow-auto overflow-y-hidden contToWatch scroll-smooth pb-4 h-full justify-between">
         {!data ? (
-          <ContinueToWatchMovieSkelton />
+          <ContinueToWatchMovieSkelton></ContinueToWatchMovieSkelton>
         ) : (
-          data?.results.map((item, index) => {
+          data.results.map((item, index) => {
             console.log(item.overview);
             if (index > 6) return;
 
@@ -58,7 +58,6 @@ function ContinueToWatch({ label }) {
                 boxId={item.id}
                 ogl={item.original_language}
                 genre_ids={item.genre_ids}
-
               />
             );
           })

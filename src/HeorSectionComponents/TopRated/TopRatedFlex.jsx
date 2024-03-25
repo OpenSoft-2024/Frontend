@@ -9,6 +9,7 @@ import al from "../../../public/al.png";
 import MovieCard from "../MovieCard";
 
 function TopRatedFlex() {
+  let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
   const { url } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch("/movie/top_rated");
@@ -46,11 +47,19 @@ function TopRatedFlex() {
           onClick={() => navigation("right")}
         ></i>
       </div>
-      <div className="wrapeer flex  mt-3 gap-3 overflow-x-hidden" ref={myRef}>
-        {data?.results.map((item) => (
-          <TopRatedMovieCard img={url.backdrop + item.backdrop_path} />
-        ))}
-      </div>
+      {data ? (
+        <div className="wrapeer flex  mt-3 gap-3 overflow-x-hidden" ref={myRef}>
+          {data?.results.map((item) => (
+            <TopRatedMovieCard img={url.backdrop + item.backdrop_path} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex gap-4 mt-8 ">
+          {loadingSkeltonArray.map((item) => (
+            <div className="w-64 h-40 blinker rounded"></div>
+          ))}{" "}
+        </div>
+      )}
     </div>
   );
 }

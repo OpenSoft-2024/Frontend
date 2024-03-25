@@ -6,6 +6,7 @@ import { store } from "./AppStore/index.js";
 import { Provider } from "react-redux";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import LocomotiveScroll from "locomotive-scroll";
 
 // import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
 // import HeroSection from './components/herosection'
@@ -13,8 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import Plans from './components/AddToFavourite.jsx/plans'
 // import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
 function App() {
- 
- 
+  const locomotiveScroll = new LocomotiveScroll();
 
   return (
     <>

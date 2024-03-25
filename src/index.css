@@ -258,11 +258,27 @@ display: none;
     overflow: auto;
     
   }
-  .scrooler-con{
+  .sc1{
     /* display: inline-block; */
     /* white-space: nowrap; */
     animation-name: mover;
     animation-duration: 100s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .sc2{
+    /* display: inline-block; */
+    /* white-space: nowrap; */
+    animation-name: mover;
+    animation-duration: 90s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .sc3{
+    /* display: inline-block; */
+    /* white-space: nowrap; */
+    animation-name: mover;
+    animation-duration: 80s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
@@ -305,20 +321,38 @@ display: none;
     width:100%;
     height: 100%;
   }
+  .subsbtn{
+     opacity:1;
+  }
 
+ .borderDedo{
+  border:solid red 2px;
+ }
+ .b-red {
+  border: solid 1px rgba(255, 38, 38, 0.955);
+  }
+  .b-white{
+    border: solid 1px rgba(148, 144, 144, 0.566);
+  }
 
+  .subsplan{
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    border: solid 1px rgba(255, 255, 255, 0.4);
+    
+  }
+  
 
   .plan-overlay2   {
-    background-image: linear-gradient(to left,rgb(0, 0, 0) ,transparent);
+    background-image: linear-gradient(to left,rgb(0, 0, 0) 50% ,transparent);
    }
    .plan-overlay1{
-    background-image: linear-gradient(to right,rgb(0, 0, 0) ,transparent);
+    background-image: linear-gradient(to right,rgb(0, 0, 0) 30% ,transparent);
 
    }
-   .overlayText{
-    left:14%;
-    top:30%;    
-   }
+   /* .overlayText{
+      
+   } */
    .overlayText P{
     color:rgba(255, 255, 255, 0.77); 
     font-size: 4vw;
@@ -683,3 +717,139 @@ display: none;
    } 
    .box-overlay2:hover{
   opacity: 1; }
+
+
+ 
+
+  .searchBox{
+      backdrop-filter: blur(30px);
+       background-color: #ffffff23;
+       border:solid 1px rgba(255, 255, 255, 0.542); 
+       
+  }
+
+ 
+  .searchBar00i{
+    border-radius: 2px;
+    backdrop-filter:blur(30px)
+  }
+
+
+  .customButton{
+
+    background-color: red;
+    padding:4px;  
+   border-radius: 20px;
+   padding-left:8px;
+   padding-right:8px;
+
+
+  }
+
+  .customButton:hover{
+    background-color:rgba(251, 25, 25, 0.796);
+  }
+
+
+
+  .nav-box{
+    background:linear-gradient(to bottom,rgba(0, 0, 0, 0.905) ,transparent);
+   
+     
+  }
+
+
+  .dropdown{
+    position:absolute;
+    
+    color:white;
+    /* height:30rem; */
+    z-index:4000;
+    /* border:solid rgb(190, 58, 58) 0.4px; */
+    
+    
+  }
+
+  .dropdown ul{
+      background-color: #363333;
+      backdrop-filter: blur(30px);
+      width:10rem;
+      /* border:solid rgb(190, 58, 58) 0.4px; */
+     
+      
+  }
+ 
+
+  .dropdownarrow{
+    transition:all linear 0.2s;
+  }
+
+  .languages:hover .dropdownarrow{
+   transform: rotate(180deg);
+  }
+  .dropdown{
+    opacity:1;
+  }
+
+  .languages:hover .dropdown{
+    opacity:1;
+  }
+
+
+
+  .blinker{
+  background-color: #808080;
+   animation:blinker 3s linear  infinite  ;
+   
+   
+  }
+
+
+  @keyframes blinker {
+    0%{
+      opacity:0.3;
+    }
+    12%{
+      opacity:0.4;
+    }
+    24%{
+      opacity:0.6;
+    }
+    36%{
+      opacity:0.8;    
+    }
+    48%{
+      opacity:1;
+    }
+    60%{
+      opacity:0.8;
+    }
+    72%{
+      opacity:0.6;
+    }
+    84%{
+      opacity:0.4;
+    }
+    96%{
+      opacity:0.3;
+    }
+    100%{
+      opacity: 0.3;
+    }
+    
+  }
+
+
+  /* ///////////////navbar */
+  .color{
+    backdrop-filter: blur(10px);
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  .bg-eoio302{
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.9s;
+  
+    
+  }
+  /* navbar */
