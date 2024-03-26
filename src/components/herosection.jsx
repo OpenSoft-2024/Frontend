@@ -100,21 +100,21 @@ function Herosection() {
     <BackgroundImage.Provider
       value={{ bgImage, setBgImage, bgImageDescription, setBgImageDescription }}
     >
-      <div className="w-screen overflow-x-hidden">
-        <div className="hero-image-section w-screen h-screen">
+      <div className="w-screen ">
+        <div className="hero-image-section w-[100vw] h-[100vh]">
           <img
             src={bgImage.img || url?.backdrop + data?.results[2].backdrop_path}
-            className="fixed w-full "
+            className="fixed w-screen "
             alt=""
           />
           {/* <div className={`overlayComplete w-full h-3/4  z-20 absolute `}></div> */}
-          <div className="overlay-1 w-full"></div>
+          <div className="overlay-1 w-[100vw]"></div>
           <div className="overlay-01"></div>
           <div className="overlay-02"></div>
-          <HeroMovieDesc/>
+          <HeroMovieDesc />
         </div>
 
-        <div className="glassmor bg-black">
+        <div className="  bg-[black] w-[110vw]">
           <div className="contnueWatching   ">
             <div className="continuToWatchMovie">
               <ContinueToWatch label="latest Relaease" />
