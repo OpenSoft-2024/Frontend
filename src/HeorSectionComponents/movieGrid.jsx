@@ -36,7 +36,7 @@ function MovieGrid({ label }) {
   };
 
   return (
-    <div className={"relative oei9342"}>
+    <div className={"relative oei9342 w-screen"}>
       <h1 className="text-white ml-4  text-opacity-[0.6] text-lg mt-20  capitalize">
         {label}
       </h1>

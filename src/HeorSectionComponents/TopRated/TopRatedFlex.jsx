@@ -10,9 +10,11 @@ import MovieCard from "../MovieCard";
 
 function TopRatedFlex() {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
-  const { url } = useSelector((state) => state.AppSlice);
+  const { url, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch("/movie/top_rated");
+  const { heroImg, isLoading, error } = useFetch(
+    `/movie/top_rated?page=${rand}`
+  );
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);

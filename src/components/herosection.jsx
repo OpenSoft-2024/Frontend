@@ -38,7 +38,7 @@ function Herosection() {
   // window.addEventListener("scroll", handleOnScroll);
 
   /////o
-  let { url } = useSelector((state) => state.AppSlice);
+  let { url ,rand} = useSelector((state) => state.AppSlice);
   console.log(url);
   const dispatch = useDispatch();
 
@@ -100,10 +100,10 @@ function Herosection() {
     <BackgroundImage.Provider
       value={{ bgImage, setBgImage, bgImageDescription, setBgImageDescription }}
     >
-      <div className="w-screen ">
+      <div className="w-screen overflow-x-hidden ">
         <div className="hero-image-section w-[100vw] h-[100vh]">
           <img
-            src={bgImage.img || url?.backdrop + data?.results[2].backdrop_path}
+            src={bgImage.img || url?.backdrop + data?.results[rand].backdrop_path}
             className="fixed w-screen "
             alt=""
           />

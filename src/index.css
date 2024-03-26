@@ -265,6 +265,7 @@ display: none;
     animation-duration: 100s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-direction: alternate;
   }
   .sc2{
     /* display: inline-block; */

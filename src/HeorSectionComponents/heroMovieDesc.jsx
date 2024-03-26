@@ -15,13 +15,14 @@ import HeroDescSkelton from "../loadingSkelton/heroloadingSkelton";
 function HeroMovieDesc() {
   // console.log(document.getElementsByClassName("description")[0]);
   //   let mycont = useRef(null);
+  const { url, genres, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch("/movie/upcoming");
+  const { heroImg, isLoading, error } = useFetch(`/movie/upcoming?`);
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);
   console.log(data);
-  const { url, genres } = useSelector((state) => state.AppSlice);
+  // const { url, genres,rand } = useSelector((state) => state.AppSlice);
 
   const truncted = (str) => {
     if (str?.length > 140) {
@@ -62,7 +63,7 @@ function HeroMovieDesc() {
         <div className="title mt-44">
           {data ? (
             <h4 className="text-4xl text-wrap tracking-wide capitalize mt-20 text-white text-opacity-80 w-3/4">
-              {bgImageDescription.title || data?.results[2]?.title}
+              {bgImageDescription.title || data?.results[rand]?.title}
             </h4>
           ) : (
             <div className="w-[20rem] h-[3rem]  blinker mt-20 rounded"></div>
@@ -72,7 +73,8 @@ function HeroMovieDesc() {
           {data ? (
             <p className="text-white text-opacity-75 ">
               {dayjs(
-                bgImageDescription.releaseDate || data?.results[2]?.release_date
+                bgImageDescription.releaseDate ||
+                  data?.results[rand]?.release_date
               ).format("MMM D, YYYY")}
             </p>
           ) : (
@@ -85,7 +87,7 @@ function HeroMovieDesc() {
           {data ? (
             <p className="text-white text-opacity-75">
               language{" "}
-              {bgImageDescription.ogl || data?.results[2]?.original_language}
+              {bgImageDescription.ogl || data?.results[rand]?.original_language}
             </p>
           ) : (
             <div className="w-[6rem] h-[1.5rem] blinker rounded"></div>

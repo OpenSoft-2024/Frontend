@@ -15,11 +15,14 @@ function ContinueToWatch({ label }) {
   let { bgImage, setBgImage } = useContext(BackgroundImage);
 
   let counter = 0;
+  const { url, rand } = useSelector((state) => state.AppSlice);
 
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch("/movie/upcoming");
+  const { heroImg, isLoading, error } = useFetch(
+    `/movie/upcoming?page=${rand}`
+  );
   // console.log(heroImg);
-  const { url } = useSelector((state) => state.AppSlice);
+
   // console.log(url);
   // let def = url?.poster + data?.results[0].backdrop_path;
 

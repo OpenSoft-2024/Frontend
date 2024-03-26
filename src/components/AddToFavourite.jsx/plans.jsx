@@ -9,7 +9,10 @@ import BackgroundColor from "../../LandingPageBackgroundImageContext/context2";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { IoLaptopOutline } from "react-icons/io5";
 import { PiTelevisionSimple } from "react-icons/pi";
-
+import useFetch from "../../custumHooks/useFetch";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import InfiniteScroll from "./InfiniteScroll";
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
 // import c4 from "../../assets/p1.jpg";
@@ -18,7 +21,7 @@ import { PiTelevisionSimple } from "react-icons/pi";
 // import c7 from "../../assets/p1.jpg";
 // import c8 from "../../assets/p1.jpg";
 // import c1 from "../../assets/p1.jpg";
-import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
+  import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
 function Plans() {
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
@@ -41,6 +44,14 @@ function Plans() {
       setBackgroundColor3(true);
     }
   };
+    const [data, setData] = useState(null);
+    const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
+    const { url } = useSelector((state) => state.AppSlice);
+    useEffect(() => {
+      setData(heroImg);
+      // setBgImage(localStorage.getItem('def'))
+    }, [heroImg]);  
+
   return (
     <BackgroundColor.Provider
       value={{
@@ -57,91 +68,22 @@ function Plans() {
         <div className="plan-container w-screen relative h-screen  ">
           <div className="flex flex-col gap-4 relative ">
             <div class="srcoller flex">
-              <div class="scrooler-con sc1 flex gap-4">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
-
-              <div class="scrooler-con sc1 flex gap-4">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
+              <InfiniteScroll page={2}/>
+              <InfiniteScroll page={3}/>
+               
+              
             </div>
             <div class="srcoller flex">
-              <div class="scrooler-con  sc1 flex gap-4">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
-              <div class="scrooler-con sc1 flex gap-4">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
-              <div class="scrooler-con flex sc1  gap-4">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
+            <InfiniteScroll page={4}/>
+              <InfiniteScroll page={5}/>
+              <InfiniteScroll page={6}/>
+             
             </div>
             <div class="srcoller flex">
-              <div class="scrooler-con flex gap-4 sc1">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
-              <div class="scrooler-con flex gap-4 sc1">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
-              <div class="scrooler-con flex gap-4 sc1">
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-                <PlansInfiniteScroolerMovieBox img={c1} />
-              </div>
+            <InfiniteScroll page={7}/>
+              <InfiniteScroll page={8}/>
+              <InfiniteScroll page={9}/>
+            
             </div>
           </div>
           <div className="plan-overlay1 absolute top-0 left-0 w-[40%] h-full"></div>
@@ -225,7 +167,20 @@ function Plans() {
                   `}
                   />
 
-                  <p className="text-[1.4rem] text-left">{item}</p>
+                  <p
+                    className={`text-[1.4rem] text-left 
+                  ${
+                    (backgroundColor1 && index == 0) ||
+                    (backgroundColor2 && index == 1) ||
+                    (backgroundColor3 && index == 2)
+                      ? "text-red-500"
+                      : ""
+                  }
+                  
+                  `}
+                  >
+                    {item}
+                  </p>
                   <p className="text-left">
                     <span className="text-[18px] absolute top-[50%] ">
                       &#8377;
@@ -252,7 +207,7 @@ function Plans() {
           </button>
         </motion.div>
 
-        <div className="flex w-screen text-white px-20 justify-between gap-2">
+        {/* <div className="flex w-screen text-white px-20 justify-between gap-2">
           <div className="w-3/12  greeting-Box rounded-3xl p-4">
             <h1>storie tailored to your taste</h1>
           </div>
@@ -265,7 +220,7 @@ function Plans() {
           <div className="w-3/12 greeting-Box rounded-3xl p-4">
             <h1>stream on any media size</h1>
           </div>
-        </div>
+        </div> */}
       </div>
     </BackgroundColor.Provider>
   );
