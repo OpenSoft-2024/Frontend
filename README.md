@@ -1,6 +1,13 @@
 # React + Vite
 new subscription page is added with animation using framerMotion
+
+
+
 navbar blur effect after a particular  y scrolling is added 
+
+
+
+
 loading skelton and locomative(for smooth scrool) is added
 
 
