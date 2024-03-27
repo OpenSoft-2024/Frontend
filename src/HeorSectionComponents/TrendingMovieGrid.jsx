@@ -26,22 +26,29 @@ function TrendingMovieGrid({ label, type }) {
     setData(heroImg);
   });
   let itTrending = 0;
-  const trendingAray = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10];
+  const trendingAray = [t1, t2, t3, t4, t5, t6, t7, t8];
   return (
     <div className="w-screen flex flex-col pl-8 mt-14 mb-2  overflow-x-auto  trending-movie-grid  overflow-y-hidden  ">
       <h1 className="text-white text-xl text-opacity-55">{label}</h1>
-
-      <div className="trending-movie-grid flex gap-10 overflow-y-hidden py-4 pl-8">
-        {data?.results.map((item) => {
-          return (
-            <TrendingMovieCard
-              key={item.id}
-              img={url.poster + item.backdrop_path}
-              trendingCount={++itTrending}
-            />
-          );
-        })}
-      </div>
+      {data ? (
+        <div className="trending-movie-grid flex gap-10 overflow-y-hidden py-4 pl-8">
+          {data?.results.map((item) => {
+            return (
+              <TrendingMovieCard
+                key={item.id}
+                img={url.poster + item.backdrop_path}
+                trendingCount={++itTrending}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="  justify-between flex trending-movie-grid mt-4">
+          {trendingAray.map((item) => (
+            <div className="w-[13rem] h-[11rem] blinker ml-4 rounded-lg"></div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

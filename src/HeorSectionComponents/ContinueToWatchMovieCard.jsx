@@ -13,12 +13,11 @@ function ContinueToWatchMovieCard({
   releasedate,
   boxId,
   ogl,
-  genre_ids
-
+  genre_ids,
 }) {
   // const [check, setCheck] = useState(false);
   // const [style, setStyle] = useState(null);
-  const cont= useRef(null);
+  const cont = useRef(null);
   let [active, setActive] = useState(false);
   let { setBgImage, setBgImageDescription, bgImage } =
     useContext(BackgroundImage);
@@ -26,7 +25,7 @@ function ContinueToWatchMovieCard({
   let handleOnClick = () => {
     setBgImage({ img, id: boxId });
     // cont.current.style = "border:1px solid white;";
-    console.log(cont)
+    console.log(cont);
 
     setTimeout(() => {
       setBgImageDescription({
@@ -34,9 +33,7 @@ function ContinueToWatchMovieCard({
         releaseDate: releasedate,
         overview: overview,
         ogl: ogl,
-        genre_ids:genre_ids
-
-
+        genre_ids: genre_ids,
       });
     }, 100);
   };
@@ -49,12 +46,19 @@ function ContinueToWatchMovieCard({
   //   }
   // }, [bgImage]);
   return (
-    <div onClick={handleOnClick} id={boxId} ref={cont}>
+    <div
+      onClick={handleOnClick}
+      id={boxId}
+      ref={cont}
+      className="relative z-[500]"
+    >
       <div
-        className={`cont-movie-card rounded-lg overflow-hidden hover:scale-110 cursor-pointer  h-full`}
+        className={`cont-movie-card rounded-lg overflow-hidden hover:scale-[1.08] cursor-pointer  h-full ${
+          bgImage.img == img ? "borderOnClicking" : ""
+        }`}
       >
-        <div className="vishal w-full h-full rounded">
-          <Img src={img} className="w-full  h-full img-cont" />
+        <div className="vishal w-full h-full rounded  ">
+          <Img src={img} className="w-full  h-full img-cont " />
         </div>
       </div>
     </div>

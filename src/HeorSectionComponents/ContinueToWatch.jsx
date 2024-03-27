@@ -15,11 +15,14 @@ function ContinueToWatch({ label }) {
   let { bgImage, setBgImage } = useContext(BackgroundImage);
 
   let counter = 0;
+  const { url, rand } = useSelector((state) => state.AppSlice);
 
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch("/movie/upcoming");
+  const { heroImg, isLoading, error } = useFetch(
+    `/movie/upcoming?page=${rand}`
+  );
   // console.log(heroImg);
-  const { url } = useSelector((state) => state.AppSlice);
+
   // console.log(url);
   // let def = url?.poster + data?.results[0].backdrop_path;
 
@@ -42,9 +45,9 @@ function ContinueToWatch({ label }) {
       ></i> */}
       <div className="flex gap-4 pt-4 overflow-auto overflow-y-hidden contToWatch scroll-smooth pb-4 h-full justify-between">
         {!data ? (
-          <ContinueToWatchMovieSkelton />
+          <ContinueToWatchMovieSkelton></ContinueToWatchMovieSkelton>
         ) : (
-          data?.results.map((item, index) => {
+          data.results.map((item, index) => {
             console.log(item.overview);
             if (index > 6) return;
 
@@ -58,7 +61,6 @@ function ContinueToWatch({ label }) {
                 boxId={item.id}
                 ogl={item.original_language}
                 genre_ids={item.genre_ids}
-
               />
             );
           })

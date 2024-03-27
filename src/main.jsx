@@ -9,6 +9,7 @@ import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite.jsx'
 import LoginPage from './components/LoginPage.jsx'
 import SignupPage from './components/SignupPage.jsx'
 import MySpace from './components/AddToFavourite.jsx/mySpace.jsx'
+import SearchPage from "./components/searchPage.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path='plans' element={<Plans/>} />
       <Route path='AddToFavourite' element={<AddToFavourite />}/>
       <Route path='MySpace' element={<MySpace />}/>
+      <Route path="searchPage"  element={<SearchPage/>}/>
     </Route>
   )
 )
