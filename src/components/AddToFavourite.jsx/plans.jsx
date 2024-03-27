@@ -13,6 +13,9 @@ import useFetch from "../../custumHooks/useFetch";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import InfiniteScroll from "./InfiniteScroll";
+import { NavLink } from "react-router-dom";
+import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
+import { useDispatch } from "react-redux";
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
 // import c4 from "../../assets/p1.jpg";
@@ -21,7 +24,7 @@ import InfiniteScroll from "./InfiniteScroll";
 // import c7 from "../../assets/p1.jpg";
 // import c8 from "../../assets/p1.jpg";
 // import c1 from "../../assets/p1.jpg";
-  import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
+import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
 function Plans() {
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
@@ -44,13 +47,19 @@ function Plans() {
       setBackgroundColor3(true);
     }
   };
-    const [data, setData] = useState(null);
-    const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
-    const { url } = useSelector((state) => state.AppSlice);
-    useEffect(() => {
-      setData(heroImg);
-      // setBgImage(localStorage.getItem('def'))
-    }, [heroImg]);  
+  const [data, setData] = useState(null);
+  const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
+  const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
+  useEffect(() => {
+    setData(heroImg);
+    // setBgImage(localStorage.getItem('def'))
+  }, [heroImg]);
+  let dispatch = useDispatch();
+  const viewOnClick = (e) => {
+    console.log(e);
+
+    setIsNavBarVisible(dispatch(true));
+  };
 
   return (
     <BackgroundColor.Provider
@@ -65,25 +74,22 @@ function Plans() {
     >
       <div className="">
         <div className="w-screen h-[2rem] bg-black"></div>
+
         <div className="plan-container w-screen relative h-screen  ">
-          <div className="flex flex-col gap-4 relative ">
+          <div className="flex flex-col gap-6 relative ">
             <div class="srcoller flex">
-              <InfiniteScroll page={2}/>
-              <InfiniteScroll page={3}/>
-               
-              
+              <InfiniteScroll page={2} />
+              <InfiniteScroll page={3} />
             </div>
             <div class="srcoller flex">
-            <InfiniteScroll page={4}/>
-              <InfiniteScroll page={5}/>
-              <InfiniteScroll page={6}/>
-             
+              <InfiniteScroll page={4} />
+              <InfiniteScroll page={5} />
+              <InfiniteScroll page={6} />
             </div>
             <div class="srcoller flex">
-            <InfiniteScroll page={7}/>
-              <InfiniteScroll page={8}/>
-              <InfiniteScroll page={9}/>
-            
+              <InfiniteScroll page={7} />
+              <InfiniteScroll page={8} />
+              <InfiniteScroll page={9} />
             </div>
           </div>
           <div className="plan-overlay1 absolute top-0 left-0 w-[40%] h-full"></div>
@@ -194,6 +200,12 @@ function Plans() {
           })}
         </div>
         <Subs></Subs>
+        <NavLink to="/" onClick={viewOnClick}>
+          <div className="absolute bg-red-600 capitalize top-[4%] right-[3%] px-6 hover:scale-[1.05]  rounded py-2 text-white">
+            home
+          </div>
+        </NavLink>
+
         <motion.div
           initial={{ height: "0%" }}
           animate={{ height: "fit-content" }}

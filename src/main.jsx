@@ -6,6 +6,7 @@ import { createBrowserRouter,createRoutesFromElements,Route,RouterProvider } fro
 import HeroSection from './components/herosection.jsx'
 import Plans from './components/AddToFavourite.jsx/plans.jsx'
 import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite.jsx'
+import SearchPage from "./components/searchPage.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
       <Route path='' element={<HeroSection/>} />
       <Route path='plans' element={<Plans/>} />
       <Route path='AddToFavourite' element={<AddToFavourite />}/>
+      <Route path="searchPage"  element={<SearchPage/>}/>
     </Route>
   )
 )

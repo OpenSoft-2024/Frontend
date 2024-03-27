@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LocomotiveScroll from "locomotive-scroll";
+ 
 
 // import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
 // import HeroSection from './components/herosection'
@@ -14,12 +15,12 @@ import LocomotiveScroll from "locomotive-scroll";
 // import Plans from './components/AddToFavourite.jsx/plans'
 // import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
 function App() {
-  const locomotiveScroll = new LocomotiveScroll();
+  
 
   return (
     <>
       <Provider store={store}>
-        <NavBar></NavBar>
+        {<NavBar></NavBar>}
 
         <Outlet></Outlet>
         <Footer></Footer>

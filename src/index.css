@@ -262,7 +262,7 @@ display: none;
     /* display: inline-block; */
     /* white-space: nowrap; */
     animation-name: mover;
-    animation-duration: 100s;
+    animation-duration: 180s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
