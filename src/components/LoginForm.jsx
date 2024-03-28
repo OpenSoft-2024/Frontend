@@ -1,7 +1,24 @@
 import {Link} from 'react-router-dom'
 import OAuthButton from './OAuthButton'
+import { useState } from 'react';
+import axios from "axios";
 const LoginForm = () => {
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+    const handleLogin = async () =>{
+      console.log("login clicked!")
+      try{
+        const loginUrl="http://localhost:8080/api/users/login";
+        const res = await axios.post(loginUrl,{
+          email: email,
+          password: password,
+        })
+        console.log("res: ",res.data);
+        localStorage.setItem("token",res.data.token);
+      }catch(err){
+        console.log(err);
+      }
+    }
     return (
       <div className="absolute inset-0 flex items-center justify-center">
         <div className='w-full md:w-1/4 flex flex-col mt-16 text-white p-10 bg-black bg-opacity-80 rounded-md shadow-md'>
@@ -11,13 +28,22 @@ const LoginForm = () => {
               className="mb-5 px-10 py-2 w-full max-w-full text-base bg-black bg-opacity-80 rounded border border-white"
               type="email"
               placeholder="Email or Phone Number"
+              onChange={(e) =>{
+                setEmail(e.target.value)
+              } }
             />
             <input
               className="mb-5 px-10 py-2 w-full max-w-full text-base bg-black bg-opacity-80 rounded border border-white"
               type="password"
               placeholder="Password"
+              onChange={(e) =>{
+                setPassword(e.target.value)
+              } }
             />
-            <button className="mb-5 px-4 py-2 w-full max-w-full text-base bg-red-600 hover:bg-red-700 text-white rounded border-none cursor-pointer align-middle" type="submit">Sign In</button>
+            <button className="mb-5 px-4 py-2 w-full max-w-full text-base bg-red-600 hover:bg-red-700 text-white rounded border-none cursor-pointer align-middle" type="button"
+            onClick={()=>{
+              handleLogin()
+            }}>Sign In</button>
           </form>
           <a className="flex self-center hover:underline mb-4" href="#">Forgot Password?</a>
           <div className='flex self-center mb-4'>
