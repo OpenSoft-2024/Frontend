@@ -45,15 +45,15 @@ function TrendingMovieGrid({ label, type }) {
   return (
     <div className="w-screen flex flex-col pl-8 mt-14 mb-2  overflow-x-hidden trending-movie-grid  overflow-y-hidden  ">
       <h1 className="text-white text-xl text-opacity-55">{label}</h1>
-      <div className="box-overlay2 absolute   text-white  group ">
+      <div className=" absolute  placeholder: w-[10%] h-[60%]  z-[6000] right-[-4%] text-white  group ">
         <i
-          className="ri-arrow-right-circle-fill text-white relative top-42  text-2xl  invisible group-hover:visible opacity-65 hover:opacity-100"
+          className="ri-arrow-right-circle-fill text-white relative top-[50%]  text-3xl  invisible group-hover:visible opacity-65 hover:opacity-100"
           onClick={() => navigation("right")}
         ></i>
       </div>
-      <div className="box-overlay1 absolute   text-white group">
+      <div className="   absolute w-[10%] h-[60%]  z-[6000]    text-white group">
         <i
-          className="ri-arrow-left-circle-fill text-white relative top-[50%] left-0 text-2xl invisible group-hover:visible opacity-65 hover:opacity-100"
+          className="ri-arrow-left-circle-fill text-white relative top-[50%] left-0 text-3xl invisible group-hover:visible opacity-65 hover:opacity-100"
           onClick={() => navigation("left")}
         ></i>
       </div>

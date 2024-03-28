@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 function DetailOnHoverForTopRated({ img, about, date, title }) {
   const trunct = (str) => {
-    if (str.length < 90) {
+    if (str.length < 100) {
       return str;
     } else {
       return str.slice(0, 90) + "...";

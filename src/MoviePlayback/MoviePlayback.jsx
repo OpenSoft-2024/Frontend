@@ -3,6 +3,7 @@ import l1 from "../assets/l1.jpg";
 import c5 from "../assets/c5.jpg";
 import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
 import MovieGridForMoviePlayback from "./MovieGridForMoviePlayback";
+import MovieGrid from "../HeorSectionComponents/movieGrid";
 function MoviePlayback() {
   return (
     <div className="relative">
@@ -55,10 +56,7 @@ function MoviePlayback() {
         label={"More Like This"}
         endPoint={"/trending/movie/week"}
       ></TopRatedFlex>
-      <MovieGridForMoviePlayback
-        endPoint={"/trending/movie/day"}
-        label={"Because You watch Madam Web"}
-      ></MovieGridForMoviePlayback>
+       <MovieGrid label={"because you watch madam web"}></MovieGrid>
     </div>
   );
 }

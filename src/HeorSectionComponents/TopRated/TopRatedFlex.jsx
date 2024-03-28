@@ -42,15 +42,15 @@ function TopRatedFlex({ label, endPoint }) {
       <div>
         <h1 className="text-white text-xl ml-[25px] ">{label}</h1>
       </div>
-      <div className="box-overlay1 absolute top-30 left-10 text-white group">
+      <div className="w-[10%] h-[75%]    z-[6000] absolute   text-white group">
         <i
-          className="ri-arrow-left-circle-fill text-white relative top-24 left-0 text-2xl invisible group-hover:visible opacity-65 hover:opacity-100"
+          className="ri-arrow-left-circle-fill cursor-pointer text-white relative top-[50%] left-0 text-3xl invisible group-hover:visible opacity-65 hover:opacity-100"
           onClick={() => navigation("left")}
         ></i>
       </div>
-      <div className="box-overlay2 absolute top-30 text-white  group ">
+      <div className=" w-[10%] h-[75%]   z-[6000] absolute right-0 text-white  group ">
         <i
-          className="ri-arrow-right-circle-fill text-white relative top-24  text-2xl  invisible group-hover:visible opacity-65 hover:opacity-100"
+          className="ri-arrow-right-circle-fill cursor-pointer text-white relative left-10 top-[50%]  text-3xl  invisible group-hover:visible opacity-65 hover:opacity-100"
           onClick={() => navigation("right")}
         ></i>
       </div>

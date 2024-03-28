@@ -21,23 +21,6 @@ import useFetch from "../custumHooks/useFetch";
 // import { UseSelector } from "react-redux";
 
 function Herosection() {
-  // overlay logic
-
-  // let [active, setActive] = useState(false);
-  // const handleOnScroll = () => {
-  //   if (window.scrollY > 230) {
-  //     setActive(true);
-  //   } else {
-  //     setActive(false);
-  //   }
-  // };
-  // useEffect(()=>{
-  //   handleOnScroll();
-  // },[window.scrollY ])
-
-  // window.addEventListener("scroll", handleOnScroll);
-
-  /////o
   let { url, rand } = useSelector((state) => state.AppSlice);
   console.log(url);
   const dispatch = useDispatch();
@@ -54,7 +37,14 @@ function Herosection() {
       dispatch(getUrl(url));
     });
   };
-
+  useEffect(() => {
+    localStorage.setItem("url", JSON.stringify(url));
+  }, [url]);
+  console.log( JSON.parse(localStorage.getItem("url")));
+  useEffect(() => {
+    const myBoolean = JSON.parse(localStorage.getItem("url"));
+    dispatch(getUrl(myBoolean));
+  }, []);
   const genresCall = async () => {
     let promises = [];
     let endPoints = ["tv", "movie"];

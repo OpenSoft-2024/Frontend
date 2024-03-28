@@ -16,6 +16,8 @@ import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
 import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
+import { fetchDataFromApi } from "../../DataUtils/fetchData2";
+
 // import { unstable_HistoryRouter } from "react-router-dom";
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
@@ -27,7 +29,13 @@ import { useDispatch } from "react-redux";
 // import c1 from "../../assets/p1.jpg";
 // import PlansInfiniteScroolerMovieBox from "../PlansComponents/plansInfiniteScroolerMovieBox";
 function Plans() {
-  // const history = useHistory();
+  let { url, rand, isNavBarVisible } = useSelector((state) => state.AppSlice);
+  console.log(url);
+  // const dispatch = useDispatch();
+
+  ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
+   
+
   useEffect(() => {
     let backCount = 0;
 
@@ -79,14 +87,14 @@ function Plans() {
   };
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
-  const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
+  // const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
   useEffect(() => {
     localStorage.setItem("myBoolean", JSON.stringify(isNavBarVisible));
   }, [isNavBarVisible]);
   useEffect(() => {
     let myBoolean = JSON.parse(localStorage.getItem("myBoolean"));
     dispatch(setIsNavBarVisible(myBoolean));
-  },[]);
+  }, []);
   useEffect(() => {
     setData(heroImg);
     // setBgImage(localStorage.getItem('def'))
