@@ -15,6 +15,7 @@ import useFetch from "../custumHooks/useFetch";
 import axios from "axios";
 import { config } from "../utils/config";
 import { login } from "../AppStore/userSlice";
+import { server } from "../../server";
 
 function Herosection() {
 
@@ -44,7 +45,7 @@ function Herosection() {
 
   /////o
   let { url ,rand} = useSelector((state) => state.AppSlice);
-  console.log(url);
+  // console.log(url);
 
   ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
   const fetchApiConfiguration = () => {
@@ -89,6 +90,92 @@ function Herosection() {
     // setBgImage(localStorage.getItem('def'))
   }, [heroImg]);
 
+  const [data1, setData1] = useState(null);
+  const [data2, setData2] = useState(null);
+  const [data3, setData3] = useState(null);
+  const [data4, setData4] = useState(null);
+  const [data5, setData5] = useState(null);
+  const [data6, setData6] = useState(null);
+  const [data7, setData7] = useState(null);
+  // const [data8, setData8] = useState(null);
+  const token=localStorage.getItem("token")
+  useEffect(() => {
+  
+    const getfetch=async()=>{
+      try{
+
+        const res=await axios.get(`${server}/movies/latest`,{
+          headers:{
+            authorization:token
+          }
+        })
+        console.log(res);
+        setData1(res.data)
+
+        // const res1=await axios.get(`${server}/movies/gethits`,{
+        //   headers:token
+        // })
+        // // console.log(res);
+        // setData2(res.data)
+
+        const res2=await axios.post(`${server}/movies/language`,{
+          headers:{
+            authorization:token
+          }
+        },{
+          language:"English"
+        })
+        // console.log(res2);
+        setData3(res2.data)
+
+        const res3=await axios.post(`${server}/movies/language`,{
+          headers:{
+            authorization:token
+          }
+        },{
+          language:"Hindi"
+        })
+        // console.log(res3);
+        setData4(res3.data)
+
+        const res4=await axios.post(`${server}/movies/genres`,{
+          headers:{
+            authorization:token
+          }
+        },{
+          genre:"Action"
+        })
+        // console.log(res);
+        setData5(res4.data)
+
+        const res5=await axios.post(`${server}/movies/genres`,{
+          headers:{
+            authorization:token
+          }
+        },{
+          genre:"Romance"
+        })
+        // console.log(res);
+        setData6(res5.data)
+
+        const res6=await axios.post(`${server}/movies/genres`,{
+          headers:{
+            authorization:token
+          }
+        },{
+          genre:"Comedy"
+        })
+        // console.log(res);
+        setData7(res6.data)
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+    }
+   getfetch()
+  }, []);
+
   let [bgImage, setBgImage] = useState({
     img: url?.backdrop + data?.results[0].backdrop_path,
     id: "",
@@ -129,14 +216,17 @@ function Herosection() {
           </div>
 
           <div className="pl-6 mt-20">
-            <MovieGrid label="latest" />
-            <TopRatedFlex />
-            <MovieGrid label="Newly relased movies" />
-            <MovieGrid label="Because you watch batman" />
+            <MovieGrid data={data1} label="Latest" />
+            {/* <TopRa Data={data1}tedFlex /> */}
+            <MovieGrid data={data3} label="English" />
+            <MovieGrid data={data4} label="Hindi" />
+            <MovieGrid data={data5} label="Action" />
+            <MovieGrid data={data6} label="Romance" />
+            <MovieGrid data={data7} label="Comedy" />
           </div>
-          <div className="trendingMovie">
+          {/* <div className="trendingMovie">
             <TrendingMovieGrid label="Top 20 TV-SHOWS" type={"tv"} />
-          </div>
+          </div> */}
         </div>
       </div>
     </BackgroundImage.Provider>

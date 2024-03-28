@@ -21,7 +21,7 @@ function HeroMovieDesc() {
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);
-  console.log(data);
+  // console.log(data);
   // const { url, genres,rand } = useSelector((state) => state.AppSlice);
 
   const truncted = (str) => {

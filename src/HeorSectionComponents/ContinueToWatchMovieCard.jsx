@@ -25,7 +25,7 @@ function ContinueToWatchMovieCard({
   let handleOnClick = () => {
     setBgImage({ img, id: boxId });
     // cont.current.style = "border:1px solid white;";
-    console.log(cont);
+    // console.log(cont);
 
     setTimeout(() => {
       setBgImageDescription({

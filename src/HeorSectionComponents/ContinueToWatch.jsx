@@ -48,7 +48,7 @@ function ContinueToWatch({ label }) {
           <ContinueToWatchMovieSkelton></ContinueToWatchMovieSkelton>
         ) : (
           data.results.map((item, index) => {
-            console.log(item.overview);
+            // console.log(item.overview);
             if (index > 6) return;
 
             return (

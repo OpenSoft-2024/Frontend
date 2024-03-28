@@ -15,7 +15,7 @@ const NavBar = () => {
 
   const {user} = useSelector((state) => state.userSlice);
 
-  console.log(user);
+  // console.log(user);
 
 
   const handleOnClick = (e) => {

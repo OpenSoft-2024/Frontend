@@ -14,17 +14,36 @@ import t9 from "../assets/t9.webp";
 import useFetch from "../custumHooks/useFetch";
 import { useSelector } from "react-redux";
 import t10 from "../assets/t10.webp";
+import axios from "axios";
+import { server } from "../../server";
 
 function TrendingMovieGrid({ label, type }) {
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch(`/trending/${type}/day`);
+  // const { heroImg, isLoading, error } = useFetch(`/trending/${type}/day`);
+
+  useEffect( ()=>{
+    const getdata=async()=>{
+      try{
+        const res=await axios.get(`${server}/movies/gethits`)
+        // console.log(res);
+      setData(res.data)
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+      
+    }
+    getdata()
+
+  },[])
   // console.log(heroImg);
-  const { url } = useSelector((state) => state.AppSlice);
+  // const { url } = useSelector((state) => state.AppSlice);
   // console.log(url);
   // setBgImage(url?.poster + data?.results[0].backdrop_path);
-  useEffect(() => {
-    setData(heroImg);
-  });
+  // useEffect(() => {
+  //   setData(heroImg);
+  // });
   let itTrending = 0;
   const trendingAray = [t1, t2, t3, t4, t5, t6, t7, t8];
   return (
@@ -32,11 +51,11 @@ function TrendingMovieGrid({ label, type }) {
       <h1 className="text-white text-xl text-opacity-55">{label}</h1>
       {data ? (
         <div className="trending-movie-grid flex gap-10 overflow-y-hidden py-4 pl-8">
-          {data?.results.map((item) => {
+          {data?.map((item) => {
             return (
               <TrendingMovieCard
-                key={item.id}
-                img={url.poster + item.backdrop_path}
+                key={item._id}
+                img={item.poster}
                 trendingCount={++itTrending}
               />
             );

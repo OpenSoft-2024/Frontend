@@ -9,6 +9,8 @@ import Img from "../lazyLoading/Img";
 import { useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import axios from "axios";
+import { server } from "../../server";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -28,18 +30,32 @@ const responsive = {
     items: 1,
   },
 };
-function MovieGrid({ label }) {
+function MovieGrid({ label,data }) {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
-  const [data, setData] = useState(null);
+  // console.log(Data);
+  // const [data, setData] = useState(Data);
+  // console.log(data);
 
+  
   const myRef = useRef(null);
-  const { heroImg, isLoading, error } = useFetch("/trending/all/day");
-  console.log(heroImg);
-  const { url } = useSelector((state) => state.AppSlice);
+  
 
-  useEffect(() => {
-    setData(heroImg);
-  }, [heroImg]);
+  // useEffect(() => {
+  
+  //   const getfetch=async()=>{
+  //     try{
+
+  //       const res=await axios.get(`${server}/movies/latest`)
+  //       console.log(res);
+  //       setData(res.data)
+  //     }
+  //     catch(err)
+  //     {
+  //       console.log(err);
+  //     }
+  //   }
+  //  getfetch()
+  // }, []);
 
   const navigation = (dir) => {
     const container = myRef.current;
@@ -76,8 +92,8 @@ function MovieGrid({ label }) {
             className=" gap-3 kdowei overflow-x-hidden flex transition-all overflow-y-hidden  justify-between  "
             ref={myRef}
           >
-            {data?.results.map((item) => (
-              <MovieCard img={url.poster + item.poster_path} key={item.id} />
+            {data?.map((item) => (
+              <MovieCard img={item.poster} key={item._id} />
             ))}
           </div>
         ) : (
