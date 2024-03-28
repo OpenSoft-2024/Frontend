@@ -32,7 +32,7 @@ function Plans() {
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
   const item = ["entertainment", "will ", "never"];
-  const button = ["Tier 1 ", "Tier 2", "Tier 2"];
+  const button = ["Tier 1 ", "Tier 2", "Tier 3"];
   const handleOnClick = (e) => {
     console.log(e.target);
     if (e.target.id == 5) {
