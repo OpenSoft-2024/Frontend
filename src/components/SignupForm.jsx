@@ -16,7 +16,7 @@ const SignupForm = () => {
 
   const handleSubmit = async () => {
     
-    if (!name || !email || !password || !password2 ) {
+    if (!name || !email || !password || !password2) {
       toast.error('Please fill all the fields');
       return;
     }
