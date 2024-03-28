@@ -222,7 +222,9 @@ display: none;
 }
 
 
-
+.overlay-04{
+  background-image: linear-gradient(to top,rgb(0, 0, 0),transparent);
+}
 
 .greeting-Box h1{
     font-size: 2.3rem;
@@ -231,11 +233,62 @@ display: none;
     color:rgba(255, 255, 255, 0.999);
 }
 
+.smt{
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+}
 
 
+ .giveMeTrans{
+  /* transform: translateX(-10%); */
+  /* display: none; */
+  
+ 
+  /* animation: hoverdetail 2s cubic-bezier(0.19, 1, 0.22, 1) 2s ; */
+ 
+ }
+ 
+ .dpnone{
+    /* display: none; */
+    opacity: 0;
+ 
+ }
 
+ @keyframes hoverdetail {
+  0% {
+    scale:0.2;
+    opacity:0;
+  }
+  20% {
+    scale:0.4;
+    opacity:0.4;
+  }
+  40% {
+    scale:0.6;
+    opacity:0.6;
+  } 
+  60% {
+    scale:0.8;
+    opacity:0.8;
+  }
+  80%{
+    scale:1;
+    opacity:1;
 
+  }
+  100%{
+    scale:1;
+    opacity: 1;
 
+  }
+  
+  
+ }
+.overlay-04{
+  background-image: linear-gradient(to right,rgb(0, 0, 0) 30%,transparent);
+  top:30vh ;
+  width:20rem;
+  height:70vh;
+}
 
 .descr{
   & p{
@@ -244,10 +297,15 @@ display: none;
 }
 
 
- 
+.overlay-detalis{
+  background-image: linear-gradient(to top,rgb(0, 0, 0) 40%,transparent);
+} 
 
 
+.searchPgec:hover .detonh{
+  display:block;
 
+}
 
 
 

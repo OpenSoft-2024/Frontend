@@ -15,8 +15,9 @@ import LocomotiveScroll from "locomotive-scroll";
 // import Plans from './components/AddToFavourite.jsx/plans'
 // import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
 function App() {
+   
   
-
+   
   return (
     <>
       <Provider store={store}>

@@ -17,7 +17,7 @@ function Subs() {
       initial={{ opacity: "0.3", right: "0%" }}
       animate={{ opacity: "1", right: "7%" }}
       transition={{ ease: [0.76, 0, 0.24, 1], duration: 2 }}
-      className="absolute top-[30%] right-[7%] opacity-0 text-white flex   gap-2 rounded-lg "
+      className="absolute top-[24%] right-[7%] opacity-0 text-white flex   gap-6 rounded-lg "
     >
       <div className="flex flex-col gap-6">
         <div>

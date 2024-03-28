@@ -7,6 +7,8 @@ import HeroSection from './components/herosection.jsx'
 import Plans from './components/AddToFavourite.jsx/plans.jsx'
 import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite.jsx'
 import SearchPage from "./components/searchPage.jsx"
+import { useEffect } from 'react'
+ 
 
 const router = createBrowserRouter(
   createRoutesFromElements(

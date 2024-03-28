@@ -16,6 +16,7 @@ import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
 import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
+// import { unstable_HistoryRouter } from "react-router-dom";
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
 // import c4 from "../../assets/p1.jpg";
@@ -26,6 +27,36 @@ import { useDispatch } from "react-redux";
 // import c1 from "../../assets/p1.jpg";
 import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
 function Plans() {
+  // const history = useHistory();
+  useEffect(() => {
+    let backCount = 0;
+
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      if (backCount < 2) {
+        window.history.pushState(null, '', window.location.href);
+        backCount++;
+        // Optionally, you can show a message or perform some other action
+      } else {
+        // After two attempts, you might want to show a message or perform some action
+        // For example: alert('You cannot go back further.');
+      }
+    };
+
+    window.onpopstate = handleBackButton;
+
+    const handleTouchMove = (event) => {
+      event.preventDefault();
+    };
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      window.onpopstate = null;
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
+
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
