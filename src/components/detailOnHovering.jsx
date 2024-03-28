@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import dayjs from "dayjs";
 function DetailOnHover({ img, about, date, style }) {
   const trunct = (str) => {
-    if (str.length < 120) {
+    if (str?.length < 120) {
       return str;
     } else {
-      return str.slice(0, 140) + "...";
+      return str?.slice(0, 140) + "...";
     }
   };
   return (
