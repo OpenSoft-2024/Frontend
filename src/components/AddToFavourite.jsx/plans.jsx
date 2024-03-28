@@ -16,6 +16,8 @@ import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
 import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
+import {loadStripe} from '@stripe/stripe-js';
+import axios from 'axios'
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
 // import c4 from "../../assets/p1.jpg";
@@ -30,7 +32,7 @@ function Plans() {
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
   const item = ["entertainment", "will ", "never"];
-  const button = ["mobile ", "super", "premium"];
+  const button = ["Tier 1 ", "Tier 2", "Tier 2"];
   const handleOnClick = (e) => {
     console.log(e.target);
     if (e.target.id == 5) {
@@ -50,6 +52,7 @@ function Plans() {
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
   const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
+  const [tier, setTier] = useState()
   useEffect(() => {
     setData(heroImg);
     // setBgImage(localStorage.getItem('def'))
@@ -60,6 +63,51 @@ function Plans() {
 
     setIsNavBarVisible(dispatch(true));
   };
+  
+
+const handlePayment=async ()=>{
+    try{
+    const stripe = await loadStripe("pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q");
+
+    const response=await axios.post('http://localhost:8080/api/payment/checkout',{
+        amt:1,
+        name:"movie"
+    })
+    
+    const session=response?.data?.id
+    console.log(session);
+    const result=await stripe.redirectToCheckout({
+        sessionId:session
+    })
+    if(result.error)
+    {
+        console.log(result.error);
+    }
+    else{
+        //for subscription
+        const tier=backgroundColor1?1:backgroundColor2?2:3
+        const res=await axios.post('http://localhost:8080/api/subscription/create',{
+        duration:1,
+        tier:tier
+    })
+    console.log(res);
+
+    // for rent
+    // const res1=await axios.post('http://localhost:8080/api/rent/create',{
+    //     duration:4,
+    //     movieId:movieid
+        
+    // })
+}
+    }
+catch(err)
+{
+    console.log(err);
+}
+
+}
+
+
 
   return (
     <BackgroundColor.Provider
@@ -212,10 +260,9 @@ function Plans() {
           transition={{ ease: [0.76, 0, 0.24, 1], duration: 1.5 }}
           className="overflow-hidden h-[0px] absolute top-[82%] right-[5%] hover:scale-[1.03] "
         >
-          <button className="text-white  py-4 px-10 capitalize bg-red-700 hover:bg-red-600 font-bold rounded ">
-            {backgroundColor1 ? "conitnue with mobile" : ""}
-            {backgroundColor2 ? "conitnue with supper" : ""}
-            {backgroundColor3 ? "conitnue with Premium" : ""}
+          <button className="text-white  py-4 px-10 capitalize bg-red-700 hover:bg-red-600 font-bold rounded "
+          onClick={handlePayment}>
+            Continue
           </button>
         </motion.div>
 
