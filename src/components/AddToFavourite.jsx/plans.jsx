@@ -16,15 +16,9 @@ import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
 import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
-// import c2 from "../../assets/p1.jpg";
-// import c3 from "../../assets/p1.jpg";
-// import c4 from "../../assets/p1.jpg";
-// import c5 from "../../assets/p1.jpg";
-// import c6 from "../../assets/p1.jpg";
-// import c7 from "../../assets/p1.jpg";
-// import c8 from "../../assets/p1.jpg";
-// import c1 from "../../assets/p1.jpg";
 import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
+
+
 function Plans() {
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);

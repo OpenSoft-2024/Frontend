@@ -1,4 +1,3 @@
-import React from 'react';
 import GoogleLogo from '../assets/Images/google.svg';
 
 const GoogleOAuthButton = () => {

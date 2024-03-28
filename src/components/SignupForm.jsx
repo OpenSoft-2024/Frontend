@@ -1,46 +1,39 @@
 import { useState } from "react";
 import axios from "axios";
-import {redirect}  from 'react-router-dom'; 
+import {useNavigate} from 'react-router-dom' 
 import OAuthButton from './OAuthButton'
+import {config} from '../utils/config';
+import {toast} from 'react-toastify';
+
+
 const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const history =useHistory();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    // console.log('kya!');
-    // // e.preventDefault();
-    // console.log("submit called")
-    if (!name || !email || !password || !password2) {
-      alert("Please fill up all mandatory fields.");
+    
+    if (!name || !email || !password || !password2 || ) {
+      toast.error('Please fill all the fields');
       return;
     }
+
     if(password != password2) {
-      alert("passwords don't match")
+      toast.error('Passwords do not match');
       return;
     }
-    // const orderUrl="http://localhost:5000/api/checkout/payment";
-    // const res = await axios.post(orderUrl, { tokenId:1,amount: totalAmount*100 });
-    // Submit the form
+  
     try{
-      console.log(name,email,password,password2);
-      const registerUrl="http://localhost:8080/api/users/register";
-      const res = await axios.post(registerUrl,{
-        name: name,
-        email: email,
-        password: password,
-        cpassword: password2
-      })
-      console.log("res: ",res.data);
-      localStorage.setItem("token",res.data.token);
+      
+      await axios.post(`${config.BASE_URL}/users/register`,{ name,email,password});
+      navigate('/login');
+      
     }catch(err){
-      //redirect to error page
-      console.error(err.response.data);
-    // Handle error (e.g., show error message)
-    alert(err.response.data.password);
+      toast.error('Something went wrong! Please try again later.');
+      console.error(err);
     }
   };
  

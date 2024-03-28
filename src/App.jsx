@@ -3,24 +3,25 @@ import { Outlet } from "react-router-dom";
 import Footer from "./components/footer";
 import { store } from "./AppStore/index.js";
 import { Provider } from "react-redux";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import LocomotiveScroll from "locomotive-scroll";
+import { ToastContainer } from 'react-toastify';
+
  
-
-// import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
-// import HeroSection from './components/herosection'
-// import {Route ,Routes} from 'react-router-dom'
-// import Plans from './components/AddToFavourite.jsx/plans'
-// import AddToFavourite from './components/AddToFavourite.jsx/addToFavourite'
 function App() {
-  
-
+   
   return (
     <>
       <Provider store={store}>
+          <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              pauseOnFocusLoss
+              pauseOnHover
+              theme="dark"
+          />
         {<NavBar></NavBar>}
-
+          
         <Outlet></Outlet>
         <Footer></Footer>
       </Provider>

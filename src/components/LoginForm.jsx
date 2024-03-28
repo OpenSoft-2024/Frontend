@@ -2,23 +2,35 @@ import {Link} from 'react-router-dom'
 import OAuthButton from './OAuthButton'
 import { useState } from 'react';
 import axios from "axios";
+import { config } from '../utils/config'
+import {useDispatch} from 'react-redux';
+import { login } from '../AppStore/userSlice';
+import { useNavigate } from 'react-router-dom';
+
+
 const LoginForm = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
     const handleLogin = async () =>{
-      console.log("login clicked!")
+    
       try{
-        const loginUrl="http://localhost:8080/api/users/login";
-        const res = await axios.post(loginUrl,{
-          email: email,
-          password: password,
-        })
-        console.log("res: ",res.data);
+        
+        const res = await axios.post(`${config.BASE_URL}/users/login`,{email,password});
         localStorage.setItem("token",res.data.token);
+        const userRes = await axios.get(`${config.BASE_URL}/users/profile`,{headers:{Authorization:res.data.token}});
+        console.log(userRes.data);
+        dispatch(login(userRes.data.user));
+        navigate('/');
+
       }catch(err){
         console.log(err);
       }
     }
+
     return (
       <div className="absolute inset-0 flex items-center justify-center">
         <div className='w-full md:w-1/4 flex flex-col mt-16 text-white p-10 bg-black bg-opacity-80 rounded-md shadow-md'>

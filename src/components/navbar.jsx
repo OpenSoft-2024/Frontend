@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useRef } from "react";
@@ -7,10 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 
 const NavBar = () => {
-  let [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   let dropDownLink = useRef(null);
   let dropDownContent = useRef(null);
   let [color, setColor] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const {user} = useSelector((state) => state.userSlice);
+
+  console.log(user);
+
+
   const handleOnClick = (e) => {
     e.target.style = "width:40vw";
   };
@@ -33,7 +40,7 @@ const NavBar = () => {
   // };
 
   let { isNavBarVisible } = useSelector((state) => state.AppSlice);
-  let dispatch = useDispatch();
+  
   const hideOrShowOnClick = (e) => {
     isNavBarVisible
       ? dispatch(setIsNavBarVisible(false))
@@ -80,17 +87,19 @@ const NavBar = () => {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/AddToFavourite"
-                className={({ isActive }) =>
-                  ` text-[1rem] ${isActive ? "acv" : "nonacv"}`
-                }
-                // onClick={hideOrShowOnClick}
-              >
-                MyStuffs
-              </NavLink>
-            </li>
+            {Object.entries(user).length > 0 && (
+              <li>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    ` text-[1rem] ${isActive ? "acv" : "nonacv"}`
+                  }
+                  // onClick={hideOrShowOnClick}
+                >
+                  Profile
+                </NavLink>
+              </li>
+            )}
 
             <li>
               <div className="languages cursor-pointer relative">
@@ -133,24 +142,22 @@ const NavBar = () => {
           </div>
         </NavLink>
 
-        {!isUserLoggedIn ? (
-          <div className="userImage absolute right-[2%]">
-            <div className="w-10 h-10 rounded-full bg-white">
-              <img src="" alt="" />
-            </div>
+
+        <div className="userImage absolute right-[2%]">
+          <div className="w-10 h-10 rounded-full bg-white">
+            <img src={Object.entries(user).length === 0 ? '' : user.imageUrl} alt="profile image" />
           </div>
-        ) : (
-          ""
-        )}
-        {!isUserLoggedIn ? (
+        </div>
+
+        
+        {Object.entries(user).length === 0 && (
           <div className="absolute right-[8%]">
-            <NavLink to="/login" className="text-white capitalize">
-              sign-up
-            </NavLink>
-          </div>
-        ) : (
-          ""
+          <NavLink to="/login" className="text-white capitalize">
+            sign-up
+          </NavLink>
+        </div>
         )}
+
       </div>
     </>
   );

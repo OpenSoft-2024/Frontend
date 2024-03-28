@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState } from "react";
 import MovieGrid from "../HeorSectionComponents/movieGrid";
@@ -6,41 +5,46 @@ import ContinueToWatch from "../HeorSectionComponents/ContinueToWatch";
 import BackgroundImage from "../LandingPageBackgroundImageContext/context";
 import HeroMovieDesc from "../HeorSectionComponents/heroMovieDesc";
 import TrendingMovieGrid from "../HeorSectionComponents/TrendingMovieGrid";
-import c4 from "../assets/c4.jpg";
-// import { Dispatch } from "@reduxjs/toolkit";
-// import { useContext } from "react";
-import img from "../assets/download.jpg";
-import Img from "../lazyLoading/Img";
-import { Ref } from "react";
+
 import { useEffect } from "react";
 import { fetchDataFromApi } from "../DataUtils/fetchData2";
 import { useDispatch, useSelector } from "react-redux";
 import { getUrl, getGenres } from "../AppStore/AppSlicer";
 import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
 import useFetch from "../custumHooks/useFetch";
-// import { UseSelector } from "react-redux";
+import axios from "axios";
+import { config } from "../utils/config";
+import { login } from "../AppStore/userSlice";
 
 function Herosection() {
-  // overlay logic
 
-  // let [active, setActive] = useState(false);
-  // const handleOnScroll = () => {
-  //   if (window.scrollY > 230) {
-  //     setActive(true);
-  //   } else {
-  //     setActive(false);
-  //   }
-  // };
-  // useEffect(()=>{
-  //   handleOnScroll();
-  // },[window.scrollY ])
+  const dispatch = useDispatch();
+   
+  useEffect(() => {
+    setUser();
+  }, []);
+  
+  const setUser = async () => {
 
-  // window.addEventListener("scroll", handleOnScroll);
+    const token = localStorage.getItem("token");
+    if(!token){
+      return;
+    }
+    
+    try{
+  
+      const res = await axios.get(`${config.BASE_URL}/users/profile`,{headers:{Authorization:token}});
+      dispatch(login(res.data.user));
+    }
+    catch(err){
+      console.log(err);
+    }
+    
+  }
 
   /////o
   let { url ,rand} = useSelector((state) => state.AppSlice);
   console.log(url);
-  const dispatch = useDispatch();
 
   ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
   const fetchApiConfiguration = () => {
