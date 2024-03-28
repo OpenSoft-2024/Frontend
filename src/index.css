@@ -706,23 +706,28 @@ display: none;
 
    .box-overlay1{
     /* top:40%; */
-    left:1%;
-    width:4%;
+    left:-0.1%;
+    width:6%;
+    top:10%;
     
-    z-index:4000;
-    height:50%;   
+    z-index:6000;
+    height:80%;   
     /* background:linear-gradient(to right,black ,transparent); */
     opacity: 0;
     /* bac */
     /* background-color:blue; */
    }
-
+    .overlay-08{
+      background:linear-gradient(to top,black 40% ,transparent); 
+      height:4rem;
+      width:100%;
+    }
    .box-overlay2{
-    width:10%;
-    height:58%;
-    z-index:4000;
+    width:6%;
+    height:70%;
+    z-index:6000;
     /* width:3%; */
-    right:-5%;
+    right:-1%;
     /* top:40%; */
     /* background-color:pink; */
     background:linear-gradient(to left,black ,transparent);
@@ -734,7 +739,7 @@ display: none;
    }
    .box-overlay1 i{
     /* right:-10%; */
-    top:60%;
+    top:40%;
    }
   
    .box-overlayl{
