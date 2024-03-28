@@ -2,7 +2,7 @@ import React from "react";
 import c1 from "../assets/c1.jpg";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
-function DetailOnHover({ img, about, date }) {
+function DetailOnHover({ img, about, date, style }) {
   const trunct = (str) => {
     if (str.length < 120) {
       return str;
@@ -13,8 +13,8 @@ function DetailOnHover({ img, about, date }) {
   return (
     <motion.div
       whileHover={{ scale: 1.094, opacity: 1, translate: "translateX(-10%)" }}
-      transition={{ duration: 0.3, delay: 1 }}
-      className="w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[1000]    translate-x-[-10%] bg-black left-[-18%]"
+      transition={{ duration: 0.3, delay: 0.9 }}
+      className={`w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[3000]    translate-x-[-10%] bg-black left-[-18%] ${style}`}
     >
       <div classNaem="w-[100%] h-[20vh]">
         <img src={img} alt="" w-full h-full rounded />

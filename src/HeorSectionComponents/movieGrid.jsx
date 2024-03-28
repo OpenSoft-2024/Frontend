@@ -60,24 +60,32 @@ function MovieGrid({ label }) {
       <h1 className="text-white ml-4  text-opacity-[0.6] text-lg mt-20  capitalize">
         {label}
       </h1>
-      <div className="box-overlayl absolute   text-white"></div>
-      <div className="box-overlayr absolute  text-white  "></div>
-      <i
-        class=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl w-fit  cursor-pointer  "
-        onClick={() => navigation("right")}
-      ></i>
-      <i
-        className=" i2 ri-arrow-left-circle-line text-white  absolute top-28 right-10 text-3xl  w-fit cursor-pointer  "
-        onClick={() => navigation("left")}
-      ></i>
+      <div className="box-overlay2 bx2 absolute   text-white  group ">
+        <i
+          className="ri-arrow-right-circle-fill text-white relative top-42  text-2xl  invisible group-hover:visible opacity-65 hover:opacity-100"
+          onClick={() => navigation("right")}
+        ></i>
+      </div>
+      <div className=" box-overlay1 bx1 absolute   text-white group">
+        <i
+          className="ri-arrow-left-circle-fill text-white relative top-[50%] left-0 text-2xl invisible group-hover:visible opacity-65 hover:opacity-100"
+          onClick={() => navigation("left")}
+        ></i>
+      </div>
       <div className="flex  w-screen gap-3 movie-grid scrool-smooth  relative  ">
         {data ? (
           <div
-            className=" gap-3 kdowei overflow-x-hidden flex transition-all overflow-y-hidden  justify-between  "
+            className=" gap-6 kdowei overflow-x-hidden flex transition-all overflow-y-hidden  justify-between  "
             ref={myRef}
           >
             {data?.results.map((item) => (
-              <MovieCard img={url.poster + item.poster_path} key={item.id} />
+              <MovieCard
+                img={url.poster + item.poster_path}
+                key={item.id}
+                img2={url.poster + item.backdrop_path}
+                about={item.overview}
+                date={item.release_date}
+              />
             ))}
           </div>
         ) : (

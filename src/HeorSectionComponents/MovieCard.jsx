@@ -1,8 +1,9 @@
 import React from "react";
 import avtar from "../assets/avt.webp";
 import Img from "../lazyLoading/Img";
+import DetailOnHover from "../components/detailOnHovering";
 
-function MovieCard({ img }) {
+function MovieCard({ img, img2, about, date }) {
   return (
     <div className="mt-4 rounded-3xl relative h-96  w-fit">
       <h1>vishal</h1>
@@ -17,6 +18,7 @@ function MovieCard({ img }) {
           nisi fugit odit facere.
         </p>
       </div>
+      <DetailOnHover img={img2} about={about} date={date} style={"top-[3%]"} />
     </div>
   );
 }

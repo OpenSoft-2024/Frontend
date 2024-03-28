@@ -25,7 +25,7 @@ import { useDispatch } from "react-redux";
 // import c7 from "../../assets/p1.jpg";
 // import c8 from "../../assets/p1.jpg";
 // import c1 from "../../assets/p1.jpg";
-import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
+// import PlansInfiniteScroolerMovieBox from "../PlansComponents/plansInfiniteScroolerMovieBox";
 function Plans() {
   // const history = useHistory();
   useEffect(() => {
@@ -34,7 +34,7 @@ function Plans() {
     const handleBackButton = (event) => {
       event.preventDefault();
       if (backCount < 2) {
-        window.history.pushState(null, '', window.location.href);
+        window.history.pushState(null, "", window.location.href);
         backCount++;
         // Optionally, you can show a message or perform some other action
       } else {
@@ -48,14 +48,13 @@ function Plans() {
     const handleTouchMove = (event) => {
       event.preventDefault();
     };
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.onpopstate = null;
-      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
-
 
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
@@ -82,6 +81,13 @@ function Plans() {
   const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
   const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
   useEffect(() => {
+    localStorage.setItem("myBoolean", JSON.stringify(isNavBarVisible));
+  }, [isNavBarVisible]);
+  useEffect(() => {
+    let myBoolean = JSON.parse(localStorage.getItem("myBoolean"));
+    dispatch(setIsNavBarVisible(myBoolean));
+  },[]);
+  useEffect(() => {
     setData(heroImg);
     // setBgImage(localStorage.getItem('def'))
   }, [heroImg]);
@@ -89,7 +95,7 @@ function Plans() {
   const viewOnClick = (e) => {
     console.log(e);
 
-    setIsNavBarVisible(dispatch(true));
+    dispatch(setIsNavBarVisible(true));
   };
 
   return (

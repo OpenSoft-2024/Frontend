@@ -22,7 +22,6 @@ function App() {
     <>
       <Provider store={store}>
         {<NavBar></NavBar>}
-
         <Outlet></Outlet>
         <Footer></Footer>
       </Provider>

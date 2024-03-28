@@ -32,7 +32,7 @@ function SearchPage() {
   window.addEventListener("scroll", handleOnScroll);
   const handleOnClick = (e) => {
     console.log(e);
-    setIsNavBarVisible(dispatch(true));
+    dispatch(setIsNavBarVisible(true));
   };
   return (
     <div className={`bg-[#050404] w-screen min-h-[100vh] relative  `}>
