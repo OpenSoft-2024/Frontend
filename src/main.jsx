@@ -11,6 +11,10 @@ import SignupPage from './components/SignupPage.jsx'
 import MySpace from './components/AddToFavourite.jsx/mySpace.jsx'
 import SearchPage from "./components/searchPage.jsx"
 
+
+// Admin Imports 
+import Home from "./admin/Home.jsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
@@ -19,8 +23,12 @@ const router = createBrowserRouter(
       <Route path='/login' element={<LoginPage/>} />
       <Route path='plans' element={<Plans/>} />
       <Route path='AddToFavourite' element={<AddToFavourite />}/>
-      <Route path='MySpace' element={<MySpace />}/>
+      <Route path='/profile' element={<MySpace />}/>
       <Route path="searchPage"  element={<SearchPage/>}/>
+
+      {/* Admin Routes */}
+
+      <Route path="/admin"  element={<Home/>}/>
     </Route>
   )
 )

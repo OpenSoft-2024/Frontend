@@ -23,6 +23,7 @@ function Plans() {
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
+  
   const item = ["entertainment", "will ", "never"];
   const button = ["mobile ", "super", "premium"];
   const handleOnClick = (e) => {

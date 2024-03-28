@@ -1,7 +1,7 @@
 import MovieCardHorizontal from "./movieCardHorizontal";
 import m2 from "../assets/m2.webp";
 
-function MovieGridHorizontal({ label }) {
+function MovieGridHorizontal({ label}) {
   return (
     <div style={{paddingLeft:'1vw', maxWidth:'96vw', overflow:'hidden',paddingTop:'0vh', paddingBottom:'2vh', marginTop:'2vh'}}>
       <h1 className="text-slate-300 ml-4 capitalize mt-4" style={{fontSize:'1.5rem'}}>{label}</h1>
@@ -17,6 +17,7 @@ function MovieGridHorizontal({ label }) {
         <MovieCardHorizontal />
         <MovieCardHorizontal />
         <MovieCardHorizontal />
+
       </div>
     </div>
   );

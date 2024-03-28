@@ -9,6 +9,7 @@ import Img from "../lazyLoading/Img";
 import { useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -28,6 +29,8 @@ const responsive = {
     items: 1,
   },
 };
+
+
 function MovieGrid({ label }) {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
   const [data, setData] = useState(null);
@@ -63,7 +66,7 @@ function MovieGrid({ label }) {
       <div className="box-overlayl absolute   text-white"></div>
       <div className="box-overlayr absolute  text-white  "></div>
       <i
-        class=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl w-fit  cursor-pointer  "
+        className=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl w-fit  cursor-pointer  "
         onClick={() => navigation("right")}
       ></i>
       <i
@@ -82,8 +85,8 @@ function MovieGrid({ label }) {
           </div>
         ) : (
           <div className="w-screen flex gap-4 movie-grid mt-4 mb-12">
-            {loadingSkeltonArray.map((item) => (
-              <div className="w-[25%] h-96 blinker rounded-lg"></div>
+            {loadingSkeltonArray.map((item,index) => (
+              <div key={index} className="w-[25%] h-96 blinker rounded-lg"></div>
             ))}
           </div>
         )}
