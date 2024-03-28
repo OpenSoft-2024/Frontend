@@ -104,11 +104,7 @@ function Herosection() {
     const getfetch=async()=>{
       try{
 
-        const res=await axios.get(`${server}/movies/latest`,{
-          headers:{
-            authorization:token
-          }
-        })
+        const res=await axios.get(`${server}/movies/latest`)
         console.log(res);
         setData1(res.data)
 
@@ -119,50 +115,30 @@ function Herosection() {
         // setData2(res.data)
 
         const res2=await axios.post(`${server}/movies/language`,{
-          headers:{
-            authorization:token
-          }
-        },{
           language:"English"
         })
         // console.log(res2);
         setData3(res2.data)
 
         const res3=await axios.post(`${server}/movies/language`,{
-          headers:{
-            authorization:token
-          }
-        },{
           language:"Hindi"
         })
-        // console.log(res3);
+        console.log(res3);
         setData4(res3.data)
 
         const res4=await axios.post(`${server}/movies/genres`,{
-          headers:{
-            authorization:token
-          }
-        },{
           genre:"Action"
         })
         // console.log(res);
         setData5(res4.data)
 
         const res5=await axios.post(`${server}/movies/genres`,{
-          headers:{
-            authorization:token
-          }
-        },{
           genre:"Romance"
         })
         // console.log(res);
         setData6(res5.data)
 
         const res6=await axios.post(`${server}/movies/genres`,{
-          headers:{
-            authorization:token
-          }
-        },{
           genre:"Comedy"
         })
         // console.log(res);
