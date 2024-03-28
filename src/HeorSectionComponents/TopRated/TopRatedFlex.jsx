@@ -8,13 +8,11 @@ import ar from "../../../public/ar.png";
 import al from "../../../public/al.png";
 import MovieCard from "../MovieCard";
 
-function TopRatedFlex() {
+function TopRatedFlex({ label, endPoint }) {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
   const { url, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch(
-    `/movie/top_rated?page=${rand}`
-  );
+  const { heroImg, isLoading, error } = useFetch(`${endPoint}?page=${rand}`);
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);
@@ -33,9 +31,9 @@ function TopRatedFlex() {
     });
   };
   return (
-    <div className="relative w-screen">
+    <div className="relative w-screen  ">
       <div>
-        <h1 className="text-white text-2xl">top Rated</h1>
+        <h1 className="text-white text-xl ml-[33px] ">{label}</h1>
       </div>
       <div className="box-overlay1 absolute top-30 left-10 text-white group">
         <i
@@ -50,9 +48,17 @@ function TopRatedFlex() {
         ></i>
       </div>
       {data ? (
-        <div className="wrapeer flex  mt-3 gap-3 overflow-x-hidden" ref={myRef}>
+        <div
+          className="wrapeer flex pl-8 mt-3 gap-3 overflow-y-hidden overflow-x-hidden"
+          ref={myRef}
+        >
           {data?.results.map((item) => (
-            <TopRatedMovieCard img={url.backdrop + item.backdrop_path} />
+            <TopRatedMovieCard
+              img={url.backdrop + item.backdrop_path}
+              img2={url.poster + item.backdrop_path}
+              about={item.overview}
+              date={item.release_date}
+            />
           ))}
         </div>
       ) : (

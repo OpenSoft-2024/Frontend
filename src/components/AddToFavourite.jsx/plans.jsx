@@ -20,6 +20,35 @@ import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteSc
 
 
 function Plans() {
+  // const history = useHistory();
+  useEffect(() => {
+    let backCount = 0;
+
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      if (backCount < 2) {
+        window.history.pushState(null, "", window.location.href);
+        backCount++;
+        // Optionally, you can show a message or perform some other action
+      } else {
+        // After two attempts, you might want to show a message or perform some action
+        // For example: alert('You cannot go back further.');
+      }
+    };
+
+    window.onpopstate = handleBackButton;
+
+    const handleTouchMove = (event) => {
+      event.preventDefault();
+    };
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      window.onpopstate = null;
+      document.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
@@ -46,6 +75,13 @@ function Plans() {
   const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
   const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
   useEffect(() => {
+    localStorage.setItem("myBoolean", JSON.stringify(isNavBarVisible));
+  }, [isNavBarVisible]);
+  useEffect(() => {
+    let myBoolean = JSON.parse(localStorage.getItem("myBoolean"));
+    dispatch(setIsNavBarVisible(myBoolean));
+  },[]);
+  useEffect(() => {
     setData(heroImg);
     // setBgImage(localStorage.getItem('def'))
   }, [heroImg]);
@@ -53,7 +89,7 @@ function Plans() {
   const viewOnClick = (e) => {
     console.log(e);
 
-    setIsNavBarVisible(dispatch(true));
+    dispatch(setIsNavBarVisible(true));
   };
 
   return (

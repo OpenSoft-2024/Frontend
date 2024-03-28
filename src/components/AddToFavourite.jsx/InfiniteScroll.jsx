@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import useFetch from "../../custumHooks/useFetch";
 import { useState } from "react";
 import { useEffect } from "react";
-import PlansInfiniteScroolerMovieBox from  "../../PlansComponents/plansInfiniteScroolerMovieBox";
+import PlansInfiniteScroolerMovieBox from  "../PlansComponents/plansInfiniteScroolerMovieBox";
 
 function InfiniteScroll({page}) {
   const [data, setData] = useState(null);

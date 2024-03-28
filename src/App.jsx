@@ -8,6 +8,8 @@ import { ToastContainer } from 'react-toastify';
  
 function App() {
    
+  
+   
   return (
     <>
       <Provider store={store}>
@@ -21,7 +23,6 @@ function App() {
               theme="dark"
           />
         {<NavBar></NavBar>}
-          
         <Outlet></Outlet>
         <Footer></Footer>
       </Provider>

@@ -43,7 +43,7 @@ function Herosection() {
   }
 
   /////o
-  let { url ,rand} = useSelector((state) => state.AppSlice);
+  let { url, rand } = useSelector((state) => state.AppSlice);
   console.log(url);
 
   ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
@@ -107,7 +107,9 @@ function Herosection() {
       <div className="w-screen overflow-x-hidden ">
         <div className="hero-image-section w-[100vw] h-[100vh]">
           <img
-            src={bgImage.img || url?.backdrop + data?.results[rand].backdrop_path}
+            src={
+              bgImage.img || url?.backdrop + data?.results[rand].backdrop_path
+            }
             className="fixed w-screen "
             alt=""
           />
@@ -130,7 +132,7 @@ function Herosection() {
 
           <div className="pl-6 mt-20">
             <MovieGrid label="latest" />
-            <TopRatedFlex />
+            <TopRatedFlex endPoint={"/movie/top_rated"} label={"Top Rated"} />
             <MovieGrid label="Newly relased movies" />
             <MovieGrid label="Because you watch batman" />
           </div>

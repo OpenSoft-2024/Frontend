@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import TrendingMovieCard from "./TrendingMovieCard";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -16,6 +16,21 @@ import { useSelector } from "react-redux";
 import t10 from "../assets/t10.webp";
 
 function TrendingMovieGrid({ label, type }) {
+  const myRef = useRef(null);
+  const navigation = (dir) => {
+    const container = myRef.current;
+
+    const scrollAmount =
+      dir === "left"
+        ? container.scrollLeft - (container.offsetWidth + 20)
+        : container.scrollLeft + (container.offsetWidth + 20);
+
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch(`/trending/${type}/day`);
   // console.log(heroImg);
@@ -28,16 +43,34 @@ function TrendingMovieGrid({ label, type }) {
   let itTrending = 0;
   const trendingAray = [t1, t2, t3, t4, t5, t6, t7, t8];
   return (
-    <div className="w-screen flex flex-col pl-8 mt-14 mb-2  overflow-x-auto  trending-movie-grid  overflow-y-hidden  ">
+    <div className="w-screen flex flex-col pl-8 mt-14 mb-2  overflow-x-hidden trending-movie-grid  overflow-y-hidden  ">
       <h1 className="text-white text-xl text-opacity-55">{label}</h1>
+      <div className="box-overlay2 absolute   text-white  group ">
+        <i
+          className="ri-arrow-right-circle-fill text-white relative top-42  text-2xl  invisible group-hover:visible opacity-65 hover:opacity-100"
+          onClick={() => navigation("right")}
+        ></i>
+      </div>
+      <div className="box-overlay1 absolute   text-white group">
+        <i
+          className="ri-arrow-left-circle-fill text-white relative top-[50%] left-0 text-2xl invisible group-hover:visible opacity-65 hover:opacity-100"
+          onClick={() => navigation("left")}
+        ></i>
+      </div>
       {data ? (
-        <div className="trending-movie-grid flex gap-10 overflow-y-hidden py-4 pl-8">
+        <div
+          className="trending-movie-grid flex overflow-y-hidden overflow-x-hidden  pt-14 pb-6   relative pl-10"
+          ref={myRef}
+        >
           {data?.results.map((item) => {
             return (
               <TrendingMovieCard
                 key={item.id}
-                img={url.poster + item.backdrop_path}
+                img={url.poster + item.poster_path}
                 trendingCount={++itTrending}
+                img2={url.poster + item.backdrop_path}
+                about={item.overview}
+                date={item.release_date}
               />
             );
           })}
