@@ -18,6 +18,7 @@ import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
 import {loadStripe} from '@stripe/stripe-js';
 import axios from 'axios'
+
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
 // import c4 from "../../assets/p1.jpg";
@@ -26,7 +27,6 @@ import axios from 'axios'
 // import c7 from "../../assets/p1.jpg";
 // import c8 from "../../assets/p1.jpg";
 // import c1 from "../../assets/p1.jpg";
-import PlansInfiniteScroolerMovieBox from "../../PlansComponents/plansInfiniteScroolerMovieBox";
 
 
 function Plans() {

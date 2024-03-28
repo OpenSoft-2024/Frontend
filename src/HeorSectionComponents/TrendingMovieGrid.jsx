@@ -13,7 +13,6 @@ import t8 from "../assets/t8.webp";
 import t9 from "../assets/t9.webp";
 import useFetch from "../custumHooks/useFetch";
 import { useSelector } from "react-redux";
-import t10 from "../assets/t10.webp";
 
 function TrendingMovieGrid({ label, type }) {
   const myRef = useRef(null);
