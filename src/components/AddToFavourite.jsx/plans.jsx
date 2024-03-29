@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
-import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
+import { setIsNavBarVisible,setIsFooterVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
@@ -65,6 +65,9 @@ function Plans() {
   useEffect(() => {
     dispatch(setIsNavBarVisible(false));
   }, []);
+  useEffect(()=>{
+    dispatch(setIsFooterVisible(false));
+  })
 
   const { user } = useSelector((state) => state.userSlice);
 

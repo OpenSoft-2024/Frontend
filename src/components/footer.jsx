@@ -1,9 +1,12 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
+// import { setIsFooterVisible } from "../AppStore/AppSlicer";
 function Footer() {
+  let {isFooterIsVisible}=useSelector(state=>state.AppSlice);
+  
   return (
     <div
-      className="flex px-10 py-20 w-screen capitalize justify-between"
+      className={`${isFooterIsVisible? 'visible opacity-[1]' : 'invisible opacity-0'} flex px-10 py-20 w-screen capitalize justify-between`}
       style={{ backgroundColor: "#000", color: "white" }}
     >
       <div className="flex w-6/12 justify-between">
