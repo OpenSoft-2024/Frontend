@@ -1,8 +1,9 @@
 import { easeIn, motion } from "framer-motion";
 import React from "react";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
-function DetailOnHoverForTopRated({ img, about, date, title }) {
+function DetailOnHoverForTopRated({ img, about, date, title,media_type,id }) {
   const trunct = (str) => {
     if (str.length < 100) {
       return str;
@@ -10,11 +11,14 @@ function DetailOnHoverForTopRated({ img, about, date, title }) {
       return str.slice(0, 90) + "...";
     }
   };
+  let navigate =useNavigate()
   return (
+     
     <motion.div
       whileHover={{ scale: 1.094, opacity: 1 }}
       transition={{ duration: 0.3, type: "easeIn" }}
       className="w-full  top-0 opacity-[0]    bg-[#000000]  rounded-lg absolute z-[4000]"
+      onClick={()=>navigate(`/${media_type}/${id}`)}
     >
       <div>
         <img src={img} alt="" className="rounded" />

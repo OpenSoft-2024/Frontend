@@ -34,7 +34,7 @@ function ContinueToWatch({ label }) {
   }, [heroImg]);
   let randInt = Math.floor(Math.random() * 21);
   return (
-    <div className="w-screen pl-10 mt-8  relative ">
+    <div className="w-screen pl-10 mt-8 relative ">
       {/* <i
         class=" i1 ri-arrow-right-circle-line text-white  absolute top-28 text-3xl h-full  cursor-pointer  "
         onClick={() => navigation("right")}
@@ -61,6 +61,7 @@ function ContinueToWatch({ label }) {
                 boxId={item.id}
                 ogl={item.original_language}
                 genre_ids={item.genre_ids}
+                media_type={"movie"}
               />
             );
           })

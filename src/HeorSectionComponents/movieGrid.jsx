@@ -64,9 +64,12 @@ function MovieGrid({ label }) {
               <MovieCard
                 img={url.poster + item.poster_path}
                 key={item.id}
+                id={item.id}
+                mediaType={item.media_type}
                 img2={url.poster + item.backdrop_path}
                 about={item.overview}
                 date={item.release_date}
+                item={item}
               />
             ))}
           </div>

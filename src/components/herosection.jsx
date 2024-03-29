@@ -72,7 +72,7 @@ function Herosection() {
   useEffect(() => {
     setData(heroImg);
     localStorage.setItem("def", url?.poster + data?.results[0].backdrop_path);
-    // setBgImage(localStorage.getItem('def'))
+    
   }, [heroImg]);
 
   let [bgImage, setBgImage] = useState({
@@ -85,7 +85,7 @@ function Herosection() {
     // overview:"",
   });
 
-  const [imgRef] = useAutoAnimate();
+  
   return (
     <BackgroundImage.Provider
       value={{ bgImage, setBgImage, bgImageDescription, setBgImageDescription }}
@@ -99,15 +99,15 @@ function Herosection() {
             className="fixed w-screen "
             alt=""
           />
-          {/* <div className={`overlayComplete w-full h-3/4  z-20 absolute `}></div> */}
+          
           <div className="overlay-1 w-[100vw]"></div>
           <div className="overlay-01"></div>
           <div className="overlay-02"></div>
           <HeroMovieDesc />
         </div>
 
-        <div className="  bg-[black] w-[110vw]">
-          <div className="contnueWatching   ">
+        <div className="bg-[black] w-[110vw] mc1">
+          <div className="contnueWatching">
             <div className="continuToWatchMovie">
               <ContinueToWatch label="latest Relaease" />
             </div>
