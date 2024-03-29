@@ -1,4 +1,3 @@
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState } from "react";
 import MovieGrid from "../HeorSectionComponents/movieGrid";
 import ContinueToWatch from "../HeorSectionComponents/ContinueToWatch";
@@ -10,7 +9,6 @@ import { useEffect } from "react";
 import { fetchDataFromApi } from "../DataUtils/fetchData2";
 import { useDispatch, useSelector } from "react-redux";
 import { getUrl, getGenres } from "../AppStore/AppSlicer";
-import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
 import useFetch from "../custumHooks/useFetch";
 import axios from "axios";
 import { config } from "../utils/config";
@@ -44,11 +42,7 @@ function Herosection() {
     
   }
 
-  /////o
-  // let { url ,rand} = useSelector((state) => state.AppSlice);
-  // console.log(url);
-
-  ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
+  
   const fetchApiConfiguration = () => {
     fetchDataFromApi("/configuration").then((res) => {
       const url = {
@@ -95,7 +89,6 @@ function Herosection() {
   useEffect(() => {
     setData(heroImg);
     localStorage.setItem("def", url?.poster + data?.results[0].backdrop_path);
-    
   }, [heroImg]);
 
   const [data1, setData1] = useState(null);
@@ -203,16 +196,12 @@ function Herosection() {
 
           <div className="pl-6 mt-20">
             <MovieGrid data={data1} label="Latest" />
-            {/* <TopRa Data={data1}tedFlex /> */}
             <MovieGrid data={data3} label="English" />
             <MovieGrid data={data4} label="Hindi" />
             <MovieGrid data={data5} label="Action" />
             <MovieGrid data={data6} label="Romance" />
             <MovieGrid data={data7} label="Comedy" />
           </div>
-          {/* <div className="trendingMovie">
-            <TrendingMovieGrid label="Top 20 TV-SHOWS" type={"tv"} />
-          </div> */}
         </div>
       </div>
     </BackgroundImage.Provider>
