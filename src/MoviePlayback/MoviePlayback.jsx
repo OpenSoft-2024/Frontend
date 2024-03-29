@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import { IoStar } from "react-icons/io5";
 
 function MoviePlayback() {
   const trunct = (str) => {
@@ -32,6 +33,7 @@ function MoviePlayback() {
       .get(`${config.BASE_URL}/movies/id/${movie_id}`)
       .then((res) => {
         setData(res.data);
+        console.log(data);
         // console.log(userDetails.favorites)
       })
       .catch((err) => {
@@ -83,7 +85,9 @@ function MoviePlayback() {
             )}
             <span className="w-2 h-2 rounded-full bg-[white] inline-block text-[#dddbdb]"></span>
             {data ? (
-              <span className="text-white inline-block">language</span>
+              <span className="text-white inline-block">
+                {data.languages[0]}
+              </span>
             ) : (
               <span className="blinker w-[6rem] rounded h-[1.3rem]"></span>
             )}
@@ -108,10 +112,15 @@ function MoviePlayback() {
             </div>
           )}
           {data ? (
-            <p className="text-[#d6d6d6] flex gap-3 mt-4">
+            <p className="text-[#d6d6d6] flex gap-3 mt-4  items-center ">
               {data?.genres?.map((item) => (
                 <span>{item}</span>
               ))}
+              <p className="flex items-center gap-2 py-2 px-2 bg-[#56565670] rounded-xl">
+                <IoStar className="text-[#f9c04f] ml-4" />
+                <p> {data?.imdb?.rating}/10</p>
+                <p>IMDB</p>
+              </p>
             </p>
           ) : (
             <p className="flex gap-4">

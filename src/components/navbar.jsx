@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import unnamed from "../../public/unnamed.png";
 
 const NavBar = () => {
   let dropDownLink = useRef(null);
@@ -48,23 +49,12 @@ const NavBar = () => {
           active ? "color" : "nonchange"
         } `}
       >
-        <div className="logo w-30 h-10  overflow-hidden">
-          <div className="cmny-logo-animation-oejje cursor-pointer">
-            <a href="">
-              <h1 className="text-3xl  text-content mix-blend-difference text-opacity-80">
-                M
-                <span className="text-white text-opacity-60 bg-blend-difference">
-                  Flix
-                </span>
-              </h1>
-            </a>
-            <h1 className="text-3xl text-content mix-blend-difference">
-              M
-              <span className=" text-white text-opacity-60 bg-blend-difference">
-                Flix
-              </span>
-            </h1>
-          </div>
+        <div className="logo w-[14rem] h-30   overflow-hidden">
+          <img
+            src={unnamed}
+            alt=""
+            className="w-full h-[4rem] scale-[1.05] inline-block "
+          />
         </div>
 
         <div className="navLinks ml-[10%]">
