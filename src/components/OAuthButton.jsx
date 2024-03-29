@@ -1,12 +1,12 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import GoogleLogo from '../assets/Images/google.svg';
-import Axios from 'axios'
+import axios from 'axios'
 
 const GoogleOAuthButton = () => {
   const handleclick = async ()=>{
-    window.open("http://localhost:8080/auth/google",'_self');
-    const response = await Axios.get("http://localhost:8080/auth/google");
+    window.open("http://localhost:8080/auth/google","_self");
   }
+
   return (
     <div className="flex items-center justify-center">
       <button

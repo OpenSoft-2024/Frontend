@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUrl, getGenres } from "../AppStore/AppSlicer";
 import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
 import useFetch from "../custumHooks/useFetch";
+import axios from 'axios'
 // import { UseSelector } from "react-redux";
 
 function Herosection() {
@@ -94,6 +95,11 @@ function Herosection() {
     // releaseDate:"",
     // overview:"",
   });
+  useEffect(() => {
+      axios.get("http://localhost:8080/auth/protected", { withCredentials: true })
+      .then(res => { console.log(res.data)})
+      .catch(err => console.error(err));
+  }, []);
 
   const [imgRef] = useAutoAnimate();
   return (
