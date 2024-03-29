@@ -14,36 +14,36 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Graph from "../assets/Graph.svg";
-import DashboardImg from "../assets/Category.svg";
-import Bag from "../assets/Bag.svg";
-import User from "../assets/User.svg";
-import InventoryImg from "../assets/Folder.svg";
-import Setting from "../assets/Setting.svg";
-import Logout from "../assets/Logout.svg";
-import Notification from "../assets/Notification.svg";
-import All_Orders from "./All_Orders/Allorders";
-import Profile from "../assets/profile 1.png";
-import Dashboard from "./Dashboard/Dashboard";
-import Orders from "./Orders/Orders";
-import Customers from "./Customers/Customers";
-import Inventory from "./Inventory/Inventory";
+// import Graph from "../assets/Graph.svg";
+// import DashboardImg from "../assets/Category.svg";
+// import Bag from "../assets/Bag.svg";
+// import User from "../assets/User.svg";
+// import InventoryImg from "../assets/Folder.svg";
+// import Setting from "../assets/Setting.svg";
+// import Logout from "../assets/Logout.svg";
+// import Notification from "../assets/Notification.svg";
+// import All_Orders from "./All_Orders/Allorders";
+// import Profile from "../assets/profile 1.png";
+// import Dashboard from "./Dashboard/Dashboard";
+// import Orders from "./Orders/Orders";
+// import Customers from "./Customers/Customers";
+// import Inventory from "./Inventory/Inventory";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import NewProduct from "./Inventory/NewProduct";
-import ViewProduct from "./Inventory/ViewProduct";
-import CustomerOrder from "./Customers/CustomerOrder";
-import DashNotActive from "../assets/Dash-not-active.svg";
-import Content from "./Content/Content";
-import Settings from "./Settings/Settings";
-import ViewUserNetwork from "./Settings/ViewUserNetwork";
+// import NewProduct from "./Inventory/NewProduct";
+// import ViewProduct from "./Inventory/ViewProduct";
+// import CustomerOrder from "./Customers/CustomerOrder";
+// import DashNotActive from "../assets/Dash-not-active.svg";
+// import Content from "./Content/Content";
+// import Settings from "./Settings/Settings";
+// import ViewUserNetwork from "./Settings/ViewUserNetwork";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../App";
-import DashboardContext from "./Context/DashboardContext";
+// import { UserContext } from "../App";
+// import DashboardContext from "./Context/DashboardContext";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ArrowForwardOutlined } from "@mui/icons-material";
-import UserNetworkTable from "../Components/Network/Layout/UserNetworkTable";
+// import UserNetworkTable from "../Components/Network/Layout/UserNetworkTable";
 import Modal from "@mui/material/Modal";
-import Network from "./Network/Network";
+// import Network from "./Network/Network";
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -54,16 +54,16 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const Navbar = (props) => {
-  const context2 = useContext(DashboardContext);
-  const { loading } = context2;
+const Sidebar = (props) => {
+  // const context2 = useContext(DashboardContext);
+  // const { loading } = context2;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [newActiveLink, setNewActiveLink] = useState(null);
 
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const context = useContext(UserContext);
+  // const navigate = useNavigate();
+  // const context = useContext(UserContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -167,7 +167,7 @@ const Navbar = (props) => {
 
   return (
     <Box>
-      <Backdrop sx={{ color: "#fff", zIndex: "1201" }} open={loading}>
+      <Backdrop sx={{ color: "#fff", zIndex: "1201" }}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <Modal
@@ -219,19 +219,19 @@ const Navbar = (props) => {
                   ...(open && { display: "none" }),
                 }}
               >
-                <img alt="logo" src={Graph} style={{ width: "40px" }} />
+                {/* <img alt="logo" src={Graph} style={{ width: "40px" }} /> */}
               </IconButton>
               <Typography variant="h6" noWrap component="Box">
                 Dashboard
               </Typography>
             </Toolbar>
             <Box className="navbar-profile-image">
-              <img alt="notify" src={Notification} />
-              <img
+              {/* <img alt="notify" src={Notification} /> */}
+              {/* <img
                 alt="profile"
-                src={Profile}
+                // src={Profile}
                 onClick={() => props.setOpen(true)}
-              />
+              /> */}
             </Box>
           </Box>
         </AppBar>
@@ -239,7 +239,7 @@ const Navbar = (props) => {
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <Box className="navbar-logo">
-              <img alt="logo" src={Graph} />
+              <img alt="logo" />
               <h4>Search-In</h4>
             </Box>
 
@@ -280,13 +280,13 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          {({ isActive }) => (
+                          {/* {({ isActive }) => (
                             <img
                               alt="item"
                               src={isActive ? DashboardImg : DashNotActive}
                             />
-                          )}
-                          <img alt="item" src={DashNotActive} />
+                          )} */}
+                          {/* <img alt="item" src={DashNotActive} /> */}
                           {/* {({ isActive }) => (
                             <>
                               {isActive ? (
@@ -332,7 +332,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={Bag} />
+                          {/* <img alt="listItem" src={Bag} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           Orders
@@ -364,7 +364,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={Bag} />
+                          {/* <img alt="listItem" src={Bag} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           All Orders
@@ -397,7 +397,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={User} />
+                          {/* <img alt="listItem" src={User} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           Customers
@@ -430,7 +430,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={InventoryImg} />
+                          {/* <img alt="listItem" src={InventoryImg} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           Inventory
@@ -463,7 +463,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={InventoryImg} />
+                          {/* <img alt="listItem" src={InventoryImg} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           Krishi Videos
@@ -496,7 +496,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={Setting} />
+                          {/* <img alt="listItem" src={Setting} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           Network
@@ -528,7 +528,7 @@ const Navbar = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <img alt="listItem" src={Setting} />
+                          {/* <img alt="listItem" src={Setting} /> */}
                         </ListItemIcon>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                           Settings
@@ -572,7 +572,7 @@ const Navbar = (props) => {
                       justifyContent: "center",
                     }}
                   >
-                    <img alt="listItem" src={Logout} />
+                    {/* <img alt="listItem" src={Logout} /> */}
                   </ListItemIcon>
                   <ListItemText sx={{ opacity: open ? 1 : 0 }}>
                     Logout
@@ -584,7 +584,7 @@ const Navbar = (props) => {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3, background: "#f4f5fa" }}>
           <DrawerHeader />
-          <Routes>
+          {/* <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/allorders" element={<All_Orders />} />
@@ -598,11 +598,11 @@ const Navbar = (props) => {
             <Route path="/viewusernetwork" element={<ViewUserNetwork />} />
             <Route path="/network" element={<Network />} />
             <Route path="/usernetwork" element={<UserNetworkTable />} />
-          </Routes>
+          </Routes> */}
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default Navbar;
+export default Sidebar;

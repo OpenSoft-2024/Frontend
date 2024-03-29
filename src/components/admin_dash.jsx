@@ -13,16 +13,21 @@ import Modal from '@mui/material/Modal';
 import {toast} from "react-toastify"
 import {Typography} from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
-import {Select,MenuItem} from "@mui/material"
-
+import { Select, MenuItem } from "@mui/material";
+import Sidebar from "./sidebar";
 
 function Banners() {
-    const [offers, setOffers] = useState([])
+    const [offers, setOffers] = useState([{
+      "image":"",
+      "product_id":""
+    }
+
+    ])
     const [products, setProducts] = useState([])
-    const context=useContext(DashboardContext)
-    const {setLoading}=context;
+    // const context=useContext(DashboardContext)
+    // const {setLoading}=context;
   useEffect(()=>{
-    setLoading(true);
+    // setLoading(true);
     const requestOptions = {
         headers: {
           method: "GET",
@@ -32,27 +37,27 @@ function Banners() {
     axios.get(`${config.BASEURL}/offers/getOffers_deals/`,requestOptions)
     .then((res)=>{
         console.log(res.data.results);
-        setOffers(res.data.results);
-        setLoading(false);
+        // setOffers(res.data.results);
+        // setLoading(false);
     })
     .catch((err)=>{
         console.log(err);
-        setLoading(false);
+        // setLoading(false);
     })
 
-    axios.get(`${config.BASE_URL}/products/getProducts/`,requestOptions)
-    .then((res)=>{
-        // console.log(res.data.results);
-        let prod_id=[];
-        res.data.results?.map((item)=>{prod_id.push({id:item.id,name:item.name})})
-        setProducts([...prod_id]);
-        setLoading(false);
-    })
-    .catch((err)=>{
-        console.log(err);
-        setLoading(false);
+    // axios.get(`${config.BASE_URL}/products/getProducts/`,requestOptions)
+    // .then((res)=>{
+    //     // console.log(res.data.results);
+    //     let prod_id=[];
+    //     res.data.results?.map((item)=>{prod_id.push({id:item.id,name:item.name})})
+    //     setProducts([...prod_id]);
+    //     // setLoading(false);
+    // })
+    // .catch((err)=>{
+    //     console.log(err);
+    //     // setLoading(false);
         
-    })
+    // })
 
   },[])  
   const style = {
@@ -116,7 +121,7 @@ const handleInput=(key,value)=>{
   }
 
   const handlesubmit=()=>{
-    setLoading(true);
+    // setLoading(true);
     console.log(offer_deals_data);
     const token= localStorage.getItem("token");
     if(id>=0)
@@ -136,11 +141,11 @@ const handleInput=(key,value)=>{
           console.log(res);
           toast.success("Offer Updated!"); 
            handleClose();
-           setLoading(false)
+          //  setLoading(false)
         })
         .catch((err) =>{console.log(err)
           toast.error("Something Went Wrong");
-          setLoading(false)
+          // setLoading(false)
     // navigate("/content")
         });
   
@@ -158,7 +163,7 @@ const handleInput=(key,value)=>{
     .catch((err)=>{console.log(err);
       toast.error("Something Went Wrong");
     })
-    setLoading(false);
+    // setLoading(false);
 
   }
 }
@@ -196,7 +201,7 @@ const handleInput=(key,value)=>{
    
   useEffect(()=>{
     let status={};
-    offers.map((item,index)=> {
+    offers?.map((item,index)=> {
       status={...status,[index]:item.status};
      
     }
@@ -208,7 +213,7 @@ const handleInput=(key,value)=>{
    
    const handleStatus=(key,value,id)=>{
      const token= localStorage.getItem("token");
-     setLoading(true);
+    //  setLoading(true);
      const offer_deals_update={"status":value}
      axios.patch(`${config.BASE_URL}/offers/updateOffer_deals/${id}`,
      {offer_deals_update,token})
@@ -224,13 +229,13 @@ const handleInput=(key,value)=>{
          progress: undefined,
          theme: "light",
        });
-       setLoading(false)
+      //  setLoading(false)
   
      })
      .catch((err) =>{
        toast.error("Something Went Wrong");
        console.log(err);
-       setLoading(false)
+      //  setLoading(false)
 
      });
    // navigate("/content")
@@ -274,13 +279,30 @@ const requestOptions = {
   return (
     // <>
     // </>
-    <Box sx={{display:"flex",flexDirection:"column"}}>
-      <Box sx={{display:"flex",justifyContent:"space-between"}}>
-        <p>Offers and Deals</p>
-    <button onClick={()=>{refresh();handleOpen(-1);}}className='create-new-post-button' style={{marginBottom:"10px"}}>Create New Offer</button>
-    </Box>
-    
-    <Modal
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        paddingTop: "100px",
+        justifyContent: "center",
+      }}
+    >
+      <Sidebar />
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <p className="text-white">Offers and Deals</p>
+        <button
+          onClick={() => {
+            refresh();
+            handleOpen(-1);
+          }}
+          className="create-new-post-button"
+          style={{ marginBottom: "10px" }}
+        >
+          Create New Offer
+        </button>
+      </Box>
+
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
