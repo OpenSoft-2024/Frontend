@@ -14,6 +14,7 @@ function ContinueToWatchMovieCard({
   boxId,
   ogl,
   genre_ids,
+  media_type,
 }) {
   // const [check, setCheck] = useState(false);
   // const [style, setStyle] = useState(null);
@@ -33,7 +34,10 @@ function ContinueToWatchMovieCard({
         releaseDate: releasedate,
         overview: overview,
         ogl: ogl,
+        boxId:boxId,
         genre_ids: genre_ids,
+        media_type:media_type
+        
       });
     }, 100);
   };
@@ -53,7 +57,7 @@ function ContinueToWatchMovieCard({
       className="relative z-[500]"
     >
       <div
-        className={`cont-movie-card rounded-lg overflow-hidden hover:scale-[1.08] cursor-pointer  h-full ${
+        className={`cont-movie-card rounded-lg overflow-hidden lg:hover:scale-[1.08] cursor-pointer  h-full ${
           bgImage.img == img ? "borderOnClicking" : ""
         }`}
       >

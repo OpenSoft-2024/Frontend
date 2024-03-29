@@ -2,7 +2,7 @@ import Img from "../../lazyLoading/Img";
 import DetailOnHoverForTopRated from "./DetailOnHoverForTopRated";
 import { motion } from "framer-motion";
 // import DetailOnHover from "../../components/detailOnHovering";
-function TopRatedMovieCard({ img, img2, about, date, title }) {
+function TopRatedMovieCard({ img, img2, about, date, title,media_type,id }) {
   return (
     <div
       whileHover={{ scale: 1.094, opacity: 1 }}
@@ -20,6 +20,8 @@ function TopRatedMovieCard({ img, img2, about, date, title }) {
         about={about}
         title={title}
         date={date}
+        media_type={media_type}
+        id={id}
       ></DetailOnHoverForTopRated>
     </div>
   );

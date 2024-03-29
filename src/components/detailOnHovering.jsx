@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
-function DetailOnHover({ img, about, date, style, genres }) {
+import { useNavigate } from "react-router-dom";
+function DetailOnHover({ img, about, date, style, item }) {
+  const navigate = useNavigate();
   const trunct = (str) => {
     if (str?.length < 120) {
       return str;
@@ -20,7 +22,10 @@ function DetailOnHover({ img, about, date, style, genres }) {
       <div className="overlay-detalis  w-full top-[40%] h-12 absolute "></div>
       <div className="relative z-[200]">
         <div className="w-full  flex justify-between mt-4 pl-2 pr-2">
-          <button className="text-black-2 px-8  ml-1 text-[1rem] capitalize bg-[#fbfbfbb4] smt hover:bg-[#cccccc] rounded-xl">
+          <button
+            className="text-black-2 px-8  ml-1 text-[1rem] capitalize bg-[#fbfbfbb4] smt hover:bg-[#cccccc] rounded-xl"
+            onClick={() => navigate(`/${item.media_type}/${item.id}`)}
+          >
             {" "}
             <i className="ri-play-fill"></i>watch now{" "}
           </button>{" "}
