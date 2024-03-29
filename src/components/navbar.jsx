@@ -1,22 +1,20 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 
 const NavBar = () => {
-
   let dropDownLink = useRef(null);
   let dropDownContent = useRef(null);
   let [color, setColor] = useState(false);
 
   const dispatch = useDispatch();
 
-  const {user} = useSelector((state) => state.userSlice);
+  const { user } = useSelector((state) => state.userSlice);
 
   // console.log(user);
-
 
   const handleOnClick = (e) => {
     e.target.style = "width:40vw";
@@ -40,12 +38,6 @@ const NavBar = () => {
   // };
 
   let { isNavBarVisible } = useSelector((state) => state.AppSlice);
-  
-  const hideOrShowOnClick = (e) => {
-    isNavBarVisible
-      ? dispatch(setIsNavBarVisible(false))
-      : dispatch(setIsNavBarVisible(true));
-  };
 
   return (
     <>
@@ -60,16 +52,16 @@ const NavBar = () => {
           <div className="cmny-logo-animation-oejje cursor-pointer">
             <a href="">
               <h1 className="text-3xl  text-content mix-blend-difference text-opacity-80">
-                Movie
+                M
                 <span className="text-white text-opacity-60 bg-blend-difference">
-                  Cinema
+                  Flix
                 </span>
               </h1>
             </a>
             <h1 className="text-3xl text-content mix-blend-difference">
-              Movie
+              M
               <span className=" text-white text-opacity-60 bg-blend-difference">
-                Cinema
+                Flix
               </span>
             </h1>
           </div>
@@ -112,7 +104,6 @@ const NavBar = () => {
             <li>
               <NavLink
                 to="/plans"
-                onClick={hideOrShowOnClick}
                 className={({ isActive }) =>
                   ` text-[1rem]  customButton  ${isActive ? "" : "nonacv"}`
                 }
@@ -123,41 +114,36 @@ const NavBar = () => {
           </ul>
         </div>
 
-        <NavLink to="/searchPage" onClick={hideOrShowOnClick}>
-          <div className="searchBox absolute top-[32%] left-[63%]   rounded-xl  bg-zinc-300 flex justify-center items-center">
-            <input
-              type="search"
-              disabled
-              className="w-[20rem] h-[2.4rem] bg-transparent  searchBar00i px-4 pr-10  rounded outline-none text-white placeholder:capitalize"
-              placeholder="serch for movies and tv shows"
-            />
-            <svg
-              className="absolute w-5 top-2 right-3 test-white fill-white"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
-            </svg>
-          </div>
+        <NavLink
+          to="/searchPage"
+          className=" top-[28%]  right-[20%]  inline-block  absolute "
+        >
+          <svg
+            className="absolute w-[2.4rem] font-extra-bold  test-white fill-white"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+          </svg>
         </NavLink>
-
 
         <div className="userImage absolute right-[2%]">
           <div className="w-10 h-10 rounded-full bg-white">
-            <img src={Object.entries(user).length === 0 ? '' : user.imageUrl} alt="profile image" />
+            <img
+              src={Object.entries(user).length === 0 ? "" : user.imageUrl}
+              alt=""
+            />
           </div>
         </div>
 
-        
         {Object.entries(user).length === 0 && (
           <div className="absolute right-[8%]">
-          <NavLink to="/login" className="text-white capitalize">
-            sign-up
-          </NavLink>
-        </div>
+            <NavLink to="/login" className="text-white capitalize">
+              sign-up
+            </NavLink>
+          </div>
         )}
-
       </div>
     </>
   );

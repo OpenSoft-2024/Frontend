@@ -6,13 +6,14 @@ import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
 import MovieGridForMoviePlayback from "./MovieGridForMoviePlayback";
 import MovieGrid from "../HeorSectionComponents/movieGrid";
 import useFetch from "../custumHooks/useFetch";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
-import MoviePlayBackData from "../LandingPageBackgroundImageContext/context3";
 import { useParams } from "react-router-dom";
 import { config } from "../utils/config";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 
 function MoviePlayback() {
   const trunct = (str) => {
@@ -22,6 +23,8 @@ function MoviePlayback() {
       return str?.slice(0, 260) + "...";
     }
   };
+  const dispatch = useDispatch();
+
   const [data, setData] = useState();
   let { movie_id } = useParams();
   useEffect(() => {
@@ -39,6 +42,10 @@ function MoviePlayback() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    dispatch(setIsNavBarVisible(true));
   }, []);
 
   return (
@@ -114,9 +121,12 @@ function MoviePlayback() {
           )}
           {data ? (
             <div className="mt-8 items-center  flex gap-6">
-              <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
-                PLAY
-              </button>
+              <Link to="/video">
+                {" "}
+                <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
+                  PLAY
+                </button>
+              </Link>
               <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl">
                 +
               </button>

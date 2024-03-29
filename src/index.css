@@ -5,14 +5,14 @@
 body{
     overflow-x: hidden;
 }
-@font-face {
-    font-family:vishal;
+@font-face{
+    font-family:myfont;
     src: url(../public/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.ttf);
 }
 
 *{
 
-    font-family: vishal;
+    font-family:myfont;
 }
 
 .cmny-logo-animation-oejje:hover{
