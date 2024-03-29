@@ -1,5 +1,5 @@
 {
-  "name": "gc-mmm-frontend",
+  "name": "playerfinal",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -31,7 +31,9 @@
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
-    "tailwind-merge": "^2.2.2"
+    "tailwind-merge": "^2.2.2",
+    "@vidstack/react": "^1.10.9",
+    "hls.js": "^1.5.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
