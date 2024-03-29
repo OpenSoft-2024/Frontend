@@ -122,18 +122,23 @@ function Plans() {
         }
         
         const amount=backgroundColor1?245:backgroundColor2?459:689
+        const tier=backgroundColor1?1:backgroundColor2?2:3
 
         const stripe = await loadStripe("pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q");
-
+      //   console.log({
+      //     amt:amount,
+      //     name:"Movie Cinema"
+      // });
         const response=await axios.post(`${config.BASE_URL}/payment/checkout`,{
             amt:amount,
-            name:"Movie Cinema"
+            name:"Movie Cinema",
+            tier:tier
         },{headers:{Authorization:token}})
 
 
         
         const session=response?.data?.session
-        session.metadata=user.userId
+        // session.metadata=user.userId
         console.log(session);
         await stripe.redirectToCheckout({
             sessionId:session.id,      
