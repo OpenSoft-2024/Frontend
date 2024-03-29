@@ -97,7 +97,7 @@ function Plans() {
   useEffect(() => {
     let myBoolean = JSON.parse(localStorage.getItem("myBoolean"));
     dispatch(setIsNavBarVisible(myBoolean));
-  },[]);
+  }, []);
   useEffect(() => {
     setData(heroImg);
     // setBgImage(localStorage.getItem('def'))

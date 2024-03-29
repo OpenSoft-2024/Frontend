@@ -1,6 +1,6 @@
 import React from 'react'
 import DetailOnHover from '../detailOnHovering';
-import MoviePlayBack from '../../MoviePlayback.jsx/MoviePlayback'
+import MoviePlayBack from '../../MoviePlayback/MoviePlayback'
 
 function AddToFavourite() {
   return (

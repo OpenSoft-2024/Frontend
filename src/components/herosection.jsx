@@ -18,7 +18,8 @@ import { login } from "../AppStore/userSlice";
 import { server } from "../../server";
 
 function Herosection() {
-
+  let { url, rand } = useSelector((state) => state.AppSlice);
+  console.log(url);
   const dispatch = useDispatch();
    
   useEffect(() => {
@@ -59,7 +60,14 @@ function Herosection() {
       dispatch(getUrl(url));
     });
   };
-
+  useEffect(() => {
+    localStorage.setItem("url", JSON.stringify(url));
+  }, [url]);
+  console.log( JSON.parse(localStorage.getItem("url")));
+  useEffect(() => {
+    const myBoolean = JSON.parse(localStorage.getItem("url"));
+    dispatch(getUrl(myBoolean));
+  }, []);
   const genresCall = async () => {
     let promises = [];
     let endPoints = ["tv", "movie"];
