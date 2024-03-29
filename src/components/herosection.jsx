@@ -45,7 +45,7 @@ function Herosection() {
   }
 
   /////o
-  let { url ,rand} = useSelector((state) => state.AppSlice);
+  // let { url ,rand} = useSelector((state) => state.AppSlice);
   // console.log(url);
 
   ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
