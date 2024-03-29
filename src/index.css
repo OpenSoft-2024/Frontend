@@ -299,6 +299,7 @@ display: none;
     font-size: 0.7rem;
   }
 }
+ 
 
 
 .overlay-detalis{
@@ -468,6 +469,7 @@ display: none;
   width: 100%;
   height:15%;
   top:65%;
+  
   background-image: linear-gradient(to top,rgba(0, 0, 0, 0.926) 10%,transparent);
    
  }
@@ -477,7 +479,7 @@ display: none;
   height:80%;
   /* background-color: blue; */
   right:0%;
-  background-image: linear-gradient(to left,rgb(0, 0, 0) 30%,transparent);
+  background-image: linear-gradient(to left,rgb(0, 0, 0) 50%,transparent);
  }
 
 .lazy {

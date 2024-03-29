@@ -11,10 +11,12 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import useFetch from "../custumHooks/useFetch";
+import { useNavigate } from "react-router-dom";
 import HeroDescSkelton from "../loadingSkelton/heroloadingSkelton";
 function HeroMovieDesc() {
   // console.log(document.getElementsByClassName("description")[0]);
   //   let mycont = useRef(null);
+  let navigate = useNavigate();
   const { url, genres, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch(`/movie/upcoming?`);
@@ -53,16 +55,15 @@ function HeroMovieDesc() {
 
   return (
     <>
-      {" "}
       <div
         ref={mycont}
-        className={`description w-5/12 absolute right-0  z-40 flex flex-col gap-5 con ${
+        className={`description lg:w-5/12  absolute right-0 md:right-[-18%] lg:right-[-8%] z-40 flex flex-col lg:gap-5 md:gap-2 con ${
           isAnimated ? "" : ""
         }`}
       >
-        <div className="title mt-44">
+        <div className="title mc2 lg:mt-44 md:mt-10">
           {data ? (
-            <h4 className="text-4xl text-wrap tracking-wide capitalize mt-20 text-white text-opacity-80 w-3/4">
+            <h4 className="lg:text-4xl md:text-[1.8rem] text-wrap tracking-wide capitalize mt-20 text-white text-opacity-80 w-3/4">
               {bgImageDescription.title || data?.results[rand]?.title}
             </h4>
           ) : (
@@ -71,7 +72,7 @@ function HeroMovieDesc() {
         </div>
         <div className="info-home-page flex  items-center">
           {data ? (
-            <p className="text-white text-opacity-75 ">
+            <p className="text-white text-opacity-75 md:text-sm">
               {dayjs(
                 bgImageDescription.releaseDate ||
                   data?.results[rand]?.release_date
@@ -106,7 +107,7 @@ function HeroMovieDesc() {
         </div>
         <div className="aboutMovie" ref={overview}>
           {data ? (
-            <p className="text-white text-sm text-wrap w-3/4 tracking-wide text-opacity-60">
+            <p className="text-white text-sm text-wrap lg:w-3/4 md:w-[60%] tracking-wide text-opacity-60">
               {truncted(
                 bgImageDescription.overview || data?.results[2]?.overview
               )}
@@ -134,7 +135,12 @@ function HeroMovieDesc() {
         )}
         {data ? (
           <div className="buttonToWatch flex gap-9 mt-4">
-            <button className=" py-2 px-6 rounded-xl tracking-tighter text-white cmn-call-to-action-btn font-bold">
+            <button
+              className=" py-2 px-6 rounded-xl tracking-tighter text-white cmn-call-to-action-btn font-bold"
+              onClick={() =>
+                navigate(`/${bgImageDescription?.media_type}/${bgImageDescription?.boxId}`)
+              }
+            >
               <i className="ri-play-fill font-bold text-xl text-white"></i>
               watch now
             </button>

@@ -66,6 +66,8 @@ function TopRatedFlex({ label, endPoint }) {
               about={item.overview}
               date={item.release_date}
               title={item.title}
+              media_type={'movie'}
+              id={item.id}
             />
           ))}
         </div>

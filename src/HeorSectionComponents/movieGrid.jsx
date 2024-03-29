@@ -76,8 +76,17 @@ function MovieGrid({ label,data }) {
             className=" gap-6 kdowei overflow-x-hidden flex transition-all overflow-y-hidden  justify-between  "
             ref={myRef}
           >
-            {data?.map((item) => (
-              <MovieCard img={item.poster} key={item._id} />
+            {data?.results.map((item) => (
+              <MovieCard
+                img={url.poster + item.poster_path}
+                key={item.id}
+                id={item.id}
+                mediaType={item.media_type}
+                img2={url.poster + item.backdrop_path}
+                about={item.overview}
+                date={item.release_date}
+                item={item}
+              />
             ))}
           </div>
         ) : (
