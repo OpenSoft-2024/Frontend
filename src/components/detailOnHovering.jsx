@@ -1,8 +1,6 @@
-
-
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
-function DetailOnHover({ img, about, date, style }) {
+function DetailOnHover({ img, about, date, style, genres }) {
   const trunct = (str) => {
     if (str?.length < 120) {
       return str;
@@ -17,7 +15,7 @@ function DetailOnHover({ img, about, date, style }) {
       className={`w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[3000]    translate-x-[-10%] bg-black left-[-18%] ${style}`}
     >
       <div className="w-[100%] h-[20vh]">
-        <img src={img} alt="" className="w-full h-full rounded" />
+        <img src={img} alt="" className="w-full h-full rounded object-cover" />
       </div>
       <div className="overlay-detalis  w-full top-[40%] h-12 absolute "></div>
       <div className="relative z-[200]">
@@ -39,7 +37,11 @@ function DetailOnHover({ img, about, date, style }) {
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
         <span>U/A +7</span>
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
-        <span>biography</span>
+        {genres?.map((item, index) => {
+          if (index == 0) {
+            return <span>{item}</span>;
+          }
+        })}
       </div>
       <div className="movie-detail-overview text-[#e1dfdf] pl-3 mt-10 text-sm w-full">
         <p className="w-full text-[#a4a3a3] text-sm">{trunct(about)}</p>

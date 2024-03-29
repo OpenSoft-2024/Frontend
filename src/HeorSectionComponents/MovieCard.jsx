@@ -3,7 +3,9 @@ import avtar from "../assets/avt.webp";
 import Img from "../lazyLoading/Img";
 import DetailOnHover from "../components/detailOnHovering";
 
-function MovieCard({ img, img2, about, date }) {
+function MovieCard({ img, img2, about, date,
+  genres
+   }) {
   return (
     <div className="mt-4 rounded-3xl relative h-96  w-fit">
       <h1>vishal</h1>
@@ -18,7 +20,7 @@ function MovieCard({ img, img2, about, date }) {
           nisi fugit odit facere.
         </p>
       </div>
-      <DetailOnHover img={img2} about={about} date={date} style={"top-[3%]"} />
+      <DetailOnHover img={img} about={about} date={date} style={"top-[3%] "} genres={genres} />
     </div>
   );
 }

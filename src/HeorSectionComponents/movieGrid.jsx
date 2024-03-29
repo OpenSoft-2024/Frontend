@@ -7,23 +7,22 @@ import useFetch from "../custumHooks/useFetch";
 import { useEffect } from "react";
 import Img from "../lazyLoading/Img";
 import { useRef } from "react";
- 
+
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { server } from "../../server";
- 
-function MovieGrid({ label,data }) {
+
+function MovieGrid({ label, data }) {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
   // console.log(Data);
   // const [data, setData] = useState(Data);
   // console.log(data);
+  console.log(data);
 
-  
   const myRef = useRef(null);
-  
 
   // useEffect(() => {
-  
+
   //   const getfetch=async()=>{
   //     try{
 
@@ -77,13 +76,19 @@ function MovieGrid({ label,data }) {
             ref={myRef}
           >
             {data?.map((item) => (
-              <MovieCard img={item.poster} key={item._id} />
+              <MovieCard img={item.poster} key={item._id} about={item.plot} date={item.released
+              } genres={item.
+                genres
+                }/>
             ))}
           </div>
         ) : (
           <div className="w-screen flex gap-4 movie-grid mt-4 mb-12">
-            {loadingSkeltonArray.map((item,index) => (
-              <div key={index} className="w-[25%] h-96 blinker rounded-lg"></div>
+            {loadingSkeltonArray.map((item, index) => (
+              <div
+                key={index}
+                className="w-[25%] h-96 blinker rounded-lg"
+              ></div>
             ))}
           </div>
         )}

@@ -36,22 +36,18 @@ function TrendingMovieGrid({ label, type }) {
   const [data, setData] = useState(null);
   // const { heroImg, isLoading, error } = useFetch(`/trending/${type}/day`);
 
-  useEffect( ()=>{
-    const getdata=async()=>{
-      try{
-        const res=await axios.get(`${server}/movies/gethits`)
+  useEffect(() => {
+    const getdata = async () => {
+      try {
+        const res = await axios.get(`${server}/movies/gethits`);
         // console.log(res);
-      setData(res.data)
-      }
-      catch(err)
-      {
+        setData(res.data);
+      } catch (err) {
         console.log(err);
       }
-      
-    }
-    getdata()
-
-  },[])
+    };
+    getdata();
+  }, []);
   // console.log(heroImg);
   // const { url } = useSelector((state) => state.AppSlice);
   // console.log(url);
@@ -77,7 +73,8 @@ function TrendingMovieGrid({ label, type }) {
         ></i>
       </div>
       {data ? (
-        <div className="trending-movie-grid flex gap-10 overflow-y-hidden py-4 pl-8">
+        <div className="trending-movie-grid flex gap-10 overflow-y-hidden overflow-x-hidden py-4 pl-8"
+        ref={myRef}>
           {data?.map((item) => {
             return (
               <TrendingMovieCard
@@ -85,8 +82,9 @@ function TrendingMovieGrid({ label, type }) {
                 img={item.poster}
                 trendingCount={++itTrending}
                 img2={item.poster}
-                about={item.overview}
-                date={item.release_date}
+                about={item.plot}
+                date={item.released}
+                genres={item.genres}
               />
             );
           })}
