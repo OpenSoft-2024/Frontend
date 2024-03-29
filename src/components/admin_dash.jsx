@@ -1,5 +1,4 @@
 import React,{useState,useEffect,useContext} from 'react'
-import server from '../../server';
 import { config } from '../utils/config';
 import axios from 'axios';
 import Table from '@mui/material/Table';
@@ -11,8 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import Modal from '@mui/material/Modal';
-// import handleImageUpload from '../../Inventory/Utils/HandleImageUpload';
-// import DashboardContext from '../../Context/DashboardContext';
 import {toast} from "react-toastify"
 import {Typography} from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -117,19 +114,6 @@ const handleInput=(key,value)=>{
     imginput.addEventListener("change",geturl)
 
   }
-//   useEffect(()=>{
-//     handleImageUpload({images:images,setImages:setImages})
-//     .then((res)=>{
-//       const img_url=res;
-//       // console.log(img_url);
-//       setOffer_deals_data({...offer_deals_data,"image":img_url})
-//       document.querySelector(".offer_deals_img").src=img_url
-
-//       })
-//     .catch((err)=>console.log(err))
-    
-
-//   },[images])
 
   const handlesubmit=()=>{
     setLoading(true);
@@ -153,7 +137,6 @@ const handleInput=(key,value)=>{
           toast.success("Offer Updated!"); 
            handleClose();
            setLoading(false)
-          //  navigate("/content")
         })
         .catch((err) =>{console.log(err)
           toast.error("Something Went Wrong");
