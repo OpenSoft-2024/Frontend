@@ -10,6 +10,14 @@ import LoginPage from './components/LoginPage.jsx'
 import SignupPage from './components/SignupPage.jsx'
 import MySpace from './components/AddToFavourite.jsx/mySpace.jsx'
 import SearchPage from "./components/searchPage.jsx"
+import MoviePlayback from './MoviePlayback.jsx/MoviePlayback.jsx'
+
+
+
+
+// Admin Imports 
+// import Home from "./admin/Home.jsx";
+import Banners from './components/admin_dash.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +29,12 @@ const router = createBrowserRouter(
       <Route path='AddToFavourite' element={<AddToFavourite />}/>
       <Route path='MySpace' element={<MySpace />}/>
       <Route path="searchPage"  element={<SearchPage/>}/>
+      <Route path="/moviePlayback"  element={<MoviePlayback/>}/>
+      <Route path="/admin"  element={<Banners/>}/>
+
+      {/* Admin Routes */}
+
+      {/* <Route path="/admin"  element={<Home/>}/> */}
     </Route>
   )
 )
