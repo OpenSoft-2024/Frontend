@@ -1,5 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import server from '../../server';
+import { config } from '../utils/config';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import Modal from '@mui/material/Modal';
 // import handleImageUpload from '../../Inventory/Utils/HandleImageUpload';
 // import DashboardContext from '../../Context/DashboardContext';
@@ -16,7 +17,6 @@ import {toast} from "react-toastify"
 import {Typography} from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import {Select,MenuItem} from "@mui/material"
-
 
 
 function Banners() {
@@ -29,10 +29,10 @@ function Banners() {
     const requestOptions = {
         headers: {
           method: "GET",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          Authorization: localStorage.getItem('token'),
         },
       };
-    axios.get(`${server}/offers/getOffers_deals/`,requestOptions)
+    axios.get(`${config.BASEURL}/offers/getOffers_deals/`,requestOptions)
     .then((res)=>{
         console.log(res.data.results);
         setOffers(res.data.results);
@@ -43,7 +43,7 @@ function Banners() {
         setLoading(false);
     })
 
-    axios.get(`${server}/products/getProducts/`,requestOptions)
+    axios.get(`${config.BASE_URL}/products/getProducts/`,requestOptions)
     .then((res)=>{
         // console.log(res.data.results);
         let prod_id=[];
@@ -134,7 +134,7 @@ const handleInput=(key,value)=>{
   const handlesubmit=()=>{
     setLoading(true);
     console.log(offer_deals_data);
-    const token= `Bearer ${localStorage.getItem("access")}`
+    const token= localStorage.getItem("token");
     if(id>=0)
     {
       let offer_deals_update={};
@@ -147,34 +147,16 @@ const handleInput=(key,value)=>{
       if(Object.keys(offer_deals_update).length)
       {
         axios
-        .patch(`${server}/offers/updateOffer_deals/${id}`, { offer_deals_update, token })
+        .patch(`${config.BASE_URL}/offers/updateOffer_deals/${id}`, { offer_deals_update, token })
         .then((res) => {
           console.log(res);
-          toast.success("Offer Updated!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          }); 
+          toast.success("Offer Updated!"); 
            handleClose();
            setLoading(false)
           //  navigate("/content")
         })
         .catch((err) =>{console.log(err)
-          toast.error("Something Went Wrong", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          toast.error("Something Went Wrong");
           setLoading(false)
     // navigate("/content")
         });
@@ -185,31 +167,13 @@ const handleInput=(key,value)=>{
     }
     else
     {
-    axios.post(`${server}/offers/createOffer_deals`,{offer_deals_data,token})
+    axios.post(`${config.BASE_URL}/offers/createOffer_deals`,{offer_deals_data,token})
     .then((res)=>{console.log(res.data);
       handleClose();
-      toast.success("Offer Created!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }); 
+      toast.success("Offer Created!"); 
     })
     .catch((err)=>{console.log(err);
-      toast.error("Something Went Wrong", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Something Went Wrong");
     })
     setLoading(false);
 
@@ -217,12 +181,10 @@ const handleInput=(key,value)=>{
 }
 
   useEffect(()=>{
-    // console.log(id);
+    
     if(id>=0)
     {
-      // console.log(id);
-   
-          // const offer_data=(res.data.results);
+      
           const offers_deals_id_data=offers?.filter((item)=>{return item.id==id})
           // console.log(offers_deals_id_data[0]);
           // const offers_deals_data=offers_deals_data;
@@ -259,14 +221,13 @@ const handleInput=(key,value)=>{
     console.log(status);
     setStatus({...status});
    },[offers])
-   // useEffect(()=>{
-   //   console.log(status);
-   // },[status])
+
+   
    const handleStatus=(key,value,id)=>{
-     const token= `Bearer ${localStorage.getItem("access")}`
+     const token= localStorage.getItem("token");
      setLoading(true);
      const offer_deals_update={"status":value}
-     axios.patch(`${server}/offers/updateOffer_deals/${id}`,
+     axios.patch(`${config.BASE_URL}/offers/updateOffer_deals/${id}`,
      {offer_deals_update,token})
      .then((res) => {
        console.log(res);
@@ -284,17 +245,8 @@ const handleInput=(key,value)=>{
   
      })
      .catch((err) =>{
-       toast.error("Something Went Wrong", {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: true,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-       console.log(err)
+       toast.error("Something Went Wrong");
+       console.log(err);
        setLoading(false)
 
      });
@@ -313,37 +265,19 @@ const handleInput=(key,value)=>{
 const requestOptions = {
   headers: {
     method: "DELETE",
-    Authorization: `Bearer ${localStorage.getItem("access")}`,
+    Authorization: localStorage.getItem('token'),
   },
 };
-      axios.delete(`${server}/offers/deleteBanner/${orderid}/`,requestOptions)
+      axios.delete(`${config.BASE_URL}/offers/deleteBanner/${orderid}/`,requestOptions)
       .then((res)=>{
         console.log(res);
-        toast.success("Offer Deleted! It may take few minutes to reflect the changes", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.success("Offer Deleted! It may take few minutes to reflect the changes");
         // setLoading(false)
         handleClose1();
    
       })
       .catch((err) =>{
-        toast.error("Something Went Wrong", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.error("Something Went Wrong");
         console.log(err)
       })
      
@@ -382,8 +316,8 @@ const requestOptions = {
                 <p className="Customer-info">Product Id</p>
 
                   <Select className='product-select1' value={offer_deals_data.product_id} onChange={(e) => handleInput("product_id", e.target.value)}>
-                     {products?.map((item)=>(
-                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                     {products?.map((item,index)=>(
+                        <MenuItem key={index}  value={item.id}>{item.name}</MenuItem>
                      ))}
                   </Select>
                     <p
