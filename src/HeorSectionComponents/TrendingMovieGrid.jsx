@@ -85,6 +85,7 @@ function TrendingMovieGrid({ label, type }) {
                 about={item.plot}
                 date={item.released}
                 genres={item.genres}
+                item={item}
               />
             );
           })}

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import l1 from "../assets/l1.jpg";
 import c5 from "../assets/c5.jpg";
 import { useState, useEffect } from "react";
 import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
 import MovieGridForMoviePlayback from "./MovieGridForMoviePlayback";
 import MovieGrid from "../HeorSectionComponents/movieGrid";
-import { useParams } from "react-router-dom";
 import useFetch from "../custumHooks/useFetch";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
+import MoviePlayBackData from "../LandingPageBackgroundImageContext/context3";
+import { useParams } from "react-router-dom";
+import { config } from "../utils/config";
+import { toast } from "react-toastify";
+import axios from "axios";
+
 function MoviePlayback() {
   const trunct = (str) => {
     if (str?.length < 260) {
@@ -17,21 +22,32 @@ function MoviePlayback() {
       return str?.slice(0, 260) + "...";
     }
   };
-  const { mediaType, id } = useParams();
-  const { heroImg } = useFetch(`/${mediaType}/${id}`);
-  let { url } = useSelector((state) => state.AppSlice);
-  const [data, setDate] = useState();
+  const [data, setData] = useState();
+  let { movie_id } = useParams();
   useEffect(() => {
-    setDate(heroImg);
-    console.log(data);
-  }, [heroImg]);
+    axios
+      .get(`${config.BASE_URL}/movies/id/${movie_id}`)
+      .then((res) => {
+        setData(res.data);
+        // console.log(userDetails.favorites)
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+        console.error(err);
+      });
+  }, [movie_id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="relative">
       <div className="flex pt-[10%] pl-[10%] pb-20 justify-between ">
         {data ? (
           <div className=" p-4 mt-10 detailimg absolute  rounded-lg ">
             <img
-              src={url.backdrop + data?.poster_path}
+              src={data?.poster}
               className=" object-cover w-full h-full  rounded "
               alt=""
             />
@@ -53,7 +69,7 @@ function MoviePlayback() {
           <div className="flex items-center gap-4 mt-2">
             {data ? (
               <span className="text-white inline-block">
-                {dayjs(data?.release_date).format("MMM D, YYYY")}
+                {dayjs(data?.released).format("MMM D, YYYY")}
               </span>
             ) : (
               <span className="blinker w-[6rem] h-[1.3rem] rounded"></span>
@@ -76,9 +92,7 @@ function MoviePlayback() {
             )}
           </div>
           {data ? (
-            <p className="text-[white] mt-8 w-[75%]">
-              {trunct(data?.overview)}
-            </p>
+            <p className="text-[white] mt-8 w-[75%]">{trunct(data?.plot)}</p>
           ) : (
             <div className="flex flex-col mt-8 gap-3">
               <p className="w-[150%] blinker h-[1.4rem]"></p>
@@ -89,7 +103,7 @@ function MoviePlayback() {
           {data ? (
             <p className="text-[#d6d6d6] flex gap-3 mt-4">
               {data?.genres?.map((item) => (
-                <span>{item.name}</span>
+                <span>{item}</span>
               ))}
             </p>
           ) : (

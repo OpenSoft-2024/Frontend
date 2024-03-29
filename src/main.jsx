@@ -11,6 +11,7 @@ import LoginPage from './components/LoginPage.jsx'
 import SignupPage from './components/SignupPage.jsx'
 import MySpace from './components/AddToFavourite.jsx/mySpace.jsx'
 import SearchPage from "./components/searchPage.jsx"
+import MoviePlayback from './MoviePlayback/MoviePlayback.jsx'
 // import MoviePlayback from './MoviePlayback.jsx/MoviePlayback.jsx'
 
 
@@ -28,7 +29,7 @@ const router = createBrowserRouter(
       <Route path='AddToFavourite' element={<AddToFavourite />}/>
       <Route path='/profile' element={<MySpace />}/>
       <Route path="searchPage"  element={<SearchPage/>}/>
-      {/* <Route path="/moviePlayback"  element={<MoviePlayback/>}/> */}
+      <Route path=":movie_id"  element={<MoviePlayback/>}/>
       <Route path="/admin"  element={<Banners/>}/>
 
       {/* Admin Routes */}

@@ -1,8 +1,10 @@
 import React from "react";
 import Img from "../lazyLoading/Img";
 import DetailOnHover from "../components/detailOnHovering";
+import { useNavigate } from "react-router-dom";
 
-function TrendingMovieCard({ trendingCount, img, img2, about, date, genres }) {
+function TrendingMovieCard({ trendingCount, img, img2, about, date, genres,item}) {
+   
   return (
     <div className="relative cursor-pointer">
       <div className="trending-img w-[20rem]   rounded-sm  overflow-hidden">
@@ -22,6 +24,7 @@ function TrendingMovieCard({ trendingCount, img, img2, about, date, genres }) {
         date={date}
         style={"top-[3%]"}
         genres={genres}
+        item={item}
       />
     </div>
   );

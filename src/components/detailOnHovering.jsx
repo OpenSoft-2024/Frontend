@@ -1,7 +1,20 @@
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
-function DetailOnHover({ img, about, date, style, item }) {
+import { useContext } from "react";
+import MoviePlayBackData from "../LandingPageBackgroundImageContext/context3";
+import { useEffect } from "react";
+function DetailOnHover({ img, about, date, style, genres, item }) {
+  let { movieData, setMoviedata } = useContext(MoviePlayBackData);
+
+  // useEffect(() => {
+  //   localStorage.setItem("movieData", JSON.stringify(movieData));
+  // }, [movieData]);
+  // useEffect(() => {
+  //   setMoviedata(JSON.parse(localStorage.getItem("movieData")));
+  // });
+
+  // console.log(moviedata)
   const navigate = useNavigate();
   const trunct = (str) => {
     if (str?.length < 120) {
@@ -24,7 +37,11 @@ function DetailOnHover({ img, about, date, style, item }) {
         <div className="w-full  flex justify-between mt-4 pl-2 pr-2">
           <button
             className="text-black-2 px-8  ml-1 text-[1rem] capitalize bg-[#fbfbfbb4] smt hover:bg-[#cccccc] rounded-xl"
-            onClick={() => navigate(`/${item.media_type}/${item.id}`)}
+            onClick={() => {
+              navigate(`/${item?._id}`);
+              setMoviedata(item);
+              console.log(movieData);
+            }}
           >
             {" "}
             <i className="ri-play-fill"></i>watch now{" "}
@@ -44,7 +61,7 @@ function DetailOnHover({ img, about, date, style, item }) {
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
         {genres?.map((item, index) => {
           if (index == 0) {
-            return <span>{item}</span>;
+            return <span key={index}>{item}</span>;
           }
         })}
       </div>

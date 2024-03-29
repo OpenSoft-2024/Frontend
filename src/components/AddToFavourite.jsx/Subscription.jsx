@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import react from "react";
-import { IoCheckmark} from "react-icons/io5";
+import { IoCheckmark } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useContext } from "react";
 import BackgroundColor from "../../LandingPageBackgroundImageContext/context2";
@@ -60,8 +60,10 @@ function Subs() {
       </div>
 
       <div className={` rounded ${backgroundColor1 ? "bg-[#ff3636]" : ""}`}>
-        <p className="device mt-[-35%] text-lg text-center">Tier 1</p>
-        <div className="value flex flex-col gap-7 mt-2 px-10  ">
+        <p className="device mt-[-10%] text-lg text-center absolute top-[10%]">
+          Tier 1
+        </p>
+        <div className="value flex flex-col gap-7 mt-2 px-6  items-center ">
           <div>
             <IoCheckmark className="text-2xl" />
           </div>
@@ -71,20 +73,16 @@ function Subs() {
           <div>
             <RxCross2 className="text-2xl" />
           </div>
-          <div>
-            1
-          </div>
-          <div>
-            360p
-          </div>
-          <div>
-          Dolby Atmos
-          </div>
+          <div>1</div>
+          <div>360p</div>
+          <div>Dolby Atmos</div>
         </div>
       </div>
       <div className={` rounded ${backgroundColor2 ? "bg-[#ff3636]" : ""}`}>
-        <p className="device mt-[-35%] text-lg text-center">Tier 2</p>
-        <div className="value flex flex-col gap-7 mt-2 px-10 ">
+        <p className="device mt-[-10%] text-lg text-center absolute top-[10%]">
+          Tier 2
+        </p>
+        <div className="value flex flex-col gap-7 mt-2 px-6 items-center ">
           <div>
             <IoCheckmark className="text-2xl" />
           </div>
@@ -94,20 +92,16 @@ function Subs() {
           <div>
             <IoCheckmark className="text-2xl"></IoCheckmark>
           </div>
-          <div>
-            2
-          </div>
-          <div>
-            480p
-          </div>
-          <div>
-           Dolby Atmos
-          </div>
+          <div>2</div>
+          <div>480p</div>
+          <div>Dolby Atmos</div>
         </div>
       </div>
       <div className={` rounded ${backgroundColor3 ? "bg-[#ff3636]" : ""}`}>
-        <p className="device  mt-[-35%] text-lg text-center">Tier 3</p>
-        <div className="value value flex flex-col gap-7 mt-2 px-10 ">
+        <p className="device  mt-[-10%] mb-4  text-lg text-center absolute top-[10%] left-[86%]">
+          Tier 3
+        </p>
+        <div className="value value flex flex-col gap-7 mt-2 px-6 items-center ">
           <div>
             <IoCheckmark className="text-2xl" />
           </div>
@@ -117,15 +111,9 @@ function Subs() {
           <div>
             <IoCheckmark className="text-2xl"></IoCheckmark>
           </div>
-          <div>
-            3
-          </div>
-          <div>
-            720p
-          </div>
-          <div>
-          Dolby Atmos
-          </div>
+          <div>3</div>
+          <div>720p</div>
+          <div>Dolby Atmos</div>
         </div>
       </div>
     </motion.div>

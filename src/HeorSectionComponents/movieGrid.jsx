@@ -14,10 +14,10 @@ import { server } from "../../server";
 
 function MovieGrid({ label, data }) {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
-  // console.log(Data);
+   
   // const [data, setData] = useState(Data);
   // console.log(data);
-  console.log(data);
+  // console.log(data);
 
   const myRef = useRef(null);
 
@@ -76,10 +76,14 @@ function MovieGrid({ label, data }) {
             ref={myRef}
           >
             {data?.map((item) => (
-              <MovieCard img={item.poster} key={item._id} about={item.plot} date={item.released
-              } genres={item.
-                genres
-                }/>
+              <MovieCard
+                img={item.poster}
+                key={item._id}
+                about={item.plot}
+                date={item.released}
+                genres={item.genres}
+                item={item}
+              />
             ))}
           </div>
         ) : (

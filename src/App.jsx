@@ -4,11 +4,12 @@ import Footer from "./components/footer";
 import { store } from "./AppStore/index.js";
 import { Provider } from "react-redux";
 import { ToastContainer } from 'react-toastify';
-
+import MoviePlayBackData from "./LandingPageBackgroundImageContext/context3.js"
+import { useState } from "react";
  
 function App() {
    
-  
+  let [movieData,setMoviedata]= useState()
    
   return (
     <>
@@ -23,7 +24,9 @@ function App() {
               theme="dark"
           />
         {<NavBar></NavBar>}
+      <MoviePlayBackData.Provider value={{movieData,setMoviedata}}> 
         <Outlet></Outlet>
+        </MoviePlayBackData.Provider>
         <Footer></Footer>
       </Provider>
     </>

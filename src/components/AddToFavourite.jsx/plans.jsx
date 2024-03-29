@@ -38,7 +38,7 @@ function Plans() {
   useEffect(() => {
     let backCount = 0;
 
-    const handleBackButton = (event) => {
+    const handleBackButton = (event) =>{
       event.preventDefault();
       if (backCount < 2) {
         window.history.pushState(null, "", window.location.href);
