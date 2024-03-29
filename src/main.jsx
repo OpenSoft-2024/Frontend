@@ -16,7 +16,8 @@ import MoviePlayback from './MoviePlayback.jsx/MoviePlayback.jsx'
 
 
 // Admin Imports 
-import Home from "./admin/Home.jsx";
+// import Home from "./admin/Home.jsx";
+import Banners from './components/admin_dash.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,10 +30,11 @@ const router = createBrowserRouter(
       <Route path='/profile' element={<MySpace />}/>
       <Route path="searchPage"  element={<SearchPage/>}/>
       <Route path="/moviePlayback"  element={<MoviePlayback/>}/>
+      <Route path="/admin"  element={<Banners/>}/>
 
       {/* Admin Routes */}
 
-      <Route path="/admin"  element={<Home/>}/>
+      {/* <Route path="/admin"  element={<Home/>}/> */}
     </Route>
   )
 )
