@@ -42,11 +42,11 @@ function DetailOnHover({ img, about, date, style, item }) {
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
         <span>U/A +7</span>
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
-        {genres?.map((item, index) => {
+        {/* {genres?.map((item, index) => {
           if (index == 0) {
             return <span>{item}</span>;
           }
-        })}
+        })} */}
       </div>
       <div className="movie-detail-overview text-[#e1dfdf] pl-3 mt-10 text-sm w-full">
         <p className="w-full text-[#a4a3a3] text-sm">{trunct(about)}</p>
