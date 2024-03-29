@@ -16,42 +16,36 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import Graph from "../assets/Graph.svg";
-import DashboardImg from "../assets/Category.svg";
-import Bag from "../assets/Bag.svg";
-import User from "../assets/User.svg";
-import InventoryImg from "../assets/Folder.svg";
-import Setting from "../assets/Setting.svg";
-import Logout from "../assets/Logout.svg";
-import Notification from "../assets/Notification.svg";
-import Home from "../assets/Home.svg";
-import All_Orders from "./All_Orders/Allorders";
-import Profile from "../assets/profile 1.png";
-import Dashboard from "./Dashboard/Dashboard";
-import Orders from "./Orders/Orders";
-import Customers from "./Customers/Customers";
-import Inventory from "./Inventory/Inventory";
+// import Graph from "../assets/Graph.svg";
+// import DashboardImg from "../assets/Category.svg";
+// import Bag from "../assets/Bag.svg";
+// import User from "../assets/User.svg";
+// import InventoryImg from "../assets/Folder.svg";
+// import Setting from "../assets/Setting.svg";
+// import Logout from "../assets/Logout.svg";
+// import Notification from "../assets/Notification.svg";
+// import All_Orders from "./All_Orders/Allorders";
+// import Profile from "../assets/profile 1.png";
+// import Dashboard from "./Dashboard/Dashboard";
+// import Orders from "./Orders/Orders";
+// import Customers from "./Customers/Customers";
+// import Inventory from "./Inventory/Inventory";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import NewProduct from "./Inventory/NewProduct";
-import ViewProduct from "./Inventory/ViewProduct";
-import CustomerOrder from "./Customers/CustomerOrder";
-import DashNotActive from "../assets/Dash-not-active.svg";
-import Content from "./Content/Content";
-import Settings from "./Settings/Settings";
-import ViewUserNetwork from "./Settings/ViewUserNetwork";
+// import NewProduct from "./Inventory/NewProduct";
+// import ViewProduct from "./Inventory/ViewProduct";
+// import CustomerOrder from "./Customers/CustomerOrder";
+// import DashNotActive from "../assets/Dash-not-active.svg";
+// import Content from "./Content/Content";
+// import Settings from "./Settings/Settings";
+// import ViewUserNetwork from "./Settings/ViewUserNetwork";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-import DashboardContext from "./Context/DashboardContext";
+// import DashboardContext from "./Context/DashboardContext";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ArrowForwardOutlined } from "@mui/icons-material";
-import UserNetworkTable from "../Components/Network/Layout/UserNetworkTable";
-// import Box from '@mui/material/Box';
-import Button from "@mui/material/Button";
-// import Typography from '@mui/material/Typography';
+// import UserNetworkTable from "../Components/Network/Layout/UserNetworkTable";
 import Modal from "@mui/material/Modal";
-import Network from "./Network/Network";
+// import Network from "./Network/Network";
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -63,15 +57,15 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Navbar = (props) => {
-  const context2 = useContext(DashboardContext);
-  const { loading } = context2;
+  // const context2 = useContext(DashboardContext);
+  // const { loading } = context2;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [newActiveLink, setNewActiveLink] = useState(null);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const context = useContext(UserContext);
+  // const context = useContext(UserContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
