@@ -13,6 +13,8 @@ import MySpace from './components/AddToFavourite.jsx/mySpace.jsx'
 import SearchPage from "./components/searchPage.jsx"
 import MoviePlayback from './MoviePlayback/MoviePlayback.jsx'
 // import MoviePlayback from './MoviePlayback.jsx/MoviePlayback.jsx'
+import Success from './components/sucess.jsx'
+import Failure from './components/failure.jsx'
 
 
 // Admin Imports 
@@ -31,6 +33,10 @@ const router = createBrowserRouter(
       <Route path="searchPage"  element={<SearchPage/>}/>
       <Route path=":movie_id"  element={<MoviePlayback/>}/>
       <Route path="/admin"  element={<Banners/>}/>
+      {/* <Route path="/moviePlayback"  element={<MoviePlayback/>}/> */}
+      {/* <Route path="/admin"  element={<Banners/>}/> */}
+      <Route path="/success/:amt"  element={<Success/>}/>
+      <Route path="/failure"  element={<Failure/>}/>
 
       {/* Admin Routes */}
 
