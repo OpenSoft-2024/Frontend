@@ -84,6 +84,7 @@ function TrendingMovieGrid({ label, type }) {
                 key={item._id}
                 img={item.poster}
                 trendingCount={++itTrending}
+                img2={item.poster}
                 about={item.overview}
                 date={item.release_date}
               />

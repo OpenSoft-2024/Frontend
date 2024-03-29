@@ -1,5 +1,5 @@
-import React from "react";
-import c1 from "../assets/c1.jpg";
+
+
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 function DetailOnHover({ img, about, date, style }) {
@@ -16,8 +16,8 @@ function DetailOnHover({ img, about, date, style }) {
       transition={{ duration: 0.3, delay: 0.9 }}
       className={`w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[3000]    translate-x-[-10%] bg-black left-[-18%] ${style}`}
     >
-      <div classNaem="w-[100%] h-[20vh]">
-        <img src={img} alt="" w-full h-full rounded />
+      <div className="w-[100%] h-[20vh]">
+        <img src={img} alt="" className="w-full h-full rounded" />
       </div>
       <div className="overlay-detalis  w-full top-[40%] h-12 absolute "></div>
       <div className="relative z-[200]">

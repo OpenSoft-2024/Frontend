@@ -18,6 +18,9 @@ import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
 import {loadStripe} from '@stripe/stripe-js';
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import { config } from "../../utils/config";
+import { toast } from "react-toastify";
 
 // import c2 from "../../assets/p1.jpg";
 // import c3 from "../../assets/p1.jpg";
@@ -31,6 +34,7 @@ import axios from 'axios'
 
 function Plans() {
   // const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     let backCount = 0;
 
@@ -59,6 +63,8 @@ function Plans() {
     };
   }, []);
 
+  const {user} = useSelector((state) => state.userSlice);
+
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
@@ -84,7 +90,7 @@ function Plans() {
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
   const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
-  const [tier, setTier] = useState()
+  const [tier, setTier] = useState();
   useEffect(() => {
     localStorage.setItem("myBoolean", JSON.stringify(isNavBarVisible));
   }, [isNavBarVisible]);
@@ -105,47 +111,39 @@ function Plans() {
   };
   
 
-const handlePayment=async ()=>{
-    try{
-    const stripe = await loadStripe("pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q");
 
-    const response=await axios.post('http://localhost:8080/api/payment/checkout',{
-        amt:1,
-        name:"movie"
-    })
-    
-    const session=response?.data?.id
-    console.log(session);
-    const result=await stripe.redirectToCheckout({
-        sessionId:session
-    })
-    if(result.error)
-    {
-        console.log(result.error);
-    }
-    else{
-        //for subscription
-        const tier=backgroundColor1?1:backgroundColor2?2:3
-        const res=await axios.post('http://localhost:8080/api/subscription/create',{
-        duration:1,
-        tier:tier
-    })
-    console.log(res);
+    const handlePayment= async ()=>{
 
-    // for rent
-    // const res1=await axios.post('http://localhost:8080/api/rent/create',{
-    //     duration:4,
-    //     movieId:movieid
+      try{
+        const token=localStorage.getItem('token')
+
+        if(!token){
+          navigate('/login');
+        }
         
-    // })
-}
-    }
-catch(err)
-{
-    console.log(err);
-}
+        const amount=backgroundColor1?245:backgroundColor2?459:689
 
-}
+        const stripe = await loadStripe("pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q");
+
+        const response=await axios.post(`${config.BASE_URL}/payment/checkout`,{
+            amt:amount,
+            name:"Movie Cinema"
+        },{headers:{Authorization:token}})
+
+
+        
+        const session=response?.data?.session
+        session.metadata=user.userId
+        console.log(session);
+        await stripe.redirectToCheckout({
+            sessionId:session.id,      
+        })
+      }
+      catch(err){
+            toast.error('Something went wrong! Please try again later.');
+            console.log(err);
+      }
+    }
 
 
 
@@ -165,16 +163,16 @@ catch(err)
 
         <div className="plan-container w-screen relative h-screen  ">
           <div className="flex flex-col gap-6 relative ">
-            <div class="srcoller flex">
+            <div className="srcoller flex">
               <InfiniteScroll page={2} />
               <InfiniteScroll page={3} />
             </div>
-            <div class="srcoller flex">
+            <div className="srcoller flex">
               <InfiniteScroll page={4} />
               <InfiniteScroll page={5} />
               <InfiniteScroll page={6} />
             </div>
-            <div class="srcoller flex">
+            <div className="srcoller flex">
               <InfiniteScroll page={7} />
               <InfiniteScroll page={8} />
               <InfiniteScroll page={9} />
@@ -301,7 +299,7 @@ catch(err)
           className="overflow-hidden h-[0px] absolute top-[82%] right-[5%] hover:scale-[1.03] "
         >
           <button className="text-white  py-4 px-10 capitalize bg-red-700 hover:bg-red-600 font-bold rounded "
-          onClick={handlePayment}>
+          onClick={()=>handlePayment()}>
             Continue
           </button>
         </motion.div>
