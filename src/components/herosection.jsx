@@ -1,12 +1,11 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieGrid from "../HeorSectionComponents/movieGrid";
 import ContinueToWatch from "../HeorSectionComponents/ContinueToWatch";
 import BackgroundImage from "../LandingPageBackgroundImageContext/context";
 import HeroMovieDesc from "../HeorSectionComponents/heroMovieDesc";
 import TrendingMovieGrid from "../HeorSectionComponents/TrendingMovieGrid";
 
-import { useEffect } from "react";
 import { fetchDataFromApi } from "../DataUtils/fetchData2";
 import { useDispatch, useSelector } from "react-redux";
 import { getUrl, getGenres } from "../AppStore/AppSlicer";
@@ -16,37 +15,16 @@ import axios from "axios";
 import { config } from "../utils/config";
 import { login } from "../AppStore/userSlice";
 import { server } from "../../server";
+import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 
 function Herosection() {
   let { url, rand } = useSelector((state) => state.AppSlice);
-  console.log(url);
+
   const dispatch = useDispatch();
-   
+
   useEffect(() => {
-    setUser();
+    dispatch(setIsNavBarVisible(true));
   }, []);
-  
-  const setUser = async () => {
-
-    const token = localStorage.getItem("token");
-    if(!token){
-      return;
-    }
-    
-    try{
-  
-      const res = await axios.get(`${config.BASE_URL}/users/profile`,{headers:{Authorization:token}});
-      dispatch(login(res.data.user));
-    }
-    catch(err){
-      console.log(err);
-    }
-    
-  }
-
-  /////o
-  // let { url ,rand} = useSelector((state) => state.AppSlice);
-  // console.log(url);
 
   ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
   const fetchApiConfiguration = () => {
@@ -63,7 +41,7 @@ function Herosection() {
   useEffect(() => {
     localStorage.setItem("url", JSON.stringify(url));
   }, [url]);
-  console.log( JSON.parse(localStorage.getItem("url")));
+  console.log(JSON.parse(localStorage.getItem("url")));
   useEffect(() => {
     const myBoolean = JSON.parse(localStorage.getItem("url"));
     dispatch(getUrl(myBoolean));
@@ -95,7 +73,6 @@ function Herosection() {
   useEffect(() => {
     setData(heroImg);
     localStorage.setItem("def", url?.poster + data?.results[0].backdrop_path);
-    
   }, [heroImg]);
 
   const [data1, setData1] = useState(null);
@@ -106,15 +83,13 @@ function Herosection() {
   const [data6, setData6] = useState(null);
   const [data7, setData7] = useState(null);
   // const [data8, setData8] = useState(null);
-  const token=localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   useEffect(() => {
-  
-    const getfetch=async()=>{
-      try{
-
-        const res=await axios.get(`${server}/movies/latest`)
+    const getfetch = async () => {
+      try {
+        const res = await axios.get(`${server}/movies/latest`);
         console.log(res);
-        setData1(res.data)
+        setData1(res.data);
 
         // const res1=await axios.get(`${server}/movies/gethits`,{
         //   headers:token
@@ -122,42 +97,40 @@ function Herosection() {
         // // console.log(res);
         // setData2(res.data)
 
-        const res2=await axios.post(`${server}/movies/language`,{
-          language:"English"
-        })
+        const res2 = await axios.post(`${server}/movies/language`, {
+          language: "English",
+        });
         // console.log(res2);
-        setData3(res2.data)
+        setData3(res2.data);
 
-        const res3=await axios.post(`${server}/movies/language`,{
-          language:"Hindi"
-        })
+        const res3 = await axios.post(`${server}/movies/language`, {
+          language: "Hindi",
+        });
         console.log(res3);
-        setData4(res3.data)
+        setData4(res3.data);
 
-        const res4=await axios.post(`${server}/movies/genres`,{
-          genre:"Action"
-        })
+        const res4 = await axios.post(`${server}/movies/genres`, {
+          genre: "Action",
+        });
         // console.log(res);
-        setData5(res4.data)
+        setData5(res4.data);
 
-        const res5=await axios.post(`${server}/movies/genres`,{
-          genre:"Romance"
-        })
+        const res5 = await axios.post(`${server}/movies/genres`, {
+          genre: "Romance",
+        });
         // console.log(res);
-        setData6(res5.data)
+        setData6(res5.data);
 
-        const res6=await axios.post(`${server}/movies/genres`,{
-          genre:"Comedy"
-        })
+        const res6 = await axios.post(`${server}/movies/genres`, {
+          genre: "Comedy",
+        });
         // console.log(res);
-        setData7(res6.data)
-      }
-      catch(err)
-      {
+        setData7(res6.data);
+      } catch (err) {
         console.log(err);
       }
-    }
-   getfetch()
+    };
+    getfetch();
   }, []);
 
   let [bgImage, setBgImage] = useState({
@@ -170,7 +143,6 @@ function Herosection() {
     // overview:"",
   });
 
-  
   return (
     <BackgroundImage.Provider
       value={{ bgImage, setBgImage, bgImageDescription, setBgImageDescription }}
@@ -184,7 +156,7 @@ function Herosection() {
             className="fixed w-screen "
             alt=""
           />
-          
+
           <div className="overlay-1 w-[100vw]"></div>
           <div className="overlay-01"></div>
           <div className="overlay-02"></div>

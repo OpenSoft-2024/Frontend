@@ -5,15 +5,6 @@ import { useContext } from "react";
 import MoviePlayBackData from "../LandingPageBackgroundImageContext/context3";
 import { useEffect } from "react";
 function DetailOnHover({ img, about, date, style, genres, item }) {
-  let { movieData, setMoviedata } = useContext(MoviePlayBackData);
-
-  // useEffect(() => {
-  //   localStorage.setItem("movieData", JSON.stringify(movieData));
-  // }, [movieData]);
-  // useEffect(() => {
-  //   setMoviedata(JSON.parse(localStorage.getItem("movieData")));
-  // });
-
   // console.log(moviedata)
   const navigate = useNavigate();
   const trunct = (str) => {

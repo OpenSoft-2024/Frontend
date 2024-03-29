@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import useFetch from "../custumHooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import HeroDescSkelton from "../loadingSkelton/heroloadingSkelton";
 function HeroMovieDesc() {
   // console.log(document.getElementsByClassName("description")[0]);
@@ -52,6 +53,13 @@ function HeroMovieDesc() {
     handleOnchange();
   }, [bgImage]);
   let maxLength = 180;
+  const hideOrShowOnClick = (e) => {
+    if (localStorage.getItem("isNavBarVisible") === "true") {
+      localStorage.setItem("isNavBarVisible", "false");
+    } else {
+      localStorage.setItem("isNavBarVisible", "true");
+    }
+  };
 
   return (
     <>
@@ -135,15 +143,16 @@ function HeroMovieDesc() {
         )}
         {data ? (
           <div className="buttonToWatch flex gap-9 mt-4">
-            <button
-              className=" py-2 px-6 rounded-xl tracking-tighter text-white cmn-call-to-action-btn font-bold"
-              onClick={() =>
-                navigate(`/${bgImageDescription?.media_type}/${bgImageDescription?.boxId}`)
-              }
+            <Link
+              to="/video"
+              className="bg-[#dfddddd5] py-4 px-12 rounded hover:scale-[1.07] transition-all"
             >
-              <i className="ri-play-fill font-bold text-xl text-white"></i>
-              watch now
-            </button>
+              <i className="ri-play-fill font-bold text-xl text-black"></i>
+              <span className="text-[#000000] font-bold capitalize">
+                watch now
+              </span>
+            </Link>
+
             <button className=" py-2 px-3 rounded-xl text-sm  cmn-call-2  tracking-tighter">
               +
             </button>

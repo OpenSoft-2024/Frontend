@@ -18,6 +18,10 @@ function SearchPage() {
   );
   console.log(heroImg);
 
+  useEffect(() => {
+    dispatch(setIsNavBarVisible(false));
+  }, []);
+
   let [active, setActive] = useState(false);
   useEffect(() => {
     setData(heroImg);

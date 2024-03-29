@@ -16,8 +16,8 @@ import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
 import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
-import {loadStripe} from '@stripe/stripe-js';
-import axios from 'axios'
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { config } from "../../utils/config";
 import { toast } from "react-toastify";
@@ -31,14 +31,13 @@ import { toast } from "react-toastify";
 // import c8 from "../../assets/p1.jpg";
 // import c1 from "../../assets/p1.jpg";
 
-
 function Plans() {
   // const history = useHistory();
   const navigate = useNavigate();
   useEffect(() => {
     let backCount = 0;
 
-    const handleBackButton = (event) =>{
+    const handleBackButton = (event) => {
       event.preventDefault();
       if (backCount < 2) {
         window.history.pushState(null, "", window.location.href);
@@ -63,12 +62,16 @@ function Plans() {
     };
   }, []);
 
-  const {user} = useSelector((state) => state.userSlice);
+  useEffect(() => {
+    dispatch(setIsNavBarVisible(false));
+  }, []);
+
+  const { user } = useSelector((state) => state.userSlice);
 
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
-  
+
   const item = ["entertainment", "will ", "never"];
   const button = ["Tier 1 ", "Tier 2", "Tier 3"];
   const handleOnClick = (e) => {
@@ -103,54 +106,46 @@ function Plans() {
     // setBgImage(localStorage.getItem('def'))
   }, [heroImg]);
   let dispatch = useDispatch();
-  const viewOnClick = (e) => {
-    console.log(e);
-    
-    dispatch(setIsNavBarVisible(true));
-    
-  };
-  
 
+  const handlePayment = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-    const handlePayment= async ()=>{
+      if (!token) {
+        navigate("/login");
+      }
 
-      try{
-        const token=localStorage.getItem('token')
+      const amount = backgroundColor1 ? 245 : backgroundColor2 ? 459 : 689;
+      const tier = backgroundColor1 ? 1 : backgroundColor2 ? 2 : 3;
 
-        if(!token){
-          navigate('/login');
-        }
-        
-        const amount=backgroundColor1?245:backgroundColor2?459:689
-        const tier=backgroundColor1?1:backgroundColor2?2:3
-
-        const stripe = await loadStripe("pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q");
+      const stripe = await loadStripe(
+        "pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q"
+      );
       //   console.log({
       //     amt:amount,
       //     name:"Movie Cinema"
       // });
-        const response=await axios.post(`${config.BASE_URL}/payment/checkout`,{
-            amt:amount,
-            name:"Movie Cinema",
-            tier:tier
-        },{headers:{Authorization:token}})
+      const response = await axios.post(
+        `${config.BASE_URL}/payment/checkout`,
+        {
+          amt: amount,
+          name: "Movie Cinema",
+          tier: tier,
+        },
+        { headers: { Authorization: token } }
+      );
 
-
-        
-        const session=response?.data?.session
-        // session.metadata=user.userId
-        console.log(session);
-        await stripe.redirectToCheckout({
-            sessionId:session.id,      
-        })
-      }
-      catch(err){
-            toast.error('Something went wrong! Please try again later.');
-            console.log(err);
-      }
+      const session = response?.data?.session;
+      // session.metadata=user.userId
+      console.log(session);
+      await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+    } catch (err) {
+      toast.error("Something went wrong! Please try again later.");
+      console.log(err);
     }
-
-
+  };
 
   return (
     <BackgroundColor.Provider
@@ -291,11 +286,7 @@ function Plans() {
           })}
         </div>
         <Subs></Subs>
-        <NavLink to="/" onClick={viewOnClick}>
-          <div className="absolute bg-red-600 capitalize top-[4%] right-[3%] px-6 hover:scale-[1.05]  rounded py-2 text-white">
-            home
-          </div>
-        </NavLink>
+ 
 
         <motion.div
           initial={{ height: "0%" }}
@@ -303,8 +294,10 @@ function Plans() {
           transition={{ ease: [0.76, 0, 0.24, 1], duration: 1.5 }}
           className="overflow-hidden h-[0px] absolute top-[82%] right-[5%] hover:scale-[1.03] "
         >
-          <button className="text-white  py-4 px-10 capitalize bg-red-700 hover:bg-red-600 font-bold rounded "
-          onClick={()=>handlePayment()}>
+          <button
+            className="text-white  py-4 px-10 capitalize bg-red-700 hover:bg-red-600 font-bold rounded "
+            onClick={() => handlePayment()}
+          >
             Continue
           </button>
         </motion.div>

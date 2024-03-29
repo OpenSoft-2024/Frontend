@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const AppSlice = createSlice({
   name: "AppSlice",
   initialState: {
-    rand: Math.floor(Math.random() * 10),
-    isNavBarVisible:true,
+    rand: Math.floor(Math.random() * 4),
+    isNavBarVisible: true,
     url: {},
     genres: {},
   },
@@ -21,5 +21,5 @@ const AppSlice = createSlice({
   },
 });
 
-export const { getUrl, getGenres,setIsNavBarVisible } = AppSlice.actions;
+export const { getUrl, getGenres, setIsNavBarVisible } = AppSlice.actions;
 export default AppSlice.reducer;
