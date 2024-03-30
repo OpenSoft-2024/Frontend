@@ -39,7 +39,7 @@ function Herosection() {
     localStorage.setItem("url", JSON.stringify(url));
   }, [url]);
 
-  console.log(JSON.parse(localStorage.getItem("url")));
+  // console.log(JSON.parse(localStorage.getItem("url")));
   useEffect(() => {
     const myBoolean = JSON.parse(localStorage.getItem("url"));
     dispatch(getUrl(myBoolean));
