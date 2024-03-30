@@ -13,6 +13,8 @@ import BackgroundColor from "../LandingPageBackgroundImageContext/context2";
 import { config } from "../utils/config";
 import axios from "axios";
 import { MdOutlineDescription } from "react-icons/md";
+import { IoColorWand } from "react-icons/io5";
+
 
 function SearchPage() {
   let dispatch = useDispatch();
@@ -20,6 +22,7 @@ function SearchPage() {
   const { url, rand, isNavBarVisible } = useSelector((state) => state.AppSlice);
   // console.log(url);
   const [isPlot, setIsPlot] = useState(false);
+  const [isAI, setIsAI] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [query, setQuery] = useState("");
   const [srchData, setsrchData] = useState([]);
@@ -56,13 +59,17 @@ function SearchPage() {
  
 
   }
+  const handleFocus=()=>{
+    if (query.trim() == "") {
+      getsearch_hist()
+    }
 
+  }
   useEffect(() => {
     
     if (query.trim() == "") {
-     getsearch_hist();
+    //  getsearch_hist();
      setsrchData([])
-
     }
   }, [query]);
 
@@ -88,13 +95,18 @@ function SearchPage() {
 
   window.addEventListener("scroll", handleOnScroll);
 
-  const handleOnClick = (e) => {
-    console.log(e);
-    dispatch(setIsNavBarVisible(true));
-  };
+  // const handleOnClick = (e) => {
+  //   console.log(e);
+  //   dispatch(setIsNavBarVisible(true));
+  // };
   const handlePlot = () => {
     setIsPlot(!isPlot);
-    console.log(isPlot);
+    // console.log(isPlot);
+  };
+
+  const handleAI = () => {
+    setIsAI(!isAI);
+    // console.log(isPlot);
   };
   // const [imageUrl, setImageUrl] = useState("");
 
@@ -109,7 +121,7 @@ function SearchPage() {
   const handlekey = (e) => {
     if (e.keyCode == 13) {
       console.log("enter");
-      handleSubmit();
+      handleSubmit(query);
     }
   };
 
@@ -136,32 +148,53 @@ function SearchPage() {
   const handleIconClick = () => {
     imageref.current.click();
   };
-  const handleSubmit = async () => {
-    try{
-      const url = isPlot
-      ? `${config.BASE_URL}/search/plot`
-      : `${config.BASE_URL}/search/`;
-    const q = queryCheck(query);
-    console.log(q);
-    const result = await axios.get(`${url}`, {
-      params: {
-        query: q,
-      },
-    });
-    if(token)
-    {
-      const res=await axios.post(`${config.BASE_URL}/search_hist`,{
-      query:query
+
+  const fetchSrchHist=async(quer)=>{
+    const res=await axios.post(`${config.BASE_URL}/search_hist`,{
+      query:quer
     },{
       headers:{
         Authorization:token
       }
     })
     console.log(res);
+  }
+  const api_url = isAI?
+      isPlot
+      ? `${config.BASE_URL}/sem_search/plot`
+      : `${config.BASE_URL}/sem_search/`
+      :
+      isPlot
+      ? `${config.BASE_URL}/search/plot`
+      : `${config.BASE_URL}/search/`
+
+      useEffect(() => {
+        console.log(api_url);
+      }, [api_url])
+      
+  const handleSubmit = async (qr) => {
+    try{
+      
+      if(qr.trim() == "")
+      return;
+      console.log(qr);
+    const q = queryCheck(qr);
+    console.log(q);
+    const result = await axios.get(`${api_url}`, {
+      params: {
+        query: q,
+      },
+    });
+    console.log(result);
+    if(token)
+    {
+      fetchSrchHist(q)
 
     }
     setData(result.data);
     setQuery("");
+    setsrchData([])
+    setsrchHistData([])
     
   }
   catch(err)
@@ -174,13 +207,11 @@ function SearchPage() {
 
   const handleAutocomplete = async (quer) => {
     try{
-      const url = isPlot
-      ? `${config.BASE_URL}/search/plot`
-      : `${config.BASE_URL}/search/`;
+   
     // console.log(quer);
     const q = queryCheck(quer);
     console.log(q);
-    const result = await axios.get(`${url}`, {
+    const result = await axios.get(`${api_url}`, {
       params: {
         query: q,
       },
@@ -217,7 +248,7 @@ function SearchPage() {
             className=" w-[1.9rem] absolute top-[50px] left-[200px]    test-white fill-white cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            onClick={handleSubmit}
+            onClick={()=>handleSubmit(query)}
             fill="currentColor"
           >
             <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
@@ -229,15 +260,16 @@ function SearchPage() {
                 placeholder="Search for movie or tv shows"
                 onKeyUp={handlekey}
                 onChange={handleChange}
+                onFocus={handleFocus}
                 value={query}
                 autocomplete="off"
-                className="pl-14 w-[80%]  justify-center h-[3.3rem] rounded-lg text-white text-opacity-[0.8] text-xl outline-none bg-[#3c3c3c] placeholder:text-xl capitalize"
+                className="pl-14 w-[80%]  justify-center h-[3.3rem] rounded-lg text-white text-opacity-[0.8] text-xl outline-none bg-[#3c3c3c] placeholder:text-xl"
                 id="searchInput"
               />
               <div className="flex flex-row justify-center items-center">
                 <span
                   htmlFor="imageInput"
-                  className="text-white absolute  translate-x-[-100px]"
+                  className="text-white absolute  translate-x-[-110px]"
                   onClick={handleIconClick}
                 >
                   <FaImage />
@@ -251,7 +283,7 @@ function SearchPage() {
                   onChange={handleImageInputChange}
                 />
                 <span
-                  class="text-white absolute translate-x-[-40px] cursor-pointer p-2 rounded-sm font-semibold"
+                  class="text-white absolute translate-x-[-70px] cursor-pointer p-2 rounded-sm font-semibold"
                   style={
                     isPlot
                       ? { backgroundColor: "red", color: "black" }
@@ -260,7 +292,19 @@ function SearchPage() {
                   // style={{position: "absolute", right: "40px", top: "50%", transform: "translateY(-50%)", cursor: "pointer"}}
                   onClick={handlePlot}
                 >
-                  <MdOutlineDescription />
+                  <MdOutlineDescription  />
+                </span>
+                <span
+                  class="text-white absolute translate-x-[-30px] cursor-pointer p-2 rounded-sm font-semibold"
+                  style={
+                    isAI
+                      ? { backgroundColor: "red", color: "black" }
+                      : { backgroundColor: "black", color: "white" }
+                  }
+                  // style={{position: "absolute", right: "40px", top: "50%", transform: "translateY(-50%)", cursor: "pointer"}}
+                  onClick={handleAI}
+                >
+                  < IoColorWand/>
                 </span>
               </div>
             </div>
@@ -280,6 +324,7 @@ function SearchPage() {
                         key={item._id}
                         className="px-4  py-2 bg-gray-600 text-white  hover:bg-red-700 cursor-pointer "
                         onClick={() => {
+                          fetchSrchHist(item?.title)
                           navigate(`/${item?._id}`);
                         }}
                       >
@@ -303,6 +348,7 @@ function SearchPage() {
                           className="px-4  py-2 bg-gray-600 text-white  hover:bg-red-700 cursor-pointer "
                           onClick={() => {
                             setQuery(item)
+                            handleSubmit(item)
                           }}
                         >
                           {item}
@@ -318,7 +364,7 @@ function SearchPage() {
             </div>
           </div>
         </div>
-        <NavLink to="/" onClick={handleOnClick}>
+        <NavLink to="/">
           <div className="absolute bg-red-600 capitalize top-[2.8%] right-[3%] px-6 hover:scale-[1.05]  rounded py-2 text-white">
             home
           </div>
