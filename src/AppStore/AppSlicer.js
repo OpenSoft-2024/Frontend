@@ -4,6 +4,7 @@ const AppSlice = createSlice({
   initialState: {
     rand: Math.floor(Math.random() * 4),
     isNavBarVisible: true,
+    isFooterVisible: true,
     url: {},
     genres: {},
   },
@@ -17,8 +18,11 @@ const AppSlice = createSlice({
     setIsNavBarVisible: (state, action) => {
       state.isNavBarVisible = action.payload;
     },
+    setIsFooterVisible: (state, action) => {
+      state.isFooterVisible = action.payload;
+    },
   },
 });
 
-export const { getUrl, getGenres, setIsNavBarVisible } = AppSlice.actions;
+export const { getUrl, getGenres,setIsNavBarVisible,setIsFooterVisible} = AppSlice.actions;
 export default AppSlice.reducer;

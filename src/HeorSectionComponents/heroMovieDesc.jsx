@@ -136,7 +136,7 @@ function HeroMovieDesc() {
               </span>
             </Link>
 
-            <button className=" py-2 px-3 rounded-xl text-sm  cmn-call-2  tracking-tighter">
+            <button className=" py-2 px-8 flex justify-center items-center rounded-sm text-sm  cmn-call-2  tracking-tighter">
               +
             </button>
           </div>
