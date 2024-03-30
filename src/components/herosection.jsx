@@ -112,6 +112,9 @@ function Herosection() {
       try{
         const res = await axios.get(`${config.BASE_URL}/movies/latest`);
         setMovies((prev) => ({ ...prev, 'latest': res.data }));
+
+        // const res1 = await axios.get(`${config.BASE_URL}/movies/rental`);
+        // setMovies((prev) => ({ ...prev, 'Rental': res1.data }));
       }
       catch(err) {
         toast.error('Something went wrong');
@@ -177,6 +180,7 @@ function Herosection() {
             <MovieGrid data={movies['Action']} label="Action" />
             <MovieGrid data={movies['Romance']} label="Romance" />
             <MovieGrid data={movies['Comedy']} label="Comedy" />
+            {/* <MovieGrid data={movies['Rental']} label="Rental" /> */}
           </div>
         </div>
       </div>

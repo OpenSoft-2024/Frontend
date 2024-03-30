@@ -10,10 +10,22 @@ const NavBar = () => {
   let dropDownLink = useRef(null);
   let dropDownContent = useRef(null);
   let [color, setColor] = useState(false);
+  const [isSub, setIsSub] = useState(false)
 
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.userSlice);
+  useEffect(()=>{
+    if (user.hasOwnProperty('subscription') && user.subscription!="")
+    {
+      setIsSub(true);
+      // console.log(setIsSub);
+    }
+  // console.log(user);
+
+  },[user])
+ 
+  
 
   const handleOnClick = (e) => {
     e.target.style = "width:40vw";
@@ -90,7 +102,10 @@ const NavBar = () => {
                 </p>
               </div>
             </li>
-            <li>
+            {
+              !isSub &&
+              (
+              <li>
               <NavLink
                 to="/plans"
                 className={({ isActive }) =>
@@ -100,6 +115,8 @@ const NavBar = () => {
                 premium
               </NavLink>
             </li>
+              )
+}
           </ul>
         </div>
 

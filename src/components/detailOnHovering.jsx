@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { IoIosStar } from "react-icons/io";
+
 
 function DetailOnHover({ img, about, date, style, genres, item }) {
 
@@ -18,7 +20,11 @@ function DetailOnHover({ img, about, date, style, genres, item }) {
       transition={{ duration: 0.3, delay: 0.9 }}
       className={`w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[1000]    translate-x-[-10%] bg-black left-[-18%] ${style}`}
     >
-      <div className="w-[100%] h-[20vh]">
+      <div className="w-[100%] h-[20vh] relative">
+      {
+        item.premium && 
+        (<div className="absolute top-0 right-0 bg-blue-600 p-2 rounded-md  z-[1000]"><IoIosStar /></div>)
+      }
         <img src={img} alt="" className="w-full h-full rounded object-cover" />
       </div>
       <div className="overlay-detalis  w-full top-[40%] h-12 absolute "></div>
@@ -44,7 +50,7 @@ function DetailOnHover({ img, about, date, style, genres, item }) {
           {dayjs(date).format("MMM D, YYYY")}
         </span>
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
-        <span>U/A +7</span>
+        <span>U/A +{item?.imdb?.rating}</span>
         <div className="point-detail w-2 h-2 rounded-full bg-white"></div>
         {/* {genres?.map((item, index) => {
           if (index == 0) {

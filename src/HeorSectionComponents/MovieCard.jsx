@@ -3,13 +3,17 @@ import avtar from "../assets/avt.webp";
 import Img from "../lazyLoading/Img";
 import DetailOnHover from "../components/detailOnHovering";
 import { useNavigate } from "react-router-dom";
-
+import { IoIosStar } from "react-icons/io";
 function MovieCard({ img, img2, about, date, genres, item }) {
   
   return (
     <div className="mt-4 rounded-3xl relative h-96  w-fit">
-      <h1>vishal</h1>
+      {/* <h1>vishal</h1> */}
       <div className="  rounded overflow-hidden border-black movie-box-movie-grid    relative  detailOnHover   ">
+      {
+        item.premium && 
+        (<div className="absolute top-0 right-0 bg-blue-600 p-2 rounded-md  z-[1000]"><IoIosStar /></div>)
+      }
         <img
           src={img}
           className="w-full h-full object-cover box-shadow rounded-sm absolute movie-card-o3jiue"
