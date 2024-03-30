@@ -48,7 +48,8 @@ function SearchPage() {
       }
     })
     console.log(res);
-    setsrchHistData(res?.data?.history)
+
+    setsrchHistData(res?.data?.history?.reverse())
    
 
   }
