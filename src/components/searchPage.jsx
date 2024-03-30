@@ -126,26 +126,43 @@ function SearchPage() {
   };
 
   const handleImageInputChange = async (event) => {
+    // console.log(1);
     const file = event.target.files[0];
-    const reader = new FileReader();
-    if (!file) return;
+    console.log(file);
+    const formData = new FormData();
 
-    reader.onload = () => {
-      setSelectedImage(reader.result);
-    };
-    reader.onerror = (error) => {
-      console.error("Error reading file:", error);
+    // Append the file to the FormData object with a specified field name (e.g., 'image')
+    formData.append('image',file);
+
+    console.log(formData);
+    const configHeaders = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     };
 
-    if (file) {
-      // setImageUrl(reader.readAsDataURL(file))
-      console.log(reader.readAsDataURL(file));
+    try{
+      const results=await axios.post(`${config.BASE_URL}/search/image-search`,formData,{
+        configHeaders
+      })
+      console.log(results.data);
+  
+      setData(results.data)
+      setsrchHistData([])
+
     }
+    catch(err){
+      console.log(err);
+    }
+
+
+    
 
     // console.log(selectedImage);
   };
 
   const handleIconClick = () => {
+    console.log(2);
     imageref.current.click();
   };
 
@@ -236,7 +253,7 @@ function SearchPage() {
       <div
         className={`w-screen   pt-10   ${
           active ? "color" : ""
-        } flex justify-between`}
+        } flex justify-center items-center`}
       >
         {/* <input
           type="search"
