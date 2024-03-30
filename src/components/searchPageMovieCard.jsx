@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Img from "../lazyLoading/Img";
 import DetailOnHover from "./detailOnHovering";
 
-function SearchPageMovieCard({ img, img2, about,date,style}) {
+function SearchPageMovieCard({ img, img2, about,date,style,item}) {
   let [showOnHover, setShowOnHover] = useState(false);
   const handleOnHover = () => {
     setTimeout(() => {
@@ -14,6 +14,7 @@ function SearchPageMovieCard({ img, img2, about,date,style}) {
       setShowOnHover(false);
     });
   };
+  // console.log(img2);
 
   return (
     <div
@@ -21,8 +22,8 @@ function SearchPageMovieCard({ img, img2, about,date,style}) {
       onMouseEnter={handleOnHover}
       onMouseLeave={handleOnLeave}
     >
-      {img ? <Img src={img} alt="" className={`w-full h-full  ${style}`}  /> : ""}
-      <DetailOnHover img={img2}  about={about} date={date}/>
+      {img ? <Img src={img} alt="" className={`w-full h-full  ${style}`}  /> : img2? <Img src={img2} alt="" className={`w-full h-full  ${style}`} />:""}
+      <DetailOnHover img={img?img:img2?img2:""}  about={about} date={date} item={item}/>
     </div>
   );
 }

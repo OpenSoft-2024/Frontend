@@ -16,7 +16,7 @@ function DetailOnHover({ img, about, date, style, genres, item }) {
     <motion.div
       whileHover={{ scale: 1.094, opacity: 1, translate: "translateX(-10%)" }}
       transition={{ duration: 0.3, delay: 0.9 }}
-      className={`w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[3000]    translate-x-[-10%] bg-black left-[-18%] ${style}`}
+      className={`w-[18rem]  detonh absolute  dpnone giveMeTrans overflow-hidden top-[-8%] rounded-lg  pb-2 scale-[1]overflow-hidden z-[1000]    translate-x-[-10%] bg-black left-[-18%] ${style}`}
     >
       <div className="w-[100%] h-[20vh]">
         <img src={img} alt="" className="w-full h-full rounded object-cover" />
