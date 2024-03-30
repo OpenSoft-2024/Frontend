@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import  { useState, useEffect, useMemo, useRef } from "react";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider, Track } from "@vidstack/react";
@@ -50,11 +50,8 @@ export default function VideoPlayer() {
 
       "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
 
-      "http://vjs.zencdn.net/v/oceans.mp4",
 
-      "https://vz-cea98c59-23c.b-cdn.net/c309129c-27b6-4e43-8254-62a15c77c5ee/1280x720/video.m3u8",
 
-      "https://videos-cloudfront-usp.jwpsrv.com/6607666e_2d04fb1554308ffe0403328b4e442907ee41c978/site/LOPLPiDX/media/yp34SRmf/version/IFBsp7yL/manifest.ism/manifest-audio_eng=112000-video_eng=936240.m3u8",
     ],
     []
   );
@@ -76,7 +73,7 @@ export default function VideoPlayer() {
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
         onPause={() => handlePauseChange(true)}
-        style={{ width: "90vw", height: "90vh" }}
+        style={{ width: "100vw", height: "100vh" }}
         className="shadow"
         ref={ref}
       >
