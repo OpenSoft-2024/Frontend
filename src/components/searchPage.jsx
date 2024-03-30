@@ -391,10 +391,10 @@ function SearchPage() {
         {data?.map((item) =>
           item ? (
             <SearchPageMovieCard
-              img={item.poster}
+              img={item?.poster}
               img2={url?.poster + item.poster_path}
-              about={item.overview}
-              date={item.released}
+              about={item?.plot}
+              date={item?.released}
               item={item}
             />
           ) : (
