@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -33,7 +34,13 @@
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.2.2",
     "@vidstack/react": "^1.10.9",
-    "hls.js": "^1.5.7"
+    "express": "^4.19.1",
+    "hls.js": "^1.5.7",
+    "plyr-react": "^5.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.22.3",
+    "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
