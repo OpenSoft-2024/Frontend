@@ -12,11 +12,17 @@ import { useParams } from "react-router-dom";
 import { config } from "../utils/config";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 import { IoStar } from "react-icons/io5";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
 function MoviePlayback() {
+  const navigate = useNavigate();
+
   const trunct = (str) => {
     if (str?.length < 260) {
       return str;
@@ -25,30 +31,96 @@ function MoviePlayback() {
     }
   };
   const dispatch = useDispatch();
+  
+  const { user } = useSelector((state) => state.userSlice);
 
   const [data, setData] = useState();
   let { movie_id } = useParams();
+  const [addedToWatchList,setAddedToWatchList]= useState(user?.watchlist?.includes(movie_id)?true:false);
+  const [addedToFavorites,setAddedToFavorites]= useState(user?.favorites?.includes(movie_id)?true:false);
+
+  useEffect(()=>{
+    setAddedToWatchList(user?.watchlist?.includes(movie_id));
+    setAddedToFavorites(user?.favorites?.includes(movie_id));
+  },[user])
   useEffect(() => {
     axios
-      .get(`${config.BASE_URL}/movies/id/${movie_id}`)
-      .then((res) => {
-        setData(res.data);
-        console.log(data);
-        // console.log(userDetails.favorites)
-      })
-      .catch((err) => {
-        toast.error("Something went wrong");
-        console.error(err);
-      });
+    .get(`${config.BASE_URL}/movies/id/${movie_id}`)
+    .then((res) => {
+      setData(res.data);
+      console.log(data);
+      // console.log(userDetails.favorites)
+    })
+    .catch((err) => {
+      toast.error("Something went wrong!");
+      console.error(err);
+    });
   }, [movie_id]);
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
   useEffect(() => {
     dispatch(setIsNavBarVisible(true));
   }, []);
+  
+  const addToWatchHistory = async () =>{
+    try{
+      const token = localStorage.getItem("token");
+      if(!token){
+        navigate("/login");
+      }
+      const res = await axios.post(
+        `${config.BASE_URL}/movies/history`,
+        {
+          movieId: movie_id
+        },
+        {headers: {Authorization: token}})
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const addToWatchlist = async ()=>{
+    try{
+      const token = localStorage.getItem("token");
+      if(!token){
+        navigate("/login");
+      }
+      const res = await axios.post(
+        `${config.BASE_URL}/movies/watchlist`,
+        {
+          movieId: movie_id
+        },
+        {headers: {Authorization: token}})
+      setAddedToWatchList((prev)=>!prev);
+    }catch(err){
+      toast.error("Something went wrong! Please try again later.");
+      console.log(err);
+    }
+  }
+
+  const addToFavorites = async ()=>{
+    try{
+      const token = localStorage.getItem("token");
+      if(!token){
+        navigate("/login");
+      }
+      const res = await axios.post(
+        `${config.BASE_URL}/movies/favorites`,
+        {
+          movieId: movie_id
+        },
+        {headers: {Authorization: token}})
+        setAddedToFavorites((prev)=>!prev);
+    }catch(err){
+      toast.error("Something went wrong! Please try again later.");
+      console.log(err);
+    }
+  }
+
+
 
   return (
     <div className="relative">
@@ -132,12 +204,15 @@ function MoviePlayback() {
             <div className="mt-8 items-center  flex gap-6">
               <Link to="/video">
                 {" "}
-                <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
+                <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold" onClick={addToWatchHistory}>
                   PLAY
                 </button>
               </Link>
-              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl">
-                +
+              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl" onClick={addToWatchlist}>
+                {addedToWatchList ? <DoneOutlineIcon/> : <PlaylistAddIcon/>}
+              </button>
+              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl" onClick={addToFavorites}>
+                {addedToFavorites ? <FavoriteOutlinedIcon/> :  <FavoriteBorderOutlinedIcon/>}
               </button>
             </div>
           ) : (
