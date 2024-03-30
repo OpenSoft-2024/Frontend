@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider, Track } from "@vidstack/react";
@@ -8,33 +8,27 @@ import {
 } from "@vidstack/react/player/layouts/default";
 import "./VideoPlayer.css";
 import { Title } from "@vidstack/react";
-import { useDispatch } from "react-redux";
-import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+
 export default function VideoPlayer() {
   const [isPlayerFocused, setIsPlayerFocused] = useState(true);
   const [isTitleVisible, setIsTitleVisible] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+  const ref = useRef(null);
 
-  const dispatch = useDispatch();
-  const handleFocusChange = (isFocused) => {
+  function handleFocusChange(isFocused) {
     setIsPlayerFocused(isFocused);
     if (isFocused) {
       setIsTitleVisible(true);
     }
-  };
+  }
 
-  const handlePauseChange = (paused) => {
+  function handlePauseChange(paused) {
     setIsPaused(paused);
     if (paused) {
       setIsTitleVisible(true);
     }
-  };
-
-  useEffect(() => {
-    localStorage.setItem("isNavBarVisible", "false");
-    dispatch(setIsNavBarVisible(false));
-  }, []);
+  }
 
   useEffect(() => {
     let timeoutId;
@@ -75,19 +69,19 @@ export default function VideoPlayer() {
     [selectedVideoIndex, streamsArr]
   );
 
-  console.log(myVar);
-
   return (
-    <div className="sizeee">
+    <div>
       <MediaPlayer
         src={selectedVideoLink}
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
         onPause={() => handlePauseChange(true)}
-        autoPlay={true}
+        style={{ width: "90vw", height: "90vh" }}
+        className="shadow"
+        ref={ref}
       >
         {isPlayerFocused && isTitleVisible && (
-          <Title className="title-video-container">Movie Title</Title>
+          <Title className="title">Movie Title</Title>
         )}
 
         <MediaProvider>
