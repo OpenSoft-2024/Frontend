@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 import unnamed from "../../public/unnamed.png";
 import axios from "axios";
+import { config } from "../utils/config";
 
 const NavBar = () => {
   let dropDownLink = useRef(null);
@@ -19,22 +20,26 @@ const NavBar = () => {
   const { user } = useSelector((state) => state.userSlice);
   
   
-  const [subscribed,setSubscribed] = useState(null);
   const fetchSubscription = async () => {
+    console.log("userrrr: ",user)
     try {
+      const token = localStorage.getItem("token");
       if (!user?._id || !user?.subscription) {
+        console.log('here1 ')
         return false; // If user._id or user.subscription is null, return false
       }
-     
-      const response = await axios.get(`${config.BASE_URL}/subscription/find/${user?.subscription}`);
+      
+      const response = await axios.get(`${config.BASE_URL}/subscription/find/${user?.subscription}`,
+      {headers: {Authorization: token}});
       return response.data ? true :false;
-      }
+    }
     catch (error) {
       console.error('Error fetching subscription:', error);
       return false;
     }
   };
-
+  const [subscribed,setSubscribed] = useState(fetchSubscription());
+  
   useEffect(()=>{
     const fetchData = async () => {
       const subscriptionStatus = await fetchSubscription();
