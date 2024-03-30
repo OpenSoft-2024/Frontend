@@ -1,31 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-// import { Slice } from "@reduxjs/toolkit";
-import { Ref } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-// import {ref}
-import img from "../assets/heroTitle.png";
 import BackgroundImage from "../LandingPageBackgroundImageContext/context";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import useFetch from "../custumHooks/useFetch";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import HeroDescSkelton from "../loadingSkelton/heroloadingSkelton";
+
 function HeroMovieDesc() {
-  // console.log(document.getElementsByClassName("description")[0]);
-  //   let mycont = useRef(null);
-  let navigate = useNavigate();
-  const { url, genres, rand } = useSelector((state) => state.AppSlice);
+  
+  
+  const { genres, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch(`/movie/upcoming?`);
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);
-  // console.log(data);
-  // const { url, genres,rand } = useSelector((state) => state.AppSlice);
+ 
 
   const truncted = (str) => {
     if (str?.length > 140) {
@@ -34,10 +26,8 @@ function HeroMovieDesc() {
     return str;
   };
   let [overview] = useAutoAnimate();
-  //   const ele = document.getElementsByClassName("description")[0];
   let { bgImage, bgImageDescription } = useContext(BackgroundImage);
-  //   let about = bgImageDescription.overview;
-  //   let anotherAbout = about.substring(0,180);
+  
   const mycont = useRef(null);
   const [isAnimated, setIsAnimated] = useState(false);
 
@@ -47,19 +37,12 @@ function HeroMovieDesc() {
       setIsAnimated(false);
     }, 1000);
   };
-  const vishal = ["vishal"];
 
   useEffect(() => {
     handleOnchange();
   }, [bgImage]);
-  let maxLength = 180;
-  const hideOrShowOnClick = (e) => {
-    if (localStorage.getItem("isNavBarVisible") === "true") {
-      localStorage.setItem("isNavBarVisible", "false");
-    } else {
-      localStorage.setItem("isNavBarVisible", "true");
-    }
-  };
+
+  
 
   return (
     <>
@@ -130,8 +113,8 @@ function HeroMovieDesc() {
         </div>
         {data ? (
           <div className="genres flex gap-3">
-            {bgImageDescription?.genre_ids?.map((item) => (
-              <p className="text-white">{genres[item].name}</p>
+            {bgImageDescription?.genre_ids?.map((item,index) => (
+              <p key={index} className="text-white">{genres[item].name}</p>
             ))}
           </div>
         ) : (

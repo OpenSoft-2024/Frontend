@@ -1,13 +1,16 @@
 import NavBar from "./components/navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/footer";
-import { store } from "./AppStore/index.js";
-import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import MoviePlayBackData from "./LandingPageBackgroundImageContext/context3.js";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { config } from "./utils/config";
+import { useDispatch } from "react-redux";
+import { login } from "./AppStore/userSlice";
 
 function App() {
+
+  const dispatch = useDispatch();
   useEffect(() => {
     setUser();
   }, []);

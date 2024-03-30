@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { fetchDataFromApi } from "../DataUtils/fetchData2";
 const AppSlice = createSlice({
   name: "AppSlice",
   initialState: {

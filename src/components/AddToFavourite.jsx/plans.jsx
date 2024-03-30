@@ -1,10 +1,6 @@
-import React from "react";
-// import plans from "../css/plans.css";
-import c1 from "../../assets/p1.jpg";
-import { motion, useScroll } from "framer-motion";
+import { motion} from "framer-motion";
 import Subs from "../AddToFavourite.jsx/Subscription";
 import { useState } from "react";
-import { Provider } from "react";
 import BackgroundColor from "../../LandingPageBackgroundImageContext/context2";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { IoLaptopOutline } from "react-icons/io5";
@@ -13,7 +9,6 @@ import useFetch from "../../custumHooks/useFetch";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import InfiniteScroll from "./InfiniteScroll";
-import { NavLink } from "react-router-dom";
 import { setIsNavBarVisible } from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
@@ -22,18 +17,11 @@ import { useNavigate } from "react-router-dom";
 import { config } from "../../utils/config";
 import { toast } from "react-toastify";
 
-// import c2 from "../../assets/p1.jpg";
-// import c3 from "../../assets/p1.jpg";
-// import c4 from "../../assets/p1.jpg";
-// import c5 from "../../assets/p1.jpg";
-// import c6 from "../../assets/p1.jpg";
-// import c7 from "../../assets/p1.jpg";
-// import c8 from "../../assets/p1.jpg";
-// import c1 from "../../assets/p1.jpg";
+
 
 function Plans() {
-  // const history = useHistory();
   const navigate = useNavigate();
+  
   useEffect(() => {
     let backCount = 0;
 
@@ -42,10 +30,6 @@ function Plans() {
       if (backCount < 2) {
         window.history.pushState(null, "", window.location.href);
         backCount++;
-        // Optionally, you can show a message or perform some other action
-      } else {
-        // After two attempts, you might want to show a message or perform some action
-        // For example: alert('You cannot go back further.');
       }
     };
 
@@ -66,13 +50,11 @@ function Plans() {
     dispatch(setIsNavBarVisible(false));
   }, []);
 
-  const { user } = useSelector((state) => state.userSlice);
 
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
   let [backgroundColor3, setBackgroundColor3] = useState(false);
 
-  const item = ["entertainment", "will ", "never"];
   const button = ["Tier 1 ", "Tier 2", "Tier 3"];
   const handleOnClick = (e) => {
     console.log(e.target);
@@ -90,27 +72,17 @@ function Plans() {
       setBackgroundColor3(true);
     }
   };
-  const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch("/trending/all/day?page=2");
-  const { url, isNavBarVisible } = useSelector((state) => state.AppSlice);
-  const [tier, setTier] = useState();
+  
   useEffect(() => {
-    localStorage.setItem("myBoolean", JSON.stringify(isNavBarVisible));
-  }, [isNavBarVisible]);
-  useEffect(() => {
-    let myBoolean = JSON.parse(localStorage.getItem("myBoolean"));
-    dispatch(setIsNavBarVisible(myBoolean));
+    dispatch(setIsNavBarVisible(false));
   }, []);
-  useEffect(() => {
-    setData(heroImg);
-    // setBgImage(localStorage.getItem('def'))
-  }, [heroImg]);
+
+ 
   let dispatch = useDispatch();
 
   const handlePayment = async () => {
     try {
       const token = localStorage.getItem("token");
-
       if (!token) {
         navigate("/login");
       }
@@ -121,10 +93,7 @@ function Plans() {
       const stripe = await loadStripe(
         "pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q"
       );
-      //   console.log({
-      //     amt:amount,
-      //     name:"Movie Cinema"
-      // });
+      
       const response = await axios.post(
         `${config.BASE_URL}/payment/checkout`,
         {
@@ -136,8 +105,6 @@ function Plans() {
       );
 
       const session = response?.data?.session;
-      // session.metadata=user.userId
-      console.log(session);
       await stripe.redirectToCheckout({
         sessionId: session.id,
       });

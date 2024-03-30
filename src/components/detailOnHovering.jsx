@@ -1,11 +1,9 @@
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import MoviePlayBackData from "../LandingPageBackgroundImageContext/context3";
-import { useEffect } from "react";
+
 function DetailOnHover({ img, about, date, style, genres, item }) {
-  // console.log(moviedata)
+
   const navigate = useNavigate();
   const trunct = (str) => {
     if (str?.length < 120) {
@@ -30,8 +28,6 @@ function DetailOnHover({ img, about, date, style, genres, item }) {
             className="text-black-2 px-8  ml-1 text-[1rem] capitalize bg-[#fbfbfbb4] smt hover:bg-[#cccccc] rounded-xl"
             onClick={() => {
               navigate(`/${item?._id}`);
-              setMoviedata(item);
-              console.log(movieData);
             }}
           >
             {" "}

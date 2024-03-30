@@ -1,4 +1,3 @@
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState, useEffect } from "react";
 import MovieGrid from "../HeorSectionComponents/movieGrid";
 import ContinueToWatch from "../HeorSectionComponents/ContinueToWatch";
@@ -12,9 +11,8 @@ import { getUrl, getGenres } from "../AppStore/AppSlicer";
 import useFetch from "../custumHooks/useFetch";
 import axios from "axios";
 import { config } from "../utils/config";
-import { login } from "../AppStore/userSlice";
-import { server } from "../../server";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import { toast } from "react-toastify";
 
 function Herosection() {
   let { url, rand } = useSelector((state) => state.AppSlice);
@@ -40,6 +38,7 @@ function Herosection() {
   useEffect(() => {
     localStorage.setItem("url", JSON.stringify(url));
   }, [url]);
+
   console.log(JSON.parse(localStorage.getItem("url")));
   useEffect(() => {
     const myBoolean = JSON.parse(localStorage.getItem("url"));
@@ -74,62 +73,61 @@ function Herosection() {
     localStorage.setItem("def", url?.poster + data?.results[0].backdrop_path);
   }, [heroImg]);
 
-  const [data1, setData1] = useState(null);
-  const [data2, setData2] = useState(null);
-  const [data3, setData3] = useState(null);
-  const [data4, setData4] = useState(null);
-  const [data5, setData5] = useState(null);
-  const [data6, setData6] = useState(null);
-  const [data7, setData7] = useState(null);
-  // const [data8, setData8] = useState(null);
-  const token = localStorage.getItem("token");
+
+  const [movies, setMovies] = useState({});
+  
+  const languages = ['English', 'German'];
+  const genres = ['Action', 'Romance', 'Comedy'];
+
+  const getMoviesByLanguage = async (language) => {
+    try {
+      const res = await axios.post(`${config.BASE_URL}/movies/language`, {
+        language,
+      });
+      setMovies((prev) => ({ ...prev, [language]: res.data }));
+
+    } catch (err) {
+      toast.error('Something went wrong');
+      console.log(err);
+    }
+  }
+
+  const getMoviesByGenre = async (genre) => {
+    try {
+      const res = await axios.post(`${config.BASE_URL}/movies/genres`, {
+        genre,
+      });
+      setMovies((prev) => ({ ...prev, [genre]: res.data }));
+
+    } catch (err) {
+      toast.error('Something went wrong');
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
-    const getfetch = async () => {
-      try {
-        const res = await axios.get(`${server}/movies/latest`);
-        console.log(res);
-        setData1(res.data);
 
-        // const res1=await axios.get(`${server}/movies/gethits`,{
-        //   headers:token
-        // })
-        // // console.log(res);
-        // setData2(res.data)
+    const getMovies = async () => {
 
-        const res2 = await axios.post(`${server}/movies/language`, {
-          language: "English",
-        });
-        // console.log(res2);
-        setData3(res2.data);
-
-        const res3 = await axios.post(`${server}/movies/language`, {
-          language: "Hindi",
-        });
-        console.log(res3);
-        setData4(res3.data);
-
-        const res4 = await axios.post(`${server}/movies/genres`, {
-          genre: "Action",
-        });
-        // console.log(res);
-        setData5(res4.data);
-
-        const res5 = await axios.post(`${server}/movies/genres`, {
-          genre: "Romance",
-        });
-        // console.log(res);
-        setData6(res5.data);
-
-        const res6 = await axios.post(`${server}/movies/genres`, {
-          genre: "Comedy",
-        });
-        // console.log(res);
-        setData7(res6.data);
-      } catch (err) {
+      try{
+        const res = await axios.get(`${config.BASE_URL}/movies/latest`);
+        setMovies((prev) => ({ ...prev, 'latest': res.data }));
+      }
+      catch(err) {
+        toast.error('Something went wrong');
         console.log(err);
       }
-    };
-    getfetch();
+        
+      for(let language of languages) {
+        await getMoviesByLanguage(language);
+      }
+
+      for(let genre of genres) {
+        await getMoviesByGenre(genre);
+      }
+    }
+     
+    getMovies();
   }, []);
 
   let [bgImage, setBgImage] = useState({
@@ -146,7 +144,7 @@ function Herosection() {
     <BackgroundImage.Provider
       value={{ bgImage, setBgImage, bgImageDescription, setBgImageDescription }}
     >
-      <div className="w-screen overflow-x-hidden ">
+      <div className="w-screen overflow-x-hidden">
         <div className="hero-image-section w-[100vw] h-[100vh]">
           <img
             src={
@@ -173,12 +171,12 @@ function Herosection() {
           </div>
 
           <div className="pl-6 mt-20">
-            <MovieGrid data={data1} label="Latest" />
-            <MovieGrid data={data3} label="English" />
-            <MovieGrid data={data4} label="Hindi" />
-            <MovieGrid data={data5} label="Action" />
-            <MovieGrid data={data6} label="Romance" />
-            <MovieGrid data={data7} label="Comedy" />
+            <MovieGrid data={movies['latest']} label="Latest" />
+            <MovieGrid data={movies['English']} label="English" />
+            <MovieGrid data={movies['German']} label="German" />
+            <MovieGrid data={movies['Action']} label="Action" />
+            <MovieGrid data={movies['Romance']} label="Romance" />
+            <MovieGrid data={movies['Comedy']} label="Comedy" />
           </div>
         </div>
       </div>

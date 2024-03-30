@@ -4,6 +4,7 @@ import { LampContainer } from "./ui/lamp";
 
 export function LampDemo({name}) {
   console.log(name);
+  
   return (
     <LampContainer>
       <motion.h1

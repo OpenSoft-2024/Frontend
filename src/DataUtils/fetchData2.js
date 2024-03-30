@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { Await } from "react-router-dom";
 
 const baseUrl = "https://api.themoviedb.org/3";
 const tmdbToken =
@@ -10,11 +9,10 @@ const headers = {
 
 export const fetchDataFromApi = async (url, params) => {
   try {
-    const { data } = await axios.get(baseUrl + url, { headers, params });
-    // console.log(data);
-    return data;
+    const res = await axios.get(baseUrl + url, { headers, params });
+    return res.data;
+    
   } catch (err) {
     console.log(err);
-    // return err;
   }
 };

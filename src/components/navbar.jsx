@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 
 const NavBar = () => {
   let dropDownLink = useRef(null);
@@ -14,11 +13,10 @@ const NavBar = () => {
 
   const { user } = useSelector((state) => state.userSlice);
 
-  // console.log(user);
-
   const handleOnClick = (e) => {
     e.target.style = "width:40vw";
   };
+  
   const handleOnLeave = (e) => {
     e.target.style = "width:22vw";
   };
