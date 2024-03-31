@@ -38,7 +38,7 @@ function TopRatedFlex({ label, endPoint }) {
     });
   };
   return (
-    <div className="relative w-screen mt-10 ">
+    <div className="relative w-screen mt-20  mb-20 ">
       <div>
         <h1 className="text-white text-xl ml-[25px] ">{label}</h1>
       </div>
@@ -66,7 +66,7 @@ function TopRatedFlex({ label, endPoint }) {
               about={item.overview}
               date={item.release_date}
               title={item.title}
-              media_type={'movie'}
+              media_type={"movie"}
               id={item.id}
             />
           ))}

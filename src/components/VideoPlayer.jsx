@@ -9,13 +9,13 @@ import {
 import "./VideoPlayer.css";
 import { Title } from "@vidstack/react";
 import { useDispatch } from "react-redux";
-import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import { setIsNavBarVisible ,setIsFooterVisible} from "../AppStore/AppSlicer";
 export default function VideoPlayer() {
   const [isPlayerFocused, setIsPlayerFocused] = useState(true);
   const [isTitleVisible, setIsTitleVisible] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
-
+  
   const dispatch = useDispatch();
   const handleFocusChange = (isFocused) => {
     setIsPlayerFocused(isFocused);
@@ -35,6 +35,11 @@ export default function VideoPlayer() {
     localStorage.setItem("isNavBarVisible", "false");
     dispatch(setIsNavBarVisible(false));
   }, []);
+  useEffect(() => {
+    localStorage.setItem("isNavBarVisible", "false");
+    dispatch(setIsFooterVisible(false));
+  }, []);
+
 
   useEffect(() => {
     let timeoutId;

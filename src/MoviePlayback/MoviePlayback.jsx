@@ -13,7 +13,7 @@ import { config } from "../utils/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import { setIsNavBarVisible, setIsFooterVisible } from "../AppStore/AppSlicer";
 import { IoStar } from "react-icons/io5";
 
 function MoviePlayback() {
@@ -48,6 +48,9 @@ function MoviePlayback() {
 
   useEffect(() => {
     dispatch(setIsNavBarVisible(true));
+  }, []);
+  useEffect(() => {
+    dispatch(setIsFooterVisible(false));
   }, []);
 
   return (
@@ -154,7 +157,7 @@ function MoviePlayback() {
         label={"More Like This"}
         endPoint={"/trending/movie/week"}
       ></TopRatedFlex>
-      <MovieGrid label={"because you watch madam web"}></MovieGrid>
+      {/* <MovieGrid label={"because you watch madam web"}></MovieGrid> */}
     </div>
   );
 }

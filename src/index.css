@@ -54,7 +54,7 @@ border-bottom-left-radius: 30px;
 .nav-box{
     position:absolute ;
     position: fixed;
-    z-index: 10000;
+    z-index: 10000000;
 }
 .overlay{
     position: absolute;
@@ -300,6 +300,11 @@ display: none;
   }
 }
  
+.adminhome{
+  width:100vw;
+  height:100vh;
+  background-color: red;
+}
 
 
 .overlay-detalis{
@@ -801,9 +806,10 @@ display: none;
 
   .customButton{
 
-    background-color: red;
+    /* background-color: #FF2328; */
+    border: solid 2px #FF2328;
     padding:4px;  
-   border-radius: 20px;
+   border-radius:5px;
    padding-left:8px;
    padding-right:8px;
 

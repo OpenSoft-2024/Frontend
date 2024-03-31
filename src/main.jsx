@@ -22,14 +22,17 @@ import SearchPage from "./components/searchPage.jsx";
 import MoviePlayback from "./MoviePlayback/MoviePlayback.jsx";
 import VideoPlayer from "./components/VideoPlayer.jsx";
 // import MoviePlayback from './MoviePlayback.jsx/MoviePlayback.jsx'
-import Success from './components/sucess.jsx'
+import Success from "./components/sucess.jsx";
 // import MoviePlayback from './MoviePlayback.jsx/MoviePlayback.jsx'
 
-
+import Home from "./admin/Home.jsx";
+import HomeRev from "./admin/HomeRev.jsx";
+import HomeSubs from "./admin/HomeSubs.jsx";
+import HomeMovie from "./admin/HomeMovie.jsx";
 
 // Admin Imports
 // import Home from "./admin/Home.jsx";
-import Banners from "./components/admin_dash.jsx";
+// import Banners from "./admin/Home.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,9 +45,12 @@ const router = createBrowserRouter(
       <Route path="/profile" element={<MySpace />} />
       <Route path="searchPage" element={<SearchPage />} />
       <Route path=":movie_id" element={<MoviePlayback />} />
-      <Route path="/admin" element={<Banners />} />
+      <Route path="/admin" element={<Home />} />
+      <Route path="/adminMovie" element={<HomeMovie />} />
+      <Route path="/adminreview" element={<HomeRev />} />
+      <Route path="/adminSubscription" element={<HomeSubs />} />
       <Route path="/video" element={<VideoPlayer />} />
-      <Route path="/success/:amt"  element={<Success/>}/>
+      <Route path="/success/:amt" element={<Success />} />
 
       {/* Admin Routes */}
 

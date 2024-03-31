@@ -1,4 +1,4 @@
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import Subs from "../AddToFavourite.jsx/Subscription";
 import { useState } from "react";
 import BackgroundColor from "../../LandingPageBackgroundImageContext/context2";
@@ -10,7 +10,10 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
-import { setIsNavBarVisible,setIsFooterVisible } from "../../AppStore/AppSlicer";
+import {
+  setIsNavBarVisible,
+  setIsFooterVisible,
+} from "../../AppStore/AppSlicer";
 import { useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
@@ -18,42 +21,8 @@ import { useNavigate } from "react-router-dom";
 import { config } from "../../utils/config";
 import { toast } from "react-toastify";
 
-
-
 function Plans() {
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    let backCount = 0;
-
-    const handleBackButton = (event) => {
-      event.preventDefault();
-      if (backCount < 2) {
-        window.history.pushState(null, "", window.location.href);
-        backCount++;
-      }
-    };
-
-    window.onpopstate = handleBackButton;
-
-    const handleTouchMove = (event) => {
-      event.preventDefault();
-    };
-    document.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-    return () => {
-      window.onpopstate = null;
-      document.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    dispatch(setIsNavBarVisible(false));
-  }, []);
-  useEffect(()=>{
-    dispatch(setIsFooterVisible(false));
-  })
-
 
   let [backgroundColor1, setBackgroundColor1] = useState(true);
   let [backgroundColor2, setBackgroundColor2] = useState(false);
@@ -76,12 +45,15 @@ function Plans() {
       setBackgroundColor3(true);
     }
   };
-  
+
   useEffect(() => {
     dispatch(setIsNavBarVisible(false));
   }, []);
 
- 
+  useEffect(() => {
+    dispatch(setIsFooterVisible(false));
+  }, []);
+
   let dispatch = useDispatch();
 
   const handlePayment = async () => {
@@ -97,7 +69,7 @@ function Plans() {
       const stripe = await loadStripe(
         "pk_test_51OwT8LSFnIU9Zobg5roeG54Xh1WmUxRshSP3iTRS9dQvCYdLzgdXsCqVk8ZYCSct5QfEhjzWiuektuSGakFGuGdl00ge7Fr33Q"
       );
-      
+
       const response = await axios.post(
         `${config.BASE_URL}/payment/checkout`,
         {
@@ -130,8 +102,6 @@ function Plans() {
       }}
     >
       <div className="">
-        <div className="w-screen h-[2rem] bg-black"></div>
-
         <div className="plan-container w-screen relative h-screen  ">
           <div className="flex flex-col gap-6 relative ">
             <div className="srcoller flex">
@@ -151,6 +121,12 @@ function Plans() {
           </div>
           <div className="plan-overlay1 absolute top-0 left-0 w-[40%] h-full"></div>
           <div className="plan-overlay2 absolute  top-0 right-0 w-[90%] h-full"></div>
+          <NavLink to='/' className="inline-block">
+            <div className="w-[4rem] h-[2rem] a rounded-md text-center left-[90%] top-[2%] absolute flex items-center justify-center px-12 py-6 capitalize      bg-red-500   text-white">
+              {" "}
+              home
+            </div>
+          </NavLink>
           <div className="top-[25%] left-[5%]  flex flex-col absolute ">
             <motion.h1
               inital={{ width: "0" }}
@@ -257,7 +233,6 @@ function Plans() {
           })}
         </div>
         <Subs></Subs>
- 
 
         <motion.div
           initial={{ height: "0%" }}
@@ -266,7 +241,7 @@ function Plans() {
           className="overflow-hidden h-[0px] absolute top-[82%] right-[5%] hover:scale-[1.03] "
         >
           <button
-            className="text-white  py-4 px-10 capitalize bg-red-700 hover:bg-red-600 font-bold rounded "
+            className="text-white  py-4 px-20 capitalize bg-red-700 hover:bg-red-600 font-bold rounded "
             onClick={() => handlePayment()}
           >
             Continue

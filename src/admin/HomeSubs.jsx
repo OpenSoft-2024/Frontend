@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 // import Banners from "./admin_dash";
-import Admin from "./admin_dash2";
+import AdminSubs from "./admin_dashSubs";
 import Sidebar2 from "./sidebar2";
 
-function Home() {
+function HomeSubs() {
   return (
     <>
-      <div className="w-screen h-screen flex gap-4 bg-[#d2d5d8]   ">
+      <div className="w-screen h-screen flex gap-4 bg-[#d2d5d8]">
         <Sidebar2 />
-        <Admin/>
+        <AdminSubs />
       </div>
     </>
   );
 }
 
-export default Home;
+export default HomeSubs;

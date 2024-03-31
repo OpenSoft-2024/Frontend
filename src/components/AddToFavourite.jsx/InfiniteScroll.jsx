@@ -19,7 +19,7 @@ function InfiniteScroll({page}) {
       {data?.results?.map((item) => {
         return (
           <PlansInfiniteScroolerMovieBox
-            img={url?.backdrop + item?.backdrop_path}
+            img={"https://image.tmdb.org/t/p/original" + item?.backdrop_path}
             key={item.id}
           />
         );

@@ -7,17 +7,16 @@ import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import useFetch from "../custumHooks/useFetch";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
+ 
 function HeroMovieDesc() {
-  
-  
   const { genres, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
   const { heroImg, isLoading, error } = useFetch(`/movie/upcoming?`);
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);
- 
 
   const truncted = (str) => {
     if (str?.length > 140) {
@@ -27,7 +26,7 @@ function HeroMovieDesc() {
   };
   let [overview] = useAutoAnimate();
   let { bgImage, bgImageDescription } = useContext(BackgroundImage);
-  
+
   const mycont = useRef(null);
   const [isAnimated, setIsAnimated] = useState(false);
 
@@ -42,11 +41,13 @@ function HeroMovieDesc() {
     handleOnchange();
   }, [bgImage]);
 
-  
-
   return (
+     
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         ref={mycont}
         className={`description lg:w-5/12  absolute right-0 md:right-[-18%] lg:right-[-8%] z-40 flex flex-col lg:gap-5 md:gap-2 con ${
           isAnimated ? "" : ""
@@ -73,7 +74,7 @@ function HeroMovieDesc() {
             <div className="w-[6rem] h-6 blinker rounded"></div>
           )}
           <div className="mx-3 flex justify-center items-center ">
-            <p className={`points ${data ? " blinker " : ""}`}></p>
+            <p className={`points ${data ? " " : ""}`}></p>
           </div>
 
           {data ? (
@@ -113,8 +114,10 @@ function HeroMovieDesc() {
         </div>
         {data ? (
           <div className="genres flex gap-3">
-            {bgImageDescription?.genre_ids?.map((item,index) => (
-              <p key={index} className="text-white">{genres[item].name}</p>
+            {bgImageDescription?.genre_ids?.map((item, index) => (
+              <p key={index} className="text-white">
+                {genres[item].name}
+              </p>
             ))}
           </div>
         ) : (
@@ -148,7 +151,7 @@ function HeroMovieDesc() {
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </>
   );
 }
