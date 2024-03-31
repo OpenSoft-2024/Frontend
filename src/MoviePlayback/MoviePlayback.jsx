@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { IoIosStar } from "react-icons/io";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import { setIsNavBarVisible, setIsFooterVisible } from "../AppStore/AppSlicer";
 import { IoStar } from "react-icons/io5";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -135,6 +135,9 @@ function MoviePlayback() {
   }
 
 
+  useEffect(() => {
+    dispatch(setIsFooterVisible(false));
+  }, []);
 
   return (
     <div className="relative">
@@ -259,7 +262,7 @@ function MoviePlayback() {
         label={"More Like This"}
         endPoint={"/trending/movie/week"}
       ></TopRatedFlex>
-      <MovieGrid label={"because you watch madam web"}></MovieGrid>
+      {/* <MovieGrid label={"because you watch madam web"}></MovieGrid> */}
     </div>
   );
 }

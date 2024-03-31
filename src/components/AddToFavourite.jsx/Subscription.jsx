@@ -26,7 +26,7 @@ function Subs() {
             all content
           </p>
           <p className="text-sm text-opacity-[0.6] text-white">
-            Movies,Live Sports,Tv ,Specials
+            Movies,Specials
           </p>
         </div>
         <div>
@@ -36,7 +36,7 @@ function Subs() {
         </div>
         <div>
           <p className="text-[1rem] capitalize text-opacity-[0.8]">
-            add free movies and shows (except sports)
+            add free movies and shows
           </p>
         </div>
         <div>

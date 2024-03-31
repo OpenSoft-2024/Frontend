@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsNavBarVisible } from "../AppStore/AppSlicer";
+import {
+  setIsNavBarVisible,
+  setIsDropDownVisible,
+} from "../AppStore/AppSlicer";
 import unnamed from "../../public/unnamed.png";
 import axios from "axios";
 import { config } from "../utils/config";
+import wologo from "../../public/wlogo.png";
 
 const NavBar = () => {
   let dropDownLink = useRef(null);
@@ -32,7 +36,7 @@ const NavBar = () => {
   const handleOnClick = (e) => {
     e.target.style = "width:40vw";
   };
-  
+
   const handleOnLeave = (e) => {
     e.target.style = "width:22vw";
   };
@@ -51,20 +55,22 @@ const NavBar = () => {
   //   e.target.style = "transform:rotate(deg)";
   // };
 
-  let { isNavBarVisible } = useSelector((state) => state.AppSlice);
+  let { isNavBarVisible, isDropDownVisible } = useSelector(
+    (state) => state.AppSlice
+  );
 
   return (
     <>
       <div
-        className={`nav-box w-screen flex overflow-x-hidden overflow-y-hidden ${
+        className={`nav-box w-screen flex overflow-x-hidden   ${
           isNavBarVisible ? "visible opacity-[1]" : "invisible opacity-[0]"
-        } px-8 items-center py-4 bg-eoio302   fixed  ${
-          active ? "color" : "nonchange"
+        } px-8 items-center py-1 bg-eoio302   fixed  ${
+          active ? "color bg-[#0000006b]" : "nonchange"
         } `}
       >
         <div className="logo w-[14rem] h-30   overflow-hidden">
           <img
-            src={unnamed}
+            src={wologo}
             alt=""
             className="w-full h-[4rem] scale-[1.05] inline-block "
           />
@@ -98,11 +104,27 @@ const NavBar = () => {
 
             <li>
               <div className="languages cursor-pointer relative">
-                <p className="text-[1rem] text-[white] flex">
+                <p
+                  className="text-[1rem] text-[white] flex"
+                  onClick={() =>
+                    dispatch(setIsDropDownVisible(!isDropDownVisible))
+                  }
+                >
                   languages
-                  <IoIosArrowDropdownCircle className="mt-1 ml-2 dropdownarrow" />
+                  <IoIosArrowDropdownCircle
+                    className={`mt-1 ml-2 scale-[1.6]  ${
+                      isDropDownVisible ? "rotate-[180deg]" : "rotate-[0deg]"
+                    }`}
+                  />
                 </p>
               </div>
+              {/* dropdown */}
+              {/* <div className="absolute ">
+                <p>hindi</p>
+                <p>english</p>
+                <p>anime</p>
+              </div> */}
+              {/* dropdown */}
             </li>
             {
               !isSub &&
@@ -137,7 +159,7 @@ const NavBar = () => {
         </NavLink>
 
         <div className="userImage absolute right-[2%]">
-          <div className="w-10 h-10 rounded-full bg-white">
+          <div className="w-10 h-10 rounded-full bg-white overflow-hidden">
             <img
               src={Object.entries(user).length === 0 ? "" : user.imageUrl}
               alt=""

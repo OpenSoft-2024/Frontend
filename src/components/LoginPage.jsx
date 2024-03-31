@@ -24,6 +24,7 @@ function LoginPage() {
   const row1 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
   const row2 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
   const row3 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
+  // const row4 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
 
   const dispatch = useDispatch();
 
@@ -32,7 +33,10 @@ function LoginPage() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-tr from-red-500">
+    <div
+      className="bg-gradient-to-tr from-red-500"
+      style={{ maxHeight: "100vh", overflow: "hidden"}}
+    >
       <div className="mix-blend-overlay">
         <Marquee direction="left">
           {row1.map((i) => (
@@ -49,6 +53,11 @@ function LoginPage() {
             <Poster img={i}></Poster>
           ))}
         </Marquee>
+        {/* <Marquee direction="left">
+          {row4.map((i) => (
+            <Poster img={i}></Poster>
+          ))}
+        </Marquee> */}
       </div>
       <div className="navLinks">
         <LoginForm></LoginForm>

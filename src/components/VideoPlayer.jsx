@@ -8,8 +8,8 @@ import {
 } from "@vidstack/react/player/layouts/default";
 import "./VideoPlayer.css";
 import { Title } from "@vidstack/react";
-import axios from "axios";
-
+import { useDispatch } from "react-redux";
+import { setIsNavBarVisible ,setIsFooterVisible} from "../AppStore/AppSlicer";
 export default function VideoPlayer() {
   const [isPlayerFocused, setIsPlayerFocused] = useState(true);
   const [isTitleVisible, setIsTitleVisible] = useState(true);
@@ -41,7 +41,17 @@ export default function VideoPlayer() {
     if (paused) {
       setIsTitleVisible(true);
     }
-  }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("isNavBarVisible", "false");
+    dispatch(setIsNavBarVisible(false));
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("isNavBarVisible", "false");
+    dispatch(setIsFooterVisible(false));
+  }, []);
+
 
   useEffect(() => {
     let timeoutId;

@@ -1,15 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import logo from "../../public/logo.png";
+
 // import { setIsFooterVisible } from "../AppStore/AppSlicer";
 function Footer() {
-  let {isFooterIsVisible}=useSelector(state=>state.AppSlice);
-  
+  let { isFooterVisible } = useSelector((state) => state.AppSlice);
+
   return (
     <div
-      className={`${isFooterIsVisible? 'visible opacity-[1]' : 'invisible opacity-0'} flex px-10 py-20 w-screen capitalize justify-between`}
+      className={`  flex    w-screen capitalize justify-between ${
+        isFooterVisible ? "block" : "hidden"
+      } `}
       style={{ backgroundColor: "#000", color: "white" }}
     >
-      <div className="flex w-6/12 justify-between">
+      <div className="flex w-6/12 justify-between py-10 px-10">
         <div>
           <h1>comany</h1>
           <div>
@@ -39,6 +44,13 @@ function Footer() {
         </div>
       </div>
       <div className="socialLink mr-8 flex gap-5 text-xl">
+        <div>
+          <img
+            src={logo}
+            alt=""
+            className="w-20 h-20 mt-10 relative top-[2%] left-[200%] "
+          />
+        </div>
         <div
           className="h-7 w-7 flex justify-center items-center "
           style={{ borderRadius: "50%", border: "solid 2px 	#df0707" }}
