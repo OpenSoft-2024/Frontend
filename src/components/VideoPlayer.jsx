@@ -1,20 +1,33 @@
-import  { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
-import { MediaPlayer, MediaProvider, Track } from "@vidstack/react";
+import { MediaPlayer, MediaProvider, Track} from "@vidstack/react";
 import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
 import "./VideoPlayer.css";
 import { Title } from "@vidstack/react";
+import axios from "axios";
 
 export default function VideoPlayer() {
   const [isPlayerFocused, setIsPlayerFocused] = useState(true);
   const [isTitleVisible, setIsTitleVisible] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+  const [MovieTitle, setMovieTitle] = useState('Movie Title');
   const ref = useRef(null);
+  
+  useEffect(() => {
+    axios.get("/subscriptionType")
+      .then(response => {
+        const subscriptionType = response.data.subscriptionType;
+      })
+      .catch(error => {
+        console.error("Error fetching subscription type:", error);
+      });
+  }, []);
+  
 
   function handleFocusChange(isFocused) {
     setIsPlayerFocused(isFocused);
@@ -35,7 +48,7 @@ export default function VideoPlayer() {
     if ((isPlayerFocused || isPaused) && isTitleVisible) {
       timeoutId = setTimeout(() => {
         setIsTitleVisible(false);
-      }, 5000);
+      }, 3000);
     }
     return () => clearTimeout(timeoutId);
   }, [isPlayerFocused, isTitleVisible, isPaused]);
@@ -43,42 +56,57 @@ export default function VideoPlayer() {
   const streamsArr = useMemo(
     () => [
       "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8",
-
       "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.mp4/.m3u8",
-
       "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-
       "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
-
-
-
     ],
     []
   );
+
+  
   const len = streamsArr.length;
   const myVar = Math.floor(Math.random() * len);
+  console.log(myVar);
   useEffect(() => {
     setSelectedVideoIndex(myVar);
   }, []);
+const selectedVideoLink = useMemo(() => streamsArr[selectedVideoIndex], [selectedVideoIndex, streamsArr]);
+useEffect(() => {
+  let newMovieTitle;
+  switch (selectedVideoIndex) {
+    case 0:
+      newMovieTitle = "CHEESE AND CRACKERS";
+      break;
+    case 1:
+      newMovieTitle = "DOOMSDAY BOOK";
+      break;
+    case 2:
+      newMovieTitle = "REIGN OF FIRE";
+      break;
+    case 3:
+      newMovieTitle="BIG BUCK BUNNY";
+      break;
+   
+  }
+  setMovieTitle(newMovieTitle);
+}, [selectedVideoIndex]);
 
-  const selectedVideoLink = useMemo(
-    () => streamsArr[selectedVideoIndex],
-    [selectedVideoIndex, streamsArr]
-  );
-
-  return (
+ return (
     <div>
       <MediaPlayer
-        src={selectedVideoLink}
+        src={selectedVideoLink
+        }
+        
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
         onPause={() => handlePauseChange(true)}
         style={{ width: "100vw", height: "100vh" }}
         className="shadow"
         ref={ref}
+        
       >
         {isPlayerFocused && isTitleVisible && (
-          <Title className="title">Movie Title</Title>
+          <Title className="title">{MovieTitle}</Title>
         )}
 
         <MediaProvider>
