@@ -1,8 +1,11 @@
 
 
 import styles from './css/sucess.module.css';
+import { useState, useEffect, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import { Poster } from './Poster'
+import axios from 'axios'
+import { config } from '../utils/config';
 import Marquee from 'react-fast-marquee'
 import img1 from '../assets/Images/3-iron.jpg'
 import img2 from '../assets/Images/aaa.jpg'
@@ -21,6 +24,27 @@ function Success() {
     const row1 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
   const row2 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
   const row3 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
+  useEffect(()=>{
+    const token=localStorage.getItem('token')
+    const tier=amt==245 ?1: amt==459?2 :3
+
+    const subs=async()=>{
+      try{
+      const res=await axios.post(`${config.BASE_URL}/subscription/create`,{
+        duration:3,
+        tier:tier
+      },{
+        headers:{Authorization:token}
+      })
+      console.log(res);
+
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+    subs();
+  },[])
   return (
     
       <div className='bg-gradient-to-tr from-red-500'>

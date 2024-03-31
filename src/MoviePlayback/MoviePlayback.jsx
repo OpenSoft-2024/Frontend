@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
 import { config } from "../utils/config";
 import { toast } from "react-toastify";
+import { IoIosStar } from "react-icons/io";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { setIsNavBarVisible } from "../AppStore/AppSlicer";
@@ -31,11 +32,24 @@ function MoviePlayback() {
     }
   };
   const dispatch = useDispatch();
-  
   const { user } = useSelector((state) => state.userSlice);
+  console.log(user);
+  const [isSub, setIsSub] = useState(false)
 
   const [data, setData] = useState();
   let { movie_id } = useParams();
+  useEffect(()=>{
+    if (user.hasOwnProperty('subscription') && user.subscription!="")
+    {
+      setIsSub(true);
+    }
+  // console.log(user);
+
+  },[user])
+  // useEffect(()=>{
+  //   console.log(isSub);
+  // },[isSub])
+  
   const [addedToWatchList,setAddedToWatchList]= useState(user?.watchlist?.includes(movie_id)?true:false);
   const [addedToFavorites,setAddedToFavorites]= useState(user?.favorites?.includes(movie_id)?true:false);
 
@@ -193,6 +207,10 @@ function MoviePlayback() {
                 <p> {data?.imdb?.rating}/10</p>
                 <p>IMDB</p>
               </p>
+              {
+        data?.premium && 
+        (<div className=" bg-blue-600 p-2 rounded-md flex justify-center items-center"><IoIosStar />   Premium</div>)
+      } 
             </p>
           ) : (
             <p className="flex gap-4">
@@ -202,17 +220,29 @@ function MoviePlayback() {
           )}
           {data ? (
             <div className="mt-8 items-center  flex gap-6">
-              <Link to="/video">
-                {" "}
-                <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold" onClick={addToWatchHistory}>
-                  PLAY
-                </button>
-              </Link>
-              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl" onClick={addToWatchlist}>
-                {addedToWatchList ? <DoneOutlineIcon/> : <PlaylistAddIcon/>}
-              </button>
-              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl" onClick={addToFavorites}>
-                {addedToFavorites ? <FavoriteOutlinedIcon/> :  <FavoriteBorderOutlinedIcon/>}
+              {isSub ? (
+  <Link to="/video">
+    <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
+      PLAY
+    </button>
+  </Link>
+) : 
+    item.premium ? (
+  <button disabled className="py-5 px-32 bg-[#f8f8f8] inline-block rounded text-gray-500 font-bold cursor-not-allowed opacity-50">
+    PLAY (Subscription Required)
+  </button>
+    ):(
+      <Link to="/video">
+    <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
+      PLAY
+    </button>
+  </Link>
+
+    )
+  
+}
+              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl">
+                +
               </button>
             </div>
           ) : (

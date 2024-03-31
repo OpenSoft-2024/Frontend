@@ -61,7 +61,7 @@ function Plans() {
 
   const button = ["Tier 1 ", "Tier 2", "Tier 3"];
   const handleOnClick = (e) => {
-    console.log(e.target);
+    // console.log(e.target);
     if (e.target.id == 5) {
       setBackgroundColor1(true);
       setBackgroundColor2(false);
