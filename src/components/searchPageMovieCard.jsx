@@ -1,27 +1,17 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+ 
 import Img from "../lazyLoading/Img";
 import DetailOnHover from "./detailOnHovering";
 import { IoIosStar } from "react-icons/io";
 
 function SearchPageMovieCard({ img, img2, about,date,style,item}) {
-  let [showOnHover, setShowOnHover] = useState(false);
-  const handleOnHover = () => {
-    setTimeout(() => {
-      setShowOnHover(true);
-    }, 1000);
-  };
-  const handleOnLeave = () => {
-    setTimeout(() => {
-      setShowOnHover(false);
-    });
-  };
+ 
   // console.log(img2);
 
   return (
     <div
       className={`rounded searchPgec giveMeTrans group relative  `}
-      onMouseEnter={handleOnHover}
-      onMouseLeave={handleOnLeave}
+     
     >
 {
         item.premium && 

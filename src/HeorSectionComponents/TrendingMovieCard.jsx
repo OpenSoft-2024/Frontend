@@ -1,8 +1,7 @@
-import React from "react";
-import Img from "../lazyLoading/Img";
+/* eslint-disable react/prop-types */
+ import Img from "../lazyLoading/Img";
 import DetailOnHover from "../components/detailOnHovering";
-import { useNavigate } from "react-router-dom";
-
+ 
 function TrendingMovieCard({ trendingCount, img, img2, about, date, genres,item}) {
    
   return (

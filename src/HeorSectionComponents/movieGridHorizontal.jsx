@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MovieCardHorizontal from "./movieCardHorizontal";
 import m2 from "../assets/m2.webp";
 

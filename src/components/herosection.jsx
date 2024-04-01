@@ -13,7 +13,6 @@ import axios from "axios";
 import { config } from "../utils/config";
 import {
   setIsNavBarVisible,
-  setIsDropDownVisible,
   setIsFooterVisible,
 } from "../AppStore/AppSlicer";
 import { toast } from "react-toastify";
@@ -30,7 +29,6 @@ function Herosection() {
     dispatch(setIsFooterVisible(true));
   }, []);
 
-  ///////////  IMAGE BASE URL FETCHING //////////////////////////////////
   const fetchApiConfiguration = () => {
     fetchDataFromApi("/configuration").then((res) => {
       const url = {
@@ -46,7 +44,7 @@ function Herosection() {
     localStorage.setItem("url", JSON.stringify(url));
   }, [url]);
 
-  // console.log(JSON.parse(localStorage.getItem("url")));
+
   useEffect(() => {
     const myBoolean = JSON.parse(localStorage.getItem("url"));
     dispatch(getUrl(myBoolean));
@@ -74,10 +72,9 @@ function Herosection() {
   }, []);
 
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch("/movie/upcoming");
+  const { heroImg } = useFetch("/movie/upcoming");
   useEffect(() => {
     setData(heroImg);
-    localStorage.setItem("def", url?.poster + data?.results[0].backdrop_path);
   }, [heroImg]);
 
   const [movies, setMovies] = useState({});

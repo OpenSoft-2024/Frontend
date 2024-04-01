@@ -1,29 +1,29 @@
-import React from "react";
+ 
 
 import SearchPageMovieCard from "./searchPageMovieCard";
 import useFetch from "../custumHooks/useFetch";
 import { useDispatch, useSelector } from "react-redux";
-import { RiHome3Line } from "react-icons/ri";
+// import { RiHome3Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { setIsNavBarVisible, setIsFooterVisible } from "../AppStore/AppSlicer";
-// import { useHistory } from 'react-router-dom';
+ 
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaImage } from "react-icons/fa6";
-import BackgroundColor from "../LandingPageBackgroundImageContext/context2";
+ 
 import { config } from "../utils/config";
 import axios from "axios";
 import { MdOutlineDescription } from "react-icons/md";
 import { IoColorWand } from "react-icons/io5";
-
+import { useRef } from "react";
 
 function SearchPage() {
   let dispatch = useDispatch();
   const [data, setData] = useState([]);
-  const { url, rand, isNavBarVisible } = useSelector((state) => state.AppSlice);
+  const { url, rand } = useSelector((state) => state.AppSlice);
   // console.log(url);
   const [isPlot, setIsPlot] = useState(false);
   const [isAI, setIsAI] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedImage, setSelectedImage] = useState(null);
   const [query, setQuery] = useState("");
   const [srchData, setsrchData] = useState([]);
   const [srchHistData, setsrchHistData] = useState([]);
@@ -75,20 +75,22 @@ function SearchPage() {
 
   useEffect(() => {
     dispatch(setIsNavBarVisible(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     dispatch(setIsFooterVisible(false));
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   let [active, setActive] = useState(false);
-  const { heroImg, isLoading, error } = useFetch(
+  const { heroImg} = useFetch(
     `/trending/all/day?page=${rand}`
   );
   useEffect(() => {
     setData(heroImg?.results);
   }, [heroImg]);
 
-  const handleOnScroll = (e) => {
+  const handleOnScroll = () => {
     if (window.scrollY > 230) {
       setActive(true);
     } else {
@@ -211,7 +213,7 @@ function SearchPage() {
       fetchSrchHist(q)
 
     }
-    setData(result.data);
+    setData(result.data.reverse());
     setQuery("");
     setsrchData([])
     setsrchHistData([])
@@ -237,7 +239,7 @@ function SearchPage() {
       },
     });
     console.log(result);
-    setsrchData(result.data);
+    setsrchData(result.data.reverse());
 
     }
     catch(err)
@@ -282,7 +284,7 @@ function SearchPage() {
                 onChange={handleChange}
                 onFocus={handleFocus}
                 value={query}
-                autocomplete="off"
+                autoComplete={"off"}
                 className="pl-14 w-[80%]  justify-center h-[3.3rem] rounded-lg text-white text-opacity-[0.8] text-xl outline-none bg-[#3c3c3c] placeholder:text-xl"
                 id="searchInput"
               />
@@ -303,7 +305,7 @@ function SearchPage() {
                   onChange={handleImageInputChange}
                 />
                 <span
-                  class="text-white absolute translate-x-[-70px] cursor-pointer p-2 rounded-sm font-semibold"
+                  className="text-white absolute translate-x-[-70px] cursor-pointer p-2 rounded-sm font-semibold"
                   style={
                     isPlot
                       ? { backgroundColor: "red", color: "black" }
@@ -315,7 +317,7 @@ function SearchPage() {
                   <MdOutlineDescription  />
                 </span>
                 <span
-                  class="text-white absolute translate-x-[-30px] cursor-pointer p-2 rounded-sm font-semibold"
+                  className="text-white absolute translate-x-[-30px] cursor-pointer p-2 rounded-sm font-semibold"
                   style={
                     isAI
                       ? { backgroundColor: "red", color: "black" }
@@ -394,6 +396,7 @@ function SearchPage() {
         {data?.map((item) =>
           item ? (
             <SearchPageMovieCard
+              key={item.id}
               img={item?.poster}
               img2={url?.poster + item.poster_path}
               about={item?.plot}
@@ -401,7 +404,7 @@ function SearchPage() {
               item={item}
             />
           ) : (
-            <div className="w-[10rem]  blinker h-[25rem]"></div>
+            <div className="w-[10rem]  blinker h-[25rem] " key={Math.random()}></div>
           )
         )}
       </div>

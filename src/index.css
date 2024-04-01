@@ -186,7 +186,7 @@ z-index: 90;
 body::-webkit-scrollbar{
 display: none;
 }
-.vishal{
+.rtx30{
  width:14rem;
  /* aspect-ratio: 1; */
  height: 8rem;
@@ -607,7 +607,7 @@ display: none;
 
 
 
-  .vishal{
+  .rtx30{
     width:12rem
   }
   
@@ -933,3 +933,4 @@ display: none;
 /* continue to watchc */
 
 
+ 

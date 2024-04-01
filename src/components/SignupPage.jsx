@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import SignupForm from "./SignupForm";
 import { Poster } from "./Poster";
 import Marquee from "react-fast-marquee";
@@ -12,7 +11,6 @@ import img7 from "../assets/Images/wed.jpg";
 import img8 from "../assets/Images/walk.jpg";
 import img9 from "../assets/Images/wizard.jpg";
 import img10 from "../assets/Images/wom.jpg";
-import logo from "../assets/Images/MFlix_logo.png";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -35,17 +33,17 @@ function LoginPage() {
       <div className="mix-blend-overlay">
         <Marquee direction="left">
           {row1.map((i) => (
-            <Poster img={i}></Poster>
+            <Poster key={i} img={i}></Poster>
           ))}
         </Marquee>
         <Marquee direction="right">
           {row2.map((i) => (
-            <Poster img={i}></Poster>
+            <Poster key={i} img={i}></Poster>
           ))}
         </Marquee>
         <Marquee direction="left">
           {row3.map((i) => (
-            <Poster img={i}></Poster>
+            <Poster key={i} img={i}></Poster>
           ))}
         </Marquee>
       </div>
