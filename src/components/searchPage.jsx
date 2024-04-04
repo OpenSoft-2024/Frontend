@@ -4,7 +4,7 @@ import SearchPageMovieCard from "./searchPageMovieCard";
 import useFetch from "../custumHooks/useFetch";
 import { useDispatch, useSelector } from "react-redux";
 import { RiHome3Line } from "react-icons/ri";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { setIsNavBarVisible, setIsFooterVisible } from "../AppStore/AppSlicer";
 // import { useHistory } from 'react-router-dom';
 import { NavLink, useNavigate } from "react-router-dom";
