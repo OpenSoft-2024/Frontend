@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import react from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useContext } from "react";
@@ -7,11 +6,8 @@ import BackgroundColor from "../../LandingPageBackgroundImageContext/context2";
 function Subs() {
   let {
     backgroundColor1,
-    setBackgroundColor1,
     backgroundColor2,
-    setBackgroundColor2,
     backgroundColor3,
-    setBackgroundColor3,
   } = useContext(BackgroundColor);
   return (
     <motion.div
@@ -36,7 +32,7 @@ function Subs() {
         </div>
         <div>
           <p className="text-[1rem] capitalize text-opacity-[0.8]">
-            add free movies and shows
+            ad free movies and shows
           </p>
         </div>
         <div>

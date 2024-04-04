@@ -5,8 +5,6 @@ import BackgroundColor from "../../LandingPageBackgroundImageContext/context2";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { IoLaptopOutline } from "react-icons/io5";
 import { PiTelevisionSimple } from "react-icons/pi";
-import useFetch from "../../custumHooks/useFetch";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import InfiniteScroll from "./InfiniteScroll";
 import { NavLink } from "react-router-dom";
@@ -30,7 +28,6 @@ function Plans() {
 
   const button = ["Tier 1 ", "Tier 2", "Tier 3"];
   const handleOnClick = (e) => {
-    // console.log(e.target);
     if (e.target.id == 5) {
       setBackgroundColor1(true);
       setBackgroundColor2(false);

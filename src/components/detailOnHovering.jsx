@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
 
 
-function DetailOnHover({ img, about, date, style, genres, item }) {
+function DetailOnHover({ img, about, date, style, item }) {
   const navigate = useNavigate();
   const trunct = (str) => {
     if (str?.length < 120) {

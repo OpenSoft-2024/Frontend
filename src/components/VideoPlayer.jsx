@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider, Track} from "@vidstack/react";
@@ -18,15 +18,8 @@ export default function VideoPlayer() {
   const [MovieTitle, setMovieTitle] = useState('Movie Title');
   const ref = useRef(null);
   
-  useEffect(() => {
-    axios.get("/subscriptionType")
-      .then(response => {
-        const subscriptionType = response.data.subscriptionType;
-      })
-      .catch(error => {
-        console.error("Error fetching subscription type:", error);
-      });
-  }, []);
+
+  const dispatch = useDispatch();
   
 
   function handleFocusChange(isFocused) {
@@ -41,7 +34,7 @@ export default function VideoPlayer() {
     if (paused) {
       setIsTitleVisible(true);
     }
-  };
+  }
 
   useEffect(() => {
     localStorage.setItem("isNavBarVisible", "false");
@@ -116,7 +109,7 @@ useEffect(() => {
         
       >
         {isPlayerFocused && isTitleVisible && (
-          <Title className="title">{MovieTitle}</Title>
+          <Title className="title-video-container">{MovieTitle}</Title>
         )}
 
         <MediaProvider>

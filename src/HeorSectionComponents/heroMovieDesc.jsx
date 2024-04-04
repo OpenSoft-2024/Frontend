@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 function HeroMovieDesc() {
   const { genres, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch(`/movie/upcoming?`);
+  const { heroImg } = useFetch(`/movie/upcoming?`);
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);

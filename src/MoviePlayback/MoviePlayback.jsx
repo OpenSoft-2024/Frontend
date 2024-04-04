@@ -1,20 +1,14 @@
-import React, { useContext } from "react";
-import l1 from "../assets/l1.jpg";
-import c5 from "../assets/c5.jpg";
 import { useState, useEffect } from "react";
 import TopRatedFlex from "../HeorSectionComponents/TopRated/TopRatedFlex";
-import MovieGridForMoviePlayback from "./MovieGridForMoviePlayback";
-import MovieGrid from "../HeorSectionComponents/movieGrid";
-import useFetch from "../custumHooks/useFetch";
+ 
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
 import { config } from "../utils/config";
 import { toast } from "react-toastify";
-import { IoIosStar } from "react-icons/io";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { setIsNavBarVisible, setIsFooterVisible } from "../AppStore/AppSlicer";
+import { setIsNavBarVisible } from "../AppStore/AppSlicer";
 import { IoStar } from "react-icons/io5";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -32,24 +26,11 @@ function MoviePlayback() {
     }
   };
   const dispatch = useDispatch();
+  
   const { user } = useSelector((state) => state.userSlice);
-  console.log(user);
-  const [isSub, setIsSub] = useState(false)
 
   const [data, setData] = useState();
   let { movie_id } = useParams();
-  useEffect(()=>{
-    if (user.hasOwnProperty('subscription') && user.subscription!="")
-    {
-      setIsSub(true);
-    }
-  // console.log(user);
-
-  },[user])
-  // useEffect(()=>{
-  //   console.log(isSub);
-  // },[isSub])
-  
   const [addedToWatchList,setAddedToWatchList]= useState(user?.watchlist?.includes(movie_id)?true:false);
   const [addedToFavorites,setAddedToFavorites]= useState(user?.favorites?.includes(movie_id)?true:false);
 
@@ -85,7 +66,7 @@ function MoviePlayback() {
       if(!token){
         navigate("/login");
       }
-      const res = await axios.post(
+        await axios.post(
         `${config.BASE_URL}/movies/history`,
         {
           movieId: movie_id
@@ -102,7 +83,7 @@ function MoviePlayback() {
       if(!token){
         navigate("/login");
       }
-      const res = await axios.post(
+       await axios.post(
         `${config.BASE_URL}/movies/watchlist`,
         {
           movieId: movie_id
@@ -121,7 +102,7 @@ function MoviePlayback() {
       if(!token){
         navigate("/login");
       }
-      const res = await axios.post(
+      await axios.post(
         `${config.BASE_URL}/movies/favorites`,
         {
           movieId: movie_id
@@ -135,9 +116,6 @@ function MoviePlayback() {
   }
 
 
-  useEffect(() => {
-    dispatch(setIsFooterVisible(false));
-  }, []);
 
   return (
     <div className="relative">
@@ -153,9 +131,7 @@ function MoviePlayback() {
         ) : (
           <div className="p-4 mt-10 detload blinker absolute  rounded-lg h-[50rem]"></div>
         )}
-        {/* <div className="overlay-04 absolute"></div>
-        <div className="overlay-05 absolute"></div> */}
-        {/* <div className="overlay-06 absolute w-full h-full"></div> */}
+       
         <div className="  flex flex-col gap-2   ml-[34rem]  ">
           {data?.title ? (
             <h1 className="text-[#d0cfcf] text-[2.3vw] w-3/4  mt-28">
@@ -202,18 +178,14 @@ function MoviePlayback() {
           )}
           {data ? (
             <p className="text-[#d6d6d6] flex gap-3 mt-4  items-center ">
-              {data?.genres?.map((item) => (
-                <span>{item}</span>
+              {data?.genres?.map((item,index) => (
+                <span key ={index}>{item}</span>
               ))}
               <p className="flex items-center gap-2 py-2 px-2 bg-[#56565670] rounded-xl">
                 <IoStar className="text-[#f9c04f] ml-4" />
                 <p> {data?.imdb?.rating}/10</p>
                 <p>IMDB</p>
               </p>
-              {
-        data?.premium && 
-        (<div className=" bg-blue-600 p-2 rounded-md flex justify-center items-center"><IoIosStar />   Premium</div>)
-      } 
             </p>
           ) : (
             <p className="flex gap-4">
@@ -223,29 +195,17 @@ function MoviePlayback() {
           )}
           {data ? (
             <div className="mt-8 items-center  flex gap-6">
-              {isSub ? (
-  <Link to="/video">
-    <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
-      PLAY
-    </button>
-  </Link>
-) : 
-    item.premium ? (
-  <button disabled className="py-5 px-32 bg-[#f8f8f8] inline-block rounded text-gray-500 font-bold cursor-not-allowed opacity-50">
-    PLAY (Subscription Required)
-  </button>
-    ):(
-      <Link to="/video">
-    <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold">
-      PLAY
-    </button>
-  </Link>
-
-    )
-  
-}
-              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl">
-                +
+              <Link to="/video">
+                {" "}
+                <button className="py-5 px-32 bg-[#f8f8f8] inline-block hover:scale-[1.07] smt rounded text-black font-bold" onClick={addToWatchHistory}>
+                  PLAY
+                </button>
+              </Link>
+              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl" onClick={addToWatchlist}>
+                {addedToWatchList ? <DoneOutlineIcon/> : <PlaylistAddIcon/>}
+              </button>
+              <button className="text-white py-4 px-7 rounded inline-block hover:scale-[1.06] smt bg-[#9491913d] text-3xl" onClick={addToFavorites}>
+                {addedToFavorites ? <FavoriteOutlinedIcon/> :  <FavoriteBorderOutlinedIcon/>}
               </button>
             </div>
           ) : (

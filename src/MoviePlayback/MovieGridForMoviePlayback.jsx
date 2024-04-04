@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import SearchPageMovieCard from "../components/searchPageMovieCard";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -7,7 +7,7 @@ import useFetch from "../custumHooks/useFetch";
 function MovieGridForMoviePlayback({ endPoint, label }) {
   const { url, rand } = useSelector((state) => state.AppSlice);
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch(`${endPoint}?page=${rand}`);
+  const { heroImg } = useFetch(`${endPoint}?page=${rand}`);
   useEffect(() => {
     setData(heroImg);
   }, [heroImg]);
@@ -20,6 +20,7 @@ function MovieGridForMoviePlayback({ endPoint, label }) {
           if (index < 9)
             return (
               <SearchPageMovieCard
+                key={index}
                 styel={""}
                 img={url.poster + item.poster_path}
                 img2={url.poster + item.backdrop_path}

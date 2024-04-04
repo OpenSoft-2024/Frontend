@@ -1,43 +1,17 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import MovieCard from "./MovieCard";
-import m2 from "../assets/m2.webp";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import useFetch from "../custumHooks/useFetch";
-import { useEffect } from "react";
-import Img from "../lazyLoading/Img";
 import { useRef } from "react";
 
 import "react-multi-carousel/lib/styles.css";
-import axios from "axios";
-import { server } from "../../server";
+
 
 function MovieGrid({ label, data }) {
   let loadingSkeltonArray = ["a", "b", "c", "d", "e", "f"];
-   
-  // const [data, setData] = useState(Data);
-  // console.log(data);
-  // console.log(data);
+  
 
   const myRef = useRef(null);
 
-  // useEffect(() => {
-
-  //   const getfetch=async()=>{
-  //     try{
-
-  //       const res=await axios.get(`${server}/movies/latest`)
-  //       console.log(res);
-  //       setData(res.data)
-  //     }
-  //     catch(err)
-  //     {
-  //       console.log(err);
-  //     }
-  //   }
-  //  getfetch()
-  // }, []);
-
+  
   const navigation = (dir) => {
     const container = myRef.current;
 

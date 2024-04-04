@@ -1,5 +1,5 @@
-import { easeIn, motion } from "framer-motion";
-import React from "react";
+/* eslint-disable react/prop-types */
+import {  motion } from "framer-motion";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 

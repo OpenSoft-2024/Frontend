@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+/* eslint-disable react/prop-types */
 import useFetch from "../../custumHooks/useFetch";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -7,8 +7,7 @@ import PlansInfiniteScroolerMovieBox from  "../PlansComponents/plansInfiniteScro
 function InfiniteScroll({page}) {
 
   const [data, setData] = useState(null);
-  const { heroImg, isLoading, error } = useFetch(`/trending/all/day?page=${page}`);
-  const { url } = useSelector((state) => state.AppSlice);
+  const { heroImg } = useFetch(`/trending/all/day?page=${page}`);
 
   useEffect(() => {
     setData(heroImg);

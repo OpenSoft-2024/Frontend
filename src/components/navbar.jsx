@@ -1,48 +1,33 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useRef } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setIsNavBarVisible,
   setIsDropDownVisible,
 } from "../AppStore/AppSlicer";
-import unnamed from "../../public/unnamed.png";
-import axios from "axios";
-import { config } from "../utils/config";
 import wologo from "../../public/wlogo.png";
 
 const NavBar = () => {
-  let dropDownLink = useRef(null);
-  let dropDownContent = useRef(null);
-  let [color, setColor] = useState(false);
+
   const [isSub, setIsSub] = useState(false)
 
   const dispatch = useDispatch();
   
   const { user } = useSelector((state) => state.userSlice);
   useEffect(()=>{
-    if (user.hasOwnProperty('subscription') && user.subscription!="")
-    {
+    console.log(user)
+    if (Object.prototype.hasOwnProperty.call(user, 'subscription') && user.subscription!=null){
       setIsSub(true);
-      // console.log(setIsSub);
     }
-  // console.log(user);
+ 
 
   },[user])
  
   
 
-  const handleOnClick = (e) => {
-    e.target.style = "width:40vw";
-  };
-
-  const handleOnLeave = (e) => {
-    e.target.style = "width:22vw";
-  };
-
+ 
   let [active, setActive] = useState(false);
-  const handleOnScroll = (e) => {
+  const handleOnScroll = () => {
     if (window.scrollY > 230) {
       setActive(true);
     } else {
@@ -51,13 +36,18 @@ const NavBar = () => {
   };
 
   window.addEventListener("scroll", handleOnScroll);
-  // const rotateOnClick = (e) => {
-  //   e.target.style = "transform:rotate(deg)";
-  // };
+  
 
   let { isNavBarVisible, isDropDownVisible } = useSelector(
     (state) => state.AppSlice
   );
+
+  let deleteUser = () => {
+    // console.log(Object.entries(user).length);
+    localStorage.removeItem("token");
+    // dispatch(login({}));
+    window.location.reload();
+  }
 
   return (
     <>
@@ -118,13 +108,7 @@ const NavBar = () => {
                   />
                 </p>
               </div>
-              {/* dropdown */}
-              {/* <div className="absolute ">
-                <p>hindi</p>
-                <p>english</p>
-                <p>anime</p>
-              </div> */}
-              {/* dropdown */}
+            
             </li>
             {
               !isSub &&
@@ -170,10 +154,18 @@ const NavBar = () => {
         {Object.entries(user).length === 0 && (
           <div className="absolute right-[8%]">
             <NavLink to="/login" className="text-white capitalize">
-              sign-up
+              Sign-In
             </NavLink>
           </div>
         )}
+         {Object.entries(user).length != 0 && (
+          <div className="absolute right-[8%]">
+          <button className="text-white" onClick={deleteUser}>
+            Log Out
+          </button>
+          </div>
+        )}
+
       </div>
     </>
   );

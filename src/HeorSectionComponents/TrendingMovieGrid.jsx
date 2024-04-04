@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRef } from "react";
 import TrendingMovieCard from "./TrendingMovieCard";
 import { useEffect } from "react";
@@ -10,14 +11,11 @@ import t5 from "../assets/t5.webp";
 import t6 from "../assets/t6.webp";
 import t7 from "../assets/t7.webp";
 import t8 from "../assets/t8.webp";
-import t9 from "../assets/t9.webp";
-import useFetch from "../custumHooks/useFetch";
-import { useSelector } from "react-redux";
-import t10 from "../assets/t10.webp";
-import axios from "axios";
-import { server } from "../../server";
 
-function TrendingMovieGrid({ label, type }) {
+import axios from "axios";
+import { config} from "../utils/config";
+
+function TrendingMovieGrid({ label }) {
   const myRef = useRef(null);
   const navigation = (dir) => {
     const container = myRef.current;
@@ -39,7 +37,7 @@ function TrendingMovieGrid({ label, type }) {
   useEffect(() => {
     const getdata = async () => {
       try {
-        const res = await axios.get(`${server}/movies/gethits`);
+        const res = await axios.get(`${config.BASE_URL}/movies/gethits`);
         // console.log(res);
         setData(res.data);
       } catch (err) {
@@ -48,13 +46,7 @@ function TrendingMovieGrid({ label, type }) {
     };
     getdata();
   }, []);
-  // console.log(heroImg);
-  // const { url } = useSelector((state) => state.AppSlice);
-  // console.log(url);
-  // setBgImage(url?.poster + data?.results[0].backdrop_path);
-  // useEffect(() => {
-  //   setData(heroImg);
-  // });
+
   let itTrending = 0;
   const trendingAray = [t1, t2, t3, t4, t5, t6, t7, t8];
   return (
@@ -92,8 +84,8 @@ function TrendingMovieGrid({ label, type }) {
         </div>
       ) : (
         <div className="  justify-between flex trending-movie-grid mt-4">
-          {trendingAray.map((item) => (
-            <div className="w-[13rem] h-[11rem] blinker ml-4 rounded-lg"></div>
+          {trendingAray.map((_,index) => (
+            <div key={index} className="w-[13rem] h-[11rem] blinker ml-4 rounded-lg"></div>
           ))}
         </div>
       )}

@@ -1,14 +1,11 @@
-import React from "react";
-import avtar from "../assets/avt.webp";
-import Img from "../lazyLoading/Img";
+/* eslint-disable react/prop-types */
+ 
 import DetailOnHover from "../components/detailOnHovering";
-import { useNavigate } from "react-router-dom";
-import { IoIosStar } from "react-icons/io";
-function MovieCard({ img, img2, about, date, genres, item }) {
+ import { IoIosStar } from "react-icons/io";
+function MovieCard({ img, about, date, genres, item }) {
   
   return (
     <div className="mt-4 rounded-3xl relative h-96  w-fit">
-      {/* <h1>vishal</h1> */}
       <div className="  rounded overflow-hidden border-black movie-box-movie-grid    relative  detailOnHover   ">
       {
         item.premium && 
